@@ -2,7 +2,7 @@
 	protected IState stateCurrent;
 
 	public void ChangeState(IState stateNew){
-		if (stateCurrent == stateNew) {
+		if (stateCurrent == stateNew || stateCurrent == null) {
 			return;
 		}
 		stateCurrent.Exit ();

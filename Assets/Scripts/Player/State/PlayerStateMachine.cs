@@ -1,25 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerStateMachine : StateManager {
 	protected Animator animator;
-	private Player player;
+	protected Player player;
+	protected SOStat stats;
 	public IState moveState;
-	public IState idleState;
 
 
-	public PlayerStateMachine(Animator animator,Player player){
+	public PlayerStateMachine(Animator animator,Player player, SOStat stats){
 		this.animator = animator;
 		this.player = player;
-		moveState = new PlayerMovementState (this);
-		idleState = new PLayerIdleState (this);
-		stateCurrent = idleState;
+		this.stats = stats ;
+		moveState = new PlayerMovementState (this,stats.GetStatValue(EnumName.Stat.Speed));
 	}
 
 	public override void Initialize ()
 	{
-		stateCurrent = idleState;
+		stateCurrent = moveState;
 		stateCurrent.Enter ();
 	}
 
