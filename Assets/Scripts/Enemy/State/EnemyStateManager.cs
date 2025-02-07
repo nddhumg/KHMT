@@ -22,6 +22,12 @@ public class EnemyStateManager : StateManager {
 		stateCurrent.Enter ();
 	}
 
+	public override void ResetState ()
+	{
+		stateCurrent = moveState;
+		stateCurrent.Enter ();
+	}
+
 
 	public void MoveTo(Vector3 position){
 		enemy.transform.position = position;

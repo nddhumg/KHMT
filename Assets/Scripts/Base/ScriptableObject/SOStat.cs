@@ -12,8 +12,8 @@ namespace EnumName{
 [System.Serializable]
 public class StatEntry
 {
-	public EnumName.Stat Key;
-	public float Value;
+	public EnumName.Stat key;
+	public float value;
 }
 
 [CreateAssetMenu(fileName = "StatData", menuName = "SO/Stat")]
@@ -21,12 +21,18 @@ public class SOStat : ScriptableObject
 {
 	[SerializeField] private List<StatEntry> stats = new List<StatEntry>();
 
+	public List<StatEntry> Stats{
+		get{
+			return stats;
+		}
+	}
+
 	public float GetStatValue(EnumName.Stat statKey)
 	{
 		foreach (StatEntry stat in stats)
 		{
-			if (stat.Key == statKey)
-				return stat.Value;
+			if (stat.key == statKey)
+				return stat.value;
 		}
 		return 0f;
 	}

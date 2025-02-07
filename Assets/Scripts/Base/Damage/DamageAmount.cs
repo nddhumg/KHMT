@@ -6,7 +6,8 @@ public class DamageAmount : MonoBehaviour ,ISetStat{
 
 	void OnTriggerEnter2D(Collider2D col){
 		IReceiveDamage receive = col.GetComponent<IReceiveDamage> ();
-		receive.TakeDamage (damage);
+		if(receive != null)
+			receive.TakeDamage (damage);
 	}
 
 	public void SetStat(SOStat stat){

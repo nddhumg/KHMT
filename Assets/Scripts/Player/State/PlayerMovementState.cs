@@ -11,6 +11,12 @@ public class PlayerMovementState : PlayerState {
 		this.speed = speed;
 	}
 
+	public float Speed{
+		set{ 
+			speed = value;
+		}
+	}
+
 	public override void UpdateLogic(){
 		directionInput = JoyStick.instance.Direction;
 		position = playerState.GetPosition();

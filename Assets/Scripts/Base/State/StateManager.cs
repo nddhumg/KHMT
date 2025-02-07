@@ -10,6 +10,10 @@
 		stateCurrent.Enter ();
 	}
 
+	public virtual void ResetState(){
+
+	}
+
 	public virtual void Initialize(){
 		
 	}

@@ -5,7 +5,14 @@ using UnityEngine;
 public class Player : Singleton<Player> {
 	PlayerStateMachine state;
 	Animator anim;
-	[SerializeField] private SOStat stats;
+	[SerializeField] private StatsManager stats;
+	[SerializeField] private PlayerLevel level;
+
+	public PlayerLevel Level{
+		get{ 
+			return level;
+		}
+	}
 	void Start(){
 		state = new PlayerStateMachine (anim, this,stats);
 		state.Initialize ();
@@ -17,5 +24,15 @@ public class Player : Singleton<Player> {
 
 	void FixedUpdate(){
 		state.FixedUpdate ();
+	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		IItemPickUp item = col.GetComponent<IItemPickUp> ();
+		if (item != null)
+			item.PickUp ();
+	}
+
+	public virtual void SetStat(int value){
+		
 	}
 }

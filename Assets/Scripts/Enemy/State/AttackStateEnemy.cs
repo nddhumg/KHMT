@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackStateEnemy : EnemyState {
-	protected bool isAttacking;
-
 	public AttackStateEnemy (EnemyStateManager enemyState) : base (enemyState){
 	}
 

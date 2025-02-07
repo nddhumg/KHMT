@@ -9,10 +9,13 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
  	protected float hp;
 	protected float hpMax;
 
+	[SerializeField] protected DropItem dropItem;
+
 
 	void Awake(){
 		state = new EnemyStateManager (this,stat);
 	}
+
 	void Start(){
 		player = Player.instance.transform;
 		state.Initialize ();
@@ -34,7 +37,6 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
 
 	public void TakeDamage(float damage){
 		hp -= damage;
-		Debug.Log (hp);
 		if (hp <= 0) {
 			Dead ();
 		}
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
 
 	protected  void Dead(){
 		hp = hpMax;
+		dropItem.Drop (transform.position, Quaternion.identity);
 		gameObject.SetActive (false);
 	}
 }
