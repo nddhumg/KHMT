@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Name: StateEnemy
   m_EditorClassIdentifier: 
   stats:
-  - Key: 1
-    Value: 2
-  - Key: 2
-    Value: 2.4
-  - Key: 0
-    Value: 2
+  - key: 1
+    value: 2
+  - key: 2
+    value: 2

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Singleton<Player> {
 	PlayerStateMachine state;
 	Animator anim;
-	[SerializeField] private StatsManager stats;
+	[SerializeField] private SOStat stats;
 	[SerializeField] private PlayerLevel level;
 
 	public PlayerLevel Level{
@@ -32,7 +32,4 @@ public class Player : Singleton<Player> {
 			item.PickUp ();
 	}
 
-	public virtual void SetStat(int value){
-		
-	}
 }

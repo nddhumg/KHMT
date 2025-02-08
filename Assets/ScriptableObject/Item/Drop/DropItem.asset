@@ -11,4 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710b7d979ae4861498fc0e4c0d4424fd, type: 3}
   m_Name: DropItem
   m_EditorClassIdentifier: 
-  droppedItems: []
+  droppedItems:
+  - rate: 1
+    item: {fileID: 1971977629443170, guid: a52df83e254d8714786f391f94f29532, type: 2}

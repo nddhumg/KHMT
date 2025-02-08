@@ -6,7 +6,8 @@ namespace EnumName{
 		Hp,
 		Speed,
 		AttackRange,
-		Damage
+		Damage,
+		AttackRate,
 	}
 }
 [System.Serializable]

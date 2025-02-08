@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IUpgrade  {
-	Level Upgrade();
+
+public class SOUpgrade : ScriptableObject {
+
 }

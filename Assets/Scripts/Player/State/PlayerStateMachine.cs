@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerStateMachine : StateManager {
 	public PlayerMovementState moveState;
+	protected SOStat stats;
 
 	protected Animator animator;
 	protected Player player;
-	protected StatsManager stats;
 
 
-	public PlayerStateMachine(Animator animator,Player player,StatsManager stats){
+	public PlayerStateMachine(Animator animator,Player player,SOStat stats){
 		this.animator = animator;
 		this.player = player;
 		this.stats = stats;
@@ -20,7 +20,6 @@ public class PlayerStateMachine : StateManager {
 		moveState = new PlayerMovementState (this,stats.GetStatValue(EnumName.Stat.Speed));
 		stateCurrent = moveState;
 		stateCurrent.Enter ();
-		stats.ChangeStat += ChangeStat;
 	}
 
 	public void Move(Vector3 position){
@@ -31,9 +30,7 @@ public class PlayerStateMachine : StateManager {
 		return player.transform.position;
 	}
 
-	public void ChangeStat(EnumName.Stat statChange,float value){
-		if (statChange == EnumName.Stat.Speed) {
-			moveState.Speed = value;
-		}
+	public void SetSpeed(float value){
+		moveState.Speed = value;
 	}
 }
