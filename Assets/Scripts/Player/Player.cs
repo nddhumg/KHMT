@@ -5,16 +5,20 @@ using UnityEngine;
 public class Player : Singleton<Player> {
 	PlayerStateMachine state;
 	Animator anim;
-	[SerializeField] private SOStat stats;
 	[SerializeField] private PlayerLevel level;
+	[SerializeField] private PlayerStat statManager;
+	private int hp;
 
 	public PlayerLevel Level{
 		get{ 
 			return level;
 		}
 	}
-	void Start(){
-		state = new PlayerStateMachine (anim, this,stats);
+
+	public PlayerStat StatsManager => statManager;
+
+    void Start(){
+		state = new PlayerStateMachine (anim, this, statManager);
 		state.Initialize ();
 	}
 

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerStateMachine : StateManager {
 	public PlayerMovementState moveState;
-	protected SOStat stats;
+	protected PlayerStat stats;
 
 	protected Animator animator;
 	protected Player player;
 
 
-	public PlayerStateMachine(Animator animator,Player player,SOStat stats){
+	public PlayerStateMachine(Animator animator,Player player, PlayerStat stats){
 		this.animator = animator;
 		this.player = player;
 		this.stats = stats;

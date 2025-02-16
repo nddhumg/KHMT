@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class BulletDestroy : DestroyAfterTime {
 
-	protected override void DestroyObject ()
+    private void OnDisable()
+    {
+        timer.ResetCoolDown();
+    }
+
+    protected override void DestroyObject ()
 	{
 		transform.parent.gameObject.SetActive (false);
 	}

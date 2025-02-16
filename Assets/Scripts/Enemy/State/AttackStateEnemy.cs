@@ -3,15 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackStateEnemy : EnemyState {
-	public AttackStateEnemy (EnemyStateManager enemyState) : base (enemyState){
-	}
+    protected EnemyArcStateManager rangedEnemyState;
+	protected CoolDownTimer timer;
+    protected
+	bool isAttack = true;
+    protected GameObject bullet;
+    public AttackStateEnemy(EnemyArcStateManager enemyState, float attackCoolDown,GameObject bullet) : base(enemyState)
+    {
+		timer = new CoolDownTimer(attackCoolDown);
+		timer.OnCoolDownEnd += Attack;
+        this.bullet = bullet;
+        rangedEnemyState = enemyState;
+    }
 
-	public override void UpdateLogic ()
+    public override void Enter()
+    {
+        base.Enter();
+		timer.ResetCoolDown();
+        isAttack = true;
+    }
+
+    protected  override void CheckChangeState()
+    {
+        if (!rangedEnemyState.IsInAttackRange() && !isAttack)
+        {
+            enemyState.ChangeState(rangedEnemyState.moveState);
+            return;
+        }
+    }
+
+    public override void UpdateLogic ()
 	{
 		base.UpdateLogic ();
-		if (!enemyState.IsInAttackRange ()) {
-			enemyState.ChangeState (enemyState.moveState);
-			return;
-		}
+		timer.CountTime(Time.deltaTime);
 	}
+
+	protected virtual void Attack() { 
+        MoveInDirection moveBullet = BulletPool.instance.GetFromPool(bullet, enemyState.GetPosition(), Quaternion.identity).GetComponentInChildren<MoveInDirection>();
+        moveBullet.Direction = enemyState.GetDirecTionToPlayer();
+        isAttack = false;
+    }
 }

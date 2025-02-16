@@ -2,12 +2,21 @@
 	protected IState stateCurrent;
 
 	public void ChangeState(IState stateNew){
-		if (stateCurrent == stateNew || stateCurrent == null) {
+		if (stateCurrent == stateNew)
+		{
 			return;
 		}
-		stateCurrent.Exit ();
-		stateCurrent = stateNew;
-		stateCurrent.Enter ();
+		else if (stateCurrent == null) {
+            stateCurrent = stateNew;
+            stateCurrent.Enter();
+        }
+        else
+        {
+            stateCurrent.Exit ();
+			stateCurrent = stateNew;
+			stateCurrent.Enter ();
+        }
+        
 	}
 
 	public virtual void ResetState(){

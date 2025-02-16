@@ -15,7 +15,7 @@ public class JoyStick : Singleton<JoyStick> {
 		get{ 
 			return direction;
 		}
-	}
+    }
 
 	void Update(){
 		if (Input.GetMouseButtonDown (0)) {
@@ -52,4 +52,5 @@ public class JoyStick : Singleton<JoyStick> {
 			handleJoyStick.gameObject.SetActive (false);
 		}
 	}
+
 }

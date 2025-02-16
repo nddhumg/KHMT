@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyState : IState {
+public abstract class EnemyState : IState {
 	protected EnemyStateManager enemyState;
 
 	public EnemyState(EnemyStateManager enemyState){
 		this.enemyState = enemyState;
+	}
+
+	protected virtual void CheckChangeState() { 
 	}
 
 	public virtual void Enter(){
@@ -18,8 +21,9 @@ public class EnemyState : IState {
 	}
 
 	public virtual void UpdateLogic(){
+		CheckChangeState();
 
-	}
+    }
 
 	public virtual void UpdatePhysics(){
 

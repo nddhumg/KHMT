@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour,IReceiveDamage {
+public abstract class Enemy : MonoBehaviour,IReceiveDamage {
 	protected EnemyStateManager state;
 	protected Transform player;
 	[SerializeField] protected SOStat stat;
@@ -11,11 +11,6 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
 
 	[SerializeField] protected DropItem dropItem;
 
-
-	void Awake(){
-		state = new EnemyStateManager (this,stat);
-	}
-
 	void Start(){
 		player = Player.instance.transform;
 		state.Initialize ();
@@ -23,8 +18,8 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
 		hp = hpMax;
 	}
 
-	void Update(){
-		state.Update ();
+	protected virtual void Update(){
+        state.Update ();
 	}
 
 	void FixedUpdate(){
@@ -35,7 +30,7 @@ public class Enemy : MonoBehaviour,IReceiveDamage {
 		return player;
 	}
 
-	public void TakeDamage(float damage){
+	public void TakeDamage(int damage){
 		hp -= damage;
 		if (hp <= 0) {
 			Dead ();

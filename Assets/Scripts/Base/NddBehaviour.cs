@@ -5,6 +5,7 @@ using UnityEngine;
 public class NddBehaviour : MonoBehaviour {
 
 	// Use this for initialization
+
 	
 	protected virtual void Awake () {
 		this.LoadComponent();
