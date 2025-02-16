@@ -27,6 +27,7 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
             {
                 stat.value = value;
                 OnStatChange?.Invoke(statKey, value);
+                return;
             }
         }
         Debug.LogWarning("No stat " + statKey.ToString());
@@ -40,6 +41,7 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
             {
                 stat.value += value;
                 OnStatChange?.Invoke(statKey, stat.value);
+                return;
             }
         }
         Debug.LogWarning("No stat " + statKey.ToString());

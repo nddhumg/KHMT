@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour {
     private void Awake()
     {
 		timer = new CoolDownTimer(stats.GetStatValue(EnumName.Stat.AttackRate));
-		timer.OnCoolDownEnd += Attack;
+		timer.OnCoolDownEnd += Attack;	
     }
 
 	protected virtual void Start()

@@ -5,14 +5,16 @@ using System;
 
 public class CoolDownTimer
 {
-    private float timer =0;
-    private float coolDowl;
+    private float timer = 0;
+    private float coolDown;
+    private bool isAutoResetCoolDown;
     public bool IsCoolDownOver { get; private set; }
     public Action OnCoolDownEnd;
 
     public CoolDownTimer(float coolDown, bool isAutoResetCoolDown = true)
     {
-        this.coolDowl = coolDown;
+        this.coolDown = coolDown;
+        this.isAutoResetCoolDown = isAutoResetCoolDown;
         if (isAutoResetCoolDown) {
             OnCoolDownEnd += ResetCoolDown;
         }
@@ -22,7 +24,7 @@ public class CoolDownTimer
         if (IsCoolDownOver) return;
 
         timer += elapsedTime;
-        if (timer >= coolDowl) { 
+        if (timer >= coolDown) { 
             IsCoolDownOver = true;
             OnCoolDownEnd?.Invoke();
         }
@@ -33,5 +35,15 @@ public class CoolDownTimer
         timer = 0;
     }
 
-
+    public void SetAutoResetCoolDown(bool isAuto) {
+        if (isAutoResetCoolDown == isAuto)
+            return;
+        if (isAuto) {
+            OnCoolDownEnd += ResetCoolDown;
+        }
+        else
+        {
+            OnCoolDownEnd -= ResetCoolDown;
+        }
+    }
 }
