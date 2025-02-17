@@ -7,17 +7,17 @@ public class UpgradeSelect : MonoBehaviour {
 	[SerializeField] protected Image icon;
 	[SerializeField] protected Text text;
 
-	private uint index = 0;
+	private int indexSelect;
 
-	public void SetInfo(uint index, Sprite icon, string text)
+	public void SetInfo(int index, Sprite icon, string text)
 	{
-		this.index = index;
+		this.indexSelect = index;
 		this.icon.sprite = icon;
 		this.text.text = text;
 	}
 
 	public void Select()
 	{
-		//UpgradeSystem.instance.ApllyUpgrade(index);
+		UpgradeSystem.instance.ApllyUpgrade(indexSelect);
 	}
 }

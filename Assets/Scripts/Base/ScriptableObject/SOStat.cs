@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using EnumName;
 using UnityEngine;
 namespace EnumName{
 	public enum Stat{
@@ -8,6 +9,7 @@ namespace EnumName{
 		AttackRange,
 		Damage,
 		AttackRate,
+		HpMax,
 	}
 }
 [System.Serializable]
@@ -15,6 +17,12 @@ public class StatEntry
 {
 	public EnumName.Stat key;
 	public float value;
+
+    public StatEntry(Stat key, float value)
+    {
+        this.key = key;
+        this.value = value;
+    }
 }
 
 [CreateAssetMenu(fileName = "StatData", menuName = "SO/Stat")]

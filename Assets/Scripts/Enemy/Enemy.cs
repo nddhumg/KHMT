@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour,IReceiveDamage {
 	void Start(){
 		player = Player.instance.transform;
 		state.Initialize ();
-		hpMax = stat.GetStatValue (EnumName.Stat.Hp);
+		hpMax = stat.GetStatValue (EnumName.Stat.HpMax);
 		hp = hpMax;
 	}
 

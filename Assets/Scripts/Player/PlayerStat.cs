@@ -47,6 +47,20 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
         Debug.LogWarning("No stat " + statKey.ToString());
     }
 
+    public void PercentageIncreaseStat(EnumName.Stat statKey, float value)
+    {
+        foreach (StatEntry stat in statCurrent)
+        {
+            if (stat.key == statKey)
+            {
+                stat.value += stat.value * value/100;
+                OnStatChange?.Invoke(statKey, stat.value);
+                return;
+            }
+        }
+        Debug.LogWarning("No stat " + statKey.ToString());
+    }
+
 
     public void TakeDamage(int damage)
     {
@@ -57,6 +71,7 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
     {
         SOStat statTemp  = Instantiate(statBase);
         statCurrent = new List<StatEntry> (statTemp.Stats);
+        statCurrent.Add(new StatEntry(EnumName.Stat.Hp, GetStatValue(EnumName.Stat.HpMax)));
     }
 
 

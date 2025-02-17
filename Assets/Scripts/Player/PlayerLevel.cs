@@ -17,7 +17,7 @@ public class PlayerLevel : Level {
 	public override bool LevelUp ()
 	{
 		if (base.LevelUp ()) {
-//			UpgradeSystem.instance.CreateUpgrade ();
+			UpgradeSystem.instance.CreateUpgrade ();
 			return true;
 		}
 		return false;
