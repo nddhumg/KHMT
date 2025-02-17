@@ -18,6 +18,8 @@ public class JoyStick : Singleton<JoyStick> {
     }
 
 	void Update(){
+		if (GameSystem.IsPause)
+			return;
 		if (Input.GetMouseButtonDown (0)) {
 			positionInput = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			isJoyStickMove = true;

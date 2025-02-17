@@ -32,6 +32,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem> {
 			upgradesSelect[i].SetInfo(i, infoUpgradeSelect[i].Icon, infoUpgradeSelect[i].GetDescription());
         }
         SetActiveUpgrade (true);
+		GameSystem.Pause();
     }
 
 	private void SetActiveUpgrade(bool isActive)
@@ -46,6 +47,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem> {
 	{
 		infoUpgradeSelect[index].ApplyUpgrade();
         SetActiveUpgrade(false);
+		GameSystem.RePause();
 
     }
 

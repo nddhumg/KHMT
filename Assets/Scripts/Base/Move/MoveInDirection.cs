@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveInDirection : MonoBehaviour,ISetStat {
 	[SerializeField] protected float speed;
-	[SerializeField] protected Vector3 direction;
+	protected Vector3 direction;
 
 	public Vector3 Direction{
 		set{ 

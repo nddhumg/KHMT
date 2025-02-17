@@ -5,10 +5,16 @@ using UnityEngine;
 public class Pistol : Weapon {
 	[SerializeField] protected GameObject ammo;
 
-	protected override void Attack ()
+    private void Reset()
+    {
+        damageMultiplier = 5f;
+        attackSpeed = 1f;
+    }
+
+    protected override void Attack ()
 	{
 		GameObject bullet = BulletPool.instance.GetFromPool (ammo,transform.position,Quaternion.identity);
-		bullet.GetComponentInChildren<MoveInDirection> ().Direction = attackDirection;
-        bullet.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.GetStatValue(EnumName.Stat.Damage));
+		bullet.GetComponentInChildren<MoveInDirection> ().Direction = GetAttackDirection();
+        bullet.GetComponentInChildren<DamageSender>().SetDamage(GetDamge());
 	}
 }

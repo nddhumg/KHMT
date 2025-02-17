@@ -8,25 +8,29 @@ public class Rifle : Weapon
     [SerializeField] protected float maxAmmo = 5f;
     [SerializeField] protected float recoildAmount = 0.1f;
 
-    protected override void Start()
+    private void Reset()
     {
-        base.Start();
+        damageMultiplier = 0.5f;
+        attackSpeed = 1.5f;
+    }
+    void Start()
+    {
         timer.SetAutoResetCoolDown(false);
     }
 
     protected override void Attack()
     {
-        StartCoroutine(ShootDelay());
+        StartCoroutine(CreateBullet());
     }
 
-    protected IEnumerator ShootDelay() {
+    protected IEnumerator CreateBullet() {
         GameObject bulletCurrent;
         float recoil = 0;
         Vector2 directionBullet;
         for (int countAmmo = 0; countAmmo < maxAmmo; countAmmo++)
         {
             recoil = Random.Range(-recoildAmount, recoildAmount);
-            directionBullet = attackDirection;
+            directionBullet = GetAttackDirection();
             if (Random.value > 0.5)
                 directionBullet.y += recoil;
             else

@@ -14,7 +14,7 @@ public class PlayerSkill : MonoBehaviour
             skillLevel[skill].LevelUp();
         }
         else {
-            GameObject skillGO = Instantiate(prefab, Player.instance.transform);
+            GameObject skillGO = Instantiate(prefab, transform);
             Level level = skillGO.GetComponentInChildren<Level>();
             skillLevel.Add(skill, level);   
         }

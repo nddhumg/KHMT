@@ -6,9 +6,15 @@ public class ShotGun : Weapon {
 	[SerializeField] protected GameObject ammo;
 	[SerializeField] protected uint shotPelletCount = 4;
 	[SerializeField] protected uint fireSpread = 45;
-	protected override void Attack (){
+
+    private void Reset()
+    {
+		damageMultiplier = 1f;
+		attackSpeed = 1.5f;
+    }
+    protected override void Attack (){
 		Vector2 directionShoot = new Vector2 ();
-		directionShoot = RotateVector2 (attackDirection, -fireSpread / 2f);
+		directionShoot = RotateVector2 (GetAttackDirection(), -fireSpread / 2f);
 		float angle =fireSpread / shotPelletCount;
 		GameObject bullet;
 		MoveInDirection moveBullet;

@@ -8,20 +8,24 @@ public class Player : Singleton<Player> {
 	[SerializeField] private PlayerLevel level;
 	[SerializeField] private PlayerStat statManager;
 	[SerializeField] private PlayerSkill skillManager;
-	private int hp;
+	protected Vector2 direction = Vector2.up;
+	
 
 	public PlayerLevel Level => level;
 	public PlayerStat StatsManager => statManager;
 	public PlayerSkill SkillManager => skillManager;
+    public Vector2 Direction => direction;
 
-	void Start() {
+    void Start() {
 		state = new PlayerStateMachine(anim, this, statManager);
 		state.Initialize();
 	}
 
 	void Update() {
 		state.Update();
-	}
+        if (JoyStick.instance.Direction != Vector2.zero)
+            direction = JoyStick.instance.Direction;
+    }
 
 	void FixedUpdate() {
 		state.FixedUpdate();

@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour {
-	protected Vector2 attackDirection = Vector2.down;
 	protected CoolDownTimer timer;
-	[SerializeField] protected SOStat stats;
+	[SerializeField] protected float attackSpeed;
+	protected float damageMultiplier = 1;
 
     private void Awake()
     {
-		timer = new CoolDownTimer(stats.GetStatValue(EnumName.Stat.AttackRate));
+		timer = new CoolDownTimer(attackSpeed);
 		timer.OnCoolDownEnd += Attack;	
     }
 
-	protected virtual void Start()
-	{
-		attackDirection = Vector2.down;
-	}
-
     protected virtual void Update(){
 		timer.CountTime(Time.deltaTime);
-		if(JoyStick.instance.Direction != Vector2.zero)
-			attackDirection = JoyStick.instance.Direction;
+	}
+
+	protected virtual Vector2 GetAttackDirection()
+	{
+        return Player.instance.Direction;
+    }
+
+
+
+	protected virtual int GetDamge() { 
+		return (int)(Player.instance.StatsManager.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
 	}
 
 	protected abstract void Attack();
