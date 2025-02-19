@@ -4,15 +4,23 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour,IReceiveDamage {
 	protected EnemyStateManager state;
-	protected Transform player;
+	[SerializeField] protected Transform spriteTf;
 	[SerializeField] protected SOStat stat;
  	protected float hp;
 	protected float hpMax;
 
 	[SerializeField] protected DropItem dropItem;
 
-	void Start(){
-		player = Player.instance.transform;
+	public void Flip()
+	{
+        spriteTf.localScale = new Vector3(-1 * spriteTf.localScale.x, spriteTf.localScale.y, spriteTf.localScale.z);
+    }
+
+	public int GetDirectionLook() {
+		return spriteTf.localScale.x > 0 ? 1 : -1; 
+	}
+
+    void Start(){
 		state.Initialize ();
 		hpMax = stat.GetStatValue (EnumName.Stat.HpMax);
 		hp = hpMax;
@@ -27,7 +35,7 @@ public abstract class Enemy : MonoBehaviour,IReceiveDamage {
 	}
 
 	public Transform GetPlayer(){
-		return player;
+		return Player.instance.transform;
 	}
 
 	public void TakeDamage(int damage){

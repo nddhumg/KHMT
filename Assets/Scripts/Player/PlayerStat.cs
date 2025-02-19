@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour, IReceiveDamage
@@ -11,54 +12,80 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
     public List<StatEntry> StatCurrent => StatCurrent;
     public float GetStatValue(EnumName.Stat statKey)
     {
-        foreach (StatEntry stat in statCurrent)
+        try
         {
-            if (stat.key == statKey)
-                return stat.value;
+            StatEntry stat = GetStat(statKey);
+            return stat.value;
         }
-        Debug.LogWarning("No stat " + statKey.ToString());
-        return -1f;
+        catch
+        {
+            Debug.LogWarning("No stat " + statKey.ToString());
+            return -1f;
+        }
     }
 
     public void SetStatValue(EnumName.Stat statKey, float value) {
-        foreach (StatEntry stat in statCurrent)
+        try
         {
-            if (stat.key == statKey)
-            {
-                stat.value = value;
-                OnStatChange?.Invoke(statKey, value);
-                return;
-            }
+            StatEntry stat = GetStat(statKey);
+            stat.value = value;
+            OnStatChange?.Invoke(statKey, value);
         }
-        Debug.LogWarning("No stat " + statKey.ToString());
+        catch
+        {
+            Debug.LogWarning("No stat " + statKey.ToString());
+        }
     }
 
     public void IncreaseStat(EnumName.Stat statKey, float value)
     {
-        foreach (StatEntry stat in statCurrent)
+        try
         {
-            if (stat.key == statKey)
+            if (statKey == EnumName.Stat.Hp)
             {
+                float hpMax = GetStatValue(EnumName.Stat.HpMax);
+                StatEntry statHp = GetStat(statKey);
+                statHp.value += value;
+                if (statHp.value > hpMax)
+                    statHp.value = hpMax;
+                OnStatChange?.Invoke(statKey, statHp.value);
+            }
+            else
+            {
+                StatEntry stat = GetStat(statKey);
                 stat.value += value;
                 OnStatChange?.Invoke(statKey, stat.value);
-                return;
             }
         }
-        Debug.LogWarning("No stat " + statKey.ToString());
+        catch {
+            Debug.LogWarning("No stat " + statKey.ToString());
+        }
     }
 
     public void PercentageIncreaseStat(EnumName.Stat statKey, float value)
     {
-        foreach (StatEntry stat in statCurrent)
+        try
         {
-            if (stat.key == statKey)
+            StatEntry stat;
+            if (statKey == EnumName.Stat.Hp)
             {
-                stat.value += stat.value * value/100;
+                stat = GetStat(statKey);
+                float hpMax = GetStatValue(EnumName.Stat.HpMax);
+                stat.value += stat.value * value / 100;
+                if (stat.value > hpMax)
+                    stat.value = hpMax;
+            }
+            else
+            {
+                stat = GetStat(statKey);
+                stat.value += stat.value * value / 100;
                 OnStatChange?.Invoke(statKey, stat.value);
-                return;
             }
         }
-        Debug.LogWarning("No stat " + statKey.ToString());
+        catch
+        {
+            Debug.LogWarning("No stat " + statKey.ToString());
+        }
     }
 
 
@@ -67,6 +94,16 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
         IncreaseStat(EnumName.Stat.Hp, -damage);
     }
 
+    protected StatEntry GetStat(EnumName.Stat statKey)
+    {
+        foreach (StatEntry stat in statCurrent)
+        {
+            if (stat.key == statKey)
+                return stat;
+        }
+        Debug.LogWarning("No stat " + statKey.ToString());
+        return null;
+    }
     private void Awake()
     {
         SOStat statTemp  = Instantiate(statBase);

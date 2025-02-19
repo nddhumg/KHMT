@@ -3,4 +3,5 @@
 	void Exit();
 	void UpdateLogic ();
 	void UpdatePhysics ();
+	void CheckChangeState();
 }

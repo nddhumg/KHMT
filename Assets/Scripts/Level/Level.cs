@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoBehaviour  {
-	[SerializeField]protected uint levelCurrent;
-	[SerializeField]protected uint levelMax;
+	[SerializeField]protected uint levelCurrent = 0;
+	[SerializeField]protected uint levelMax = 1;
 
 	public uint LevelCurrent{
 		get{ 

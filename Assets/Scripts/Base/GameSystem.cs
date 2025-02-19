@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameSystem 
+public static class GameSystem
 {
     private static bool isPause;
+    private static int coin = 0 ;
+
     public static bool IsPause => isPause;
+    public static int Coin => coin;
 
     public static void Pause()
     {
@@ -18,4 +21,7 @@ public static class GameSystem
         Time.timeScale = 1;
     }
 
+    public static void AddCoin(int value){
+        coin += value;
+    }
 }

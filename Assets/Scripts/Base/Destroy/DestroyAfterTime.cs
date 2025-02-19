@@ -10,6 +10,10 @@ public class DestroyAfterTime : MonoBehaviour {
 		timer = new CoolDownTimer(destroyTime);
 		timer.OnCoolDownEnd += DestroyObject;
 	}
+
+	protected virtual void Update() {
+		timer.CountTime(Time.deltaTime);
+	}
 	protected virtual void DestroyObject()
 	{
 		Destroy (transform.parent);

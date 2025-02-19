@@ -7,6 +7,8 @@ public abstract class EnemyStateManager : StateManager {
 	protected Enemy enemy;
 	protected SOStat stat;
 
+	public Enemy Enemy => enemy;
+
 	public EnemyStateManager(Enemy enemy,SOStat stat){
 		this.enemy = enemy;
 		this.stat = stat;

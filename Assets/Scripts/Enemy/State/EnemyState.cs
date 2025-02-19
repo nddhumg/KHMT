@@ -9,7 +9,7 @@ public abstract class EnemyState : IState {
 		this.enemyState = enemyState;
 	}
 
-	protected virtual void CheckChangeState() { 
+	public virtual void CheckChangeState() { 
 	}
 
 	public virtual void Enter(){

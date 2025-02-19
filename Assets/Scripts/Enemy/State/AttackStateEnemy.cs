@@ -23,7 +23,7 @@ public class AttackStateEnemy : EnemyState {
         isAttack = true;
     }
 
-    protected  override void CheckChangeState()
+    public override void CheckChangeState()
     {
         if (!rangedEnemyState.IsInAttackRange() && !isAttack)
         {

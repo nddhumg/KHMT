@@ -6,6 +6,8 @@ public abstract class Weapon : MonoBehaviour {
 	protected CoolDownTimer timer;
 	[SerializeField] protected float attackSpeed;
 	protected float damageMultiplier = 1;
+	[SerializeField] protected GameObject bullet;
+	[SerializeField] protected Transform muzzle;
 
     private void Awake()
     {
@@ -17,7 +19,16 @@ public abstract class Weapon : MonoBehaviour {
 		timer.CountTime(Time.deltaTime);
 	}
 
-	protected virtual Vector2 GetAttackDirection()
+	public virtual void IncreaseDamageMultiplier(float value) {
+		damageMultiplier += value;
+	}
+    public virtual void IncreaseAttackSpeed(float value)
+    {
+        attackSpeed -= value;
+    }
+
+
+    protected virtual Vector2 GetAttackDirection()
 	{
         return Player.instance.Direction;
     }

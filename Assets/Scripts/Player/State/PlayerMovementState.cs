@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovementState : PlayerState {
 	protected float speed = 10;
 	protected Vector3 position = Vector3.zero;
-	protected Vector2 directionInput;
 
 	public PlayerMovementState (PlayerStateMachine statePlayer, float speed) : base (statePlayer){
 		this.speed = speed;
@@ -16,12 +15,34 @@ public class PlayerMovementState : PlayerState {
 			speed = value;
 		}
 	}
+    public override void Enter()
+    {
+        base.Enter();
+		this.playerState.Animator.SetBool(PlayerStateMachine.ParametersAnimator.isRun.ToString(),true);
+    }
 
-	public override void UpdateLogic(){
-		directionInput = JoyStick.instance.Direction;
-		position = playerState.GetPosition();
-		position.x += directionInput.x * Time.deltaTime * speed;
-		position.y += directionInput.y * Time.deltaTime * speed;
+    public override void Exit()
+    {
+        base.Exit();
+        this.playerState.Animator.SetBool(PlayerStateMachine.ParametersAnimator.isRun.ToString(), false);
+    }
+
+    public override void CheckChangeState()
+    {
+        base.CheckChangeState();
+		if (JoyStick.instance.Direction == Vector2.zero)
+		{
+			this.playerState.ChangeState(playerState.idleStat);
+		}
+				
+    }
+
+    public override void UpdateLogic(){
+        base.UpdateLogic();
+		
+        position = playerState.GetPosition();
+		position.x += JoyStick.instance.Direction.x * Time.deltaTime * speed;
+		position.y += JoyStick.instance.Direction.y * Time.deltaTime * speed;
 		position.z = 0;
 		playerState.Move (position);
 	}

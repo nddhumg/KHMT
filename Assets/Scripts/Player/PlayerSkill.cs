@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
-    Dictionary<EnumName.Skill, Level> skillLevel;
+    Dictionary<EnumName.Skill, Level> skillLevel = new Dictionary<EnumName.Skill, Level>();
 
     public void Upgrade(EnumName.Skill skill,GameObject prefab)
     {

@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IItemPickUp{
-	void PickUp ();
+	void PickUpAble ();
 }

@@ -10,7 +10,7 @@ public class MoveStateEnemyArc : MoveStateEnemy
         state = enemyState;
     }
 
-    protected override void CheckChangeState()
+    public override void CheckChangeState()
     {
         base.CheckChangeState();
         if (state.IsInAttackRange())

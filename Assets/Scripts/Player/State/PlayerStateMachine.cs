@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerStateMachine : StateManager {
 	public PlayerMovementState moveState;
+	public PlayerIdleStat idleStat;
 	protected PlayerStat stats;
 
 	protected Animator animator;
 	protected Player player;
 
+	public Animator Animator => animator;
 
+	public enum ParametersAnimator { 
+		isRun,
+	}
 	public PlayerStateMachine(Animator animator,Player player, PlayerStat stats){
 		this.animator = animator;
 		this.player = player;
@@ -18,7 +23,8 @@ public class PlayerStateMachine : StateManager {
 	public override void Initialize ()
 	{
 		moveState = new PlayerMovementState (this,stats.GetStatValue(EnumName.Stat.Speed));
-		stateCurrent = moveState;
+		idleStat = new PlayerIdleStat(this);
+		stateCurrent = idleStat;
 		stateCurrent.Enter ();
 	}
 
@@ -33,4 +39,5 @@ public class PlayerStateMachine : StateManager {
 	public void SetSpeed(float value){
 		moveState.Speed = value;
 	}
+
 }
