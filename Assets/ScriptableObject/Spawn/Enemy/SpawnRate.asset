@@ -15,3 +15,5 @@ MonoBehaviour:
   spawnRateList:
   - rate: 1
     prefab: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}
+  - rate: 1
+    prefab: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}

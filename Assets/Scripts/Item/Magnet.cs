@@ -9,5 +9,6 @@ public class Magnet : MonoBehaviour, IItemPickUp
     public void PickUpAble()
     {
         pickUpMagnet?.Invoke();
+        gameObject.SetActive(false);
     }
 }

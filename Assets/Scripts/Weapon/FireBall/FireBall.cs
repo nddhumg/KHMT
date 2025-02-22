@@ -31,7 +31,6 @@ public class FireBall :  Weapon
         float recoil = 0;
         Vector2 directionBullet = GetAttackDirection();
         Quaternion rotationBullet = new Quaternion();
-        Vector2 vectoBullet;
         for (int countAmmo = 0; countAmmo < perFire; countAmmo++)
         {
             Vector2 directionBulletCurrent = directionBullet;

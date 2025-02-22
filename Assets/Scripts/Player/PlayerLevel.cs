@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLevel : Level {
-	protected uint exp = 0;
-	[SerializeField]protected uint expLevelUp;
+	[SerializeField] protected uint exp = 0;
+	[SerializeField] protected uint expLevelUp = 20;
 
-	public void ExpUp(uint exp){
-		this.exp += exp;
-		if (exp >= expLevelUp) {
+	public void ExpUp(uint expUp){
+		this.exp += expUp;
+		if (this.exp >= expLevelUp) {
 			LevelUp ();
-			exp -= expLevelUp;
+			expUp -= expLevelUp;
 		}
 	}
 	[ButtonAttribute]
 	public override bool LevelUp ()
 	{
 		if (base.LevelUp ()) {
+			if (levelCurrent == 10) {
+				expLevelUp = 40;
+			}
 			UpgradeSystem.instance.CreateUpgrade ();
 			return true;
 		}

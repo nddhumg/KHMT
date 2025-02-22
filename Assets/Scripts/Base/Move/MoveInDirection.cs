@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveInDirection : MonoBehaviour,ISetStat {
+public class MoveInDirection : MonoBehaviour {
 	[SerializeField] protected float speed;
 	protected Vector3 direction;
 
@@ -18,9 +18,6 @@ public class MoveInDirection : MonoBehaviour,ISetStat {
 		}
 	}
 
-	public void SetStat(SOStat stat){
-		speed = stat.GetStatValue (EnumName.Stat.Speed);
-	}
 
 	void Update(){
 		transform.parent.position += speed * Time.deltaTime * direction;

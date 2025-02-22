@@ -130,6 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea00eac150a72ab4796cd3a789b59e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundPickUp:
+    clip: {fileID: 8300000, guid: 4b294d59d2399014daa718b35c9de73b, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
   exp: 1
   dataExp: {fileID: 11400000, guid: 7d5dcf1744b89ed40966b39fd6f6a19c, type: 2}
 --- !u!58 &58699993190175428

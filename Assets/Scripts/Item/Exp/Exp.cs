@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Bson;
 using UnityEngine;
 
 public class Exp : MonoBehaviour, IItemPickUp {
+
     [SerializeField] protected uint exp;
     [SerializeField] protected SOExp dataExp;
     private bool isBeingPulled = false;
@@ -13,6 +15,7 @@ public class Exp : MonoBehaviour, IItemPickUp {
         gameObject.SetActive(false);
     }
 
+   
     void OnEnable() {
         Magnet.pickUpMagnet += Pull;
     }
