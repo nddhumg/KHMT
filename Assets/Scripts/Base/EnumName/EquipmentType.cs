@@ -6,7 +6,7 @@ namespace EnumName
 {
     public enum EquipmentType
     {
-        weapon,
-
+        Weapon,
+        Armor,
     }
 }

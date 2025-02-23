@@ -7,30 +7,48 @@ namespace UI.Charector
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {
-        protected bool isSlotOccupied;
         protected RectTransform rect;
+         protected DraggableItem draggableItem;
 
         void Awake()
         {
             rect = GetComponent<RectTransform>();
         }
+
+        public virtual void Initialized(DraggableItem drag) { 
+            this.draggableItem = drag;
+        }
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag != null)
+            if (eventData.pointerDrag == null)
+                return;
+            DraggableItem itemDraggable = eventData.pointerDrag.GetComponent<DraggableItem>();
+            if (itemDraggable == null || !CanItemSwap(itemDraggable))
+                return;
+            ItemSwap(itemDraggable);
+        }
+
+        public virtual void ItemSwap(DraggableItem draggableNew)
+        {
+            if (IsSlotEmpty())
             {
-                SetItem(eventData.pointerDrag);
+                draggableNew.InventorySlot.draggableItem = null;
             }
+            else {
+                this.draggableItem.GoToSlot(draggableNew.InventorySlot);
+
+            }
+            this.draggableItem = draggableNew;
+            this.draggableItem.GoToSlot(this);
+           
         }
 
-        public void SetIsSlotOccupied(bool isSlotOccupied)
-        {
-            this.isSlotOccupied = isSlotOccupied;
+        public virtual bool CanItemSwap(DraggableItem draggable) {
+            return draggableItem != draggable ;
         }
 
-        protected virtual void SetItem(GameObject gameObjItem)
-        {
-            DraggableItem item = gameObjItem.GetComponent<DraggableItem>();
-            item?.SetItem(rect, transform, this);
+        protected bool IsSlotEmpty(){
+            return draggableItem == null;
         }
     }
 }
