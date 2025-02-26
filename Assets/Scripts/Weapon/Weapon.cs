@@ -36,7 +36,7 @@ public abstract class Weapon : MonoBehaviour {
 
 
 	protected virtual int GetDamge() { 
-		return (int)(Player.instance.StatsManager.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
+		return (int)(Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
 	}
 
 	protected abstract void Attack();

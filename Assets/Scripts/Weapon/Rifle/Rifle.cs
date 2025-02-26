@@ -35,9 +35,9 @@ public class Rifle : Weapon
                 directionBullet.y += recoil;
             else
                 directionBullet.x += recoil;
-            bulletCurrent = BulletPool.instance.GetFromPool(bullet, transform.position, Quaternion.identity);
+            bulletCurrent = BulletPool.instance.Spawn(bullet, transform.position, Quaternion.identity);
             bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBullet;
-            bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.GetStatValue(EnumName.Stat.Damage));
+            bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
             yield return new WaitForSeconds(Random.Range(0, 0.1f));
         }
         timer.ResetCoolDown();

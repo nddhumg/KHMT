@@ -10,7 +10,7 @@ public class PlayerLevel : Level {
 		this.exp += expUp;
 		if (this.exp >= expLevelUp) {
 			LevelUp ();
-			expUp -= expLevelUp;
+            exp -= expLevelUp;
 		}
 	}
 	[ButtonAttribute]

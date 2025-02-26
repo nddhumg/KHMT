@@ -9,7 +9,6 @@ namespace UI.Charector
     public class DraggableItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] protected Image icon;
-        //[SerializeField] protected Canvas canvas;
         [SerializeField] protected CanvasGroup group;
         protected RectTransform rect;
         [SerializeField]protected SOItem itemInfo;

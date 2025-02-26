@@ -19,11 +19,11 @@ public class ShotGun : Weapon {
 		MoveInDirection moveBullet;
 		DamageSender damageBullet;
 		for (int bulletCount = 0; bulletCount < shotPelletCount; bulletCount++) {
-			bullet = BulletPool.instance.GetFromPool (this.bullet, muzzle.position, Quaternion.identity);
+			bullet = BulletPool.instance.Spawn (this.bullet, muzzle.position, Quaternion.identity);
 			moveBullet = bullet.GetComponentInChildren<MoveInDirection> ();
 			damageBullet = bullet.GetComponentInChildren<DamageSender>();
             moveBullet.Direction = directionShoot;
-			damageBullet.SetDamage((int)Player.instance.StatsManager.GetStatValue(EnumName.Stat.Damage));
+			damageBullet.SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
             directionShoot = RotateVector2 (directionShoot,angle);
 		}
 	}

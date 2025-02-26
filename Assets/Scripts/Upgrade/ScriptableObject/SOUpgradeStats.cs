@@ -11,11 +11,11 @@ public class SOUpgradeStats : SOUpgrade
     {   
         if (!percentageIncrease)
         {
-            Player.instance.StatsManager.IncreaseStat(statName, statIncreaseValue);
+            Player.instance.StatsManager.StatCurrent.IncreaseStat(statName, statIncreaseValue);
         }
         else
         {
-            Player.instance.StatsManager.PercentageIncreaseStat(statName, statIncreaseValue);
+            Player.instance.StatsManager.StatCurrent.PercentageIncreaseStat(statName, statIncreaseValue);
         }
     }
 

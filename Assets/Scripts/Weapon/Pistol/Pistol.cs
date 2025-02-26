@@ -12,7 +12,7 @@ public class Pistol : Weapon {
 
     protected override void Attack ()
 	{
-		GameObject bullet = BulletPool.instance.GetFromPool (this.bullet,muzzle.position,Quaternion.identity);
+		GameObject bullet = BulletPool.instance.Spawn (this.bullet,muzzle.position,Quaternion.identity);
 		bullet.GetComponentInChildren<MoveInDirection> ().Direction = GetAttackDirection();
         bullet.GetComponentInChildren<DamageSender>().SetDamage(GetDamge());
 	}

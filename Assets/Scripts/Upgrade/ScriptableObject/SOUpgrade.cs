@@ -9,6 +9,7 @@ public abstract class SOUpgrade : ScriptableObject {
 
     public Sprite Icon => icon; 
 
+
     public abstract void ApplyUpgrade();
     public abstract string GetDescription();
 }

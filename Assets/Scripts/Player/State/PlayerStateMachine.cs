@@ -22,7 +22,7 @@ public class PlayerStateMachine : StateManager {
 
 	public override void Initialize ()
 	{
-		moveState = new PlayerMovementState (this,stats.GetStatValue(EnumName.Stat.Speed));
+		moveState = new PlayerMovementState (this,stats.StatCurrent.GetStatValue(EnumName.Stat.Speed));
 		idleStat = new PlayerIdleStat(this);
 		stateCurrent = idleStat;
 		stateCurrent.Enter ();

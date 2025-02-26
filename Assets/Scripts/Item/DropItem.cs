@@ -11,7 +11,7 @@ public class DropItem : MonoBehaviour {
 		foreach (SpawnRate item in itemsDrop.SpawnRateList) {
 			temp += item.Rate;
 			if (ran <= temp) {
-				ItemPool.instance.GetFromPool (item.Prefab, postionDrop, rotationDrop);
+				ItemPool.instance.Spawn (item.Prefab, postionDrop, rotationDrop);
 			}
 		}
 	}

@@ -1,35 +1,81 @@
-﻿using System.IO;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
-namespace Systems.SaveLoad{
-	public class SaveLoadSystem {
-		private static SaveData saveData = new SaveData();
-		private static IDataService dataService = new FileDataService (new JsonSerializer (), "json");
+namespace Systems.SaveLoad
+{
+    public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
+    {
+        [SerializeField] private GameData saveData;
+        private IDataService dataService;
 
-		[System.Serializable]
-		public class SaveData  {
-			
-		}
+        protected override void Awake()
+        {
+            base.Awake();
+            dataService = new FileDataService(new JsonSerializer(), "json");
+            LoadGame();
+        }
+        private void Start()
+        {
+            Bind<Inventory, InventorySave>(saveData.inventory);
+        }
 
-		public static void SaveGame(){
-			HandleSaveData ();
-			dataService.Save <SaveData>(ref saveData);
+        private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+        private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-		}
+        private void OnApplicationQuit()
+        {
+            SaveGame();
+        }
 
-		private static void HandleSaveData(){
-		}
+        void OnSceneLoaded(Scene s, LoadSceneMode mode)
+        {
+        }
 
-		public static void LoadGame(){
-			saveData = dataService.Load<SaveData> (typeof(SaveData).Name);
-			HandleLoadData ();
-		}	
+        void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
+        {
+            var entity = FindObjectsByType<T>(FindObjectsSortMode.None).FirstOrDefault();
+            if (entity == null)
+                return;
+            if (data == null)
+            {
+                data = new TData() { ID = entity.ID };
+            }
+            entity.Bind(data);
+        }
 
-		private static void HandleLoadData(){
+        void Bind<T, TData>(List<TData> datas) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()
+        {
+            var entities = FindObjectsByType<T>(FindObjectsSortMode.None);
+            foreach (var entity in entities)
+            {
+                var data = datas.FirstOrDefault(d => d.ID == entity.ID);
+                if (data == null)
+                {
+                    data = new TData { ID = entity.ID };
+                    datas.Add(data);
+                }
+                entity.Bind(data);
+            }
+        }
+        [Button]
+        public void SaveGame()
+        {
+            dataService.Save<GameData>(ref saveData);
 
-		}
-	}
+        }
+        [Button]
+        public void LoadGame()
+        {
+            saveData = dataService.Load<GameData>(typeof(GameData).Name);
+            if (saveData == null)
+            {
+                saveData = new();
+            }
+        }
+
+    }
+
 }

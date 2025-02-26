@@ -39,7 +39,7 @@ public class AttackStateEnemy : EnemyState {
 	}
 
 	protected virtual void Attack() { 
-        MoveInDirection moveBullet = BulletPool.instance.GetFromPool(bullet, enemyState.GetPosition(), Quaternion.identity).GetComponentInChildren<MoveInDirection>();
+        MoveInDirection moveBullet = BulletPool.instance.Spawn(bullet, enemyState.GetPosition(), Quaternion.identity).GetComponentInChildren<MoveInDirection>();
         moveBullet.Direction = enemyState.GetDirecTionToPlayer();
         isAttack = false;
     }

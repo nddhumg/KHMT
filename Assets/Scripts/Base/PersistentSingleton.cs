@@ -25,7 +25,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (_instance != null && _instance.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())
         {
-            Debug.LogError("Singleton already exist " + _instance.gameObject.name,gameObject);
+            Debug.LogError("Singleton already exist " + _instance.gameObject.name);
             Destroy(this.gameObject);
         }
         else

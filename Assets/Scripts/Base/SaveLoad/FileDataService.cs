@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
@@ -9,9 +8,9 @@ namespace System{
 		string dataPath;
 		string fileExtension;
 
-		public FileDataService(ISerializer serializer, string dataPath){
+		public FileDataService(ISerializer serializer, string fileExtension){
 			this.dataPath = Application.persistentDataPath;
-			this.fileExtension = dataPath;
+			this.fileExtension = fileExtension;
 			this.serializer = serializer;
 		}
 		public void Save<T>(ref T data, bool overwrite = true) {
@@ -30,6 +29,7 @@ namespace System{
 
 			if (!File.Exists (fileLocation)) {
 				Debug.LogWarning ($"No presisted GameData with name '{name}'" );
+				return default(T);
 			}
 
 			return serializer.Deserialize<T> (File.ReadAllText (fileLocation));
