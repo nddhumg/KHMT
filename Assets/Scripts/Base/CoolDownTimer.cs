@@ -10,8 +10,9 @@ public class CoolDownTimer
     private bool isAutoResetCoolDown;
     public bool IsCoolDownOver { get; private set; }
     public Action OnCoolDownEnd;
+    public float CoolDown { get => coolDown; set { coolDown = value; } }
 
-    public CoolDownTimer(float coolDown, bool isAutoResetCoolDown = true)
+    public CoolDownTimer(float coolDown = 0.1f, bool isAutoResetCoolDown = true)
     {
         this.coolDown = coolDown;
         this.isAutoResetCoolDown = isAutoResetCoolDown;

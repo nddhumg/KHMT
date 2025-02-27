@@ -49,5 +49,6 @@ public abstract class Enemy : MonoBehaviour,IReceiveDamage {
 		hp = hpMax;
 		dropItem.Drop (transform.position, Quaternion.identity);
 		gameObject.SetActive (false);
+		EnemySpawn.instance.EnemyCount--;
 	}
 }

@@ -86,7 +86,7 @@ public class Player : Singleton<Player>
         if (directionMove.y < 0)
             rotationWeapon.z *= -1;
 
-        weapon.localRotation = Quaternion.Euler(rotationWeapon);
+        //weapon.localRotation = Quaternion.Euler(rotationWeapon);
     }
 
 }

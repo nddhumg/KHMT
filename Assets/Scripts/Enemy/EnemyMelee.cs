@@ -17,8 +17,7 @@ public class EnemyMelee : Enemy
     protected override void Update()
     {
         base.Update();
-        if (!timer.IsCoolDownOver)
-            timer.CountTime(Time.deltaTime);
+        timer.CountTime(Time.deltaTime);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

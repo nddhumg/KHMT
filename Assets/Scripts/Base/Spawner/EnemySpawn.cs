@@ -1,69 +1,113 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour {
-	private Vector2 sizeCamera;
-	protected Vector2 randomMaxDistance = new Vector3(5f, 5f);
-	protected Vector2 randomMinDistance = new Vector3(2f, 2f);
+public class EnemySpawn : Singleton<EnemySpawn> {
 
-	protected uint spawnCountPerWave = 6;
-	protected List<SpawnRate> possibleWaveEnemies = new List<SpawnRate>();
-	[SerializeField] protected List<SOSpawnRate> allSpawnableEnemies;
+    [SerializeField] protected SpawnZones spawnZones;
+    protected List<SpawnRate> possibleWaveEnemies = new List<SpawnRate>();
+    [SerializeField] protected List<SOSpawnRate> allSpawnableEnemies;
+    [SerializeField] protected SOSpawnWave waveCurrent;
+    protected SpawnEnemyInfo info;
+    protected float timeNextWave = 0;
+    protected bool isWavePeak = false;
+    protected float operationTimePeak;
+
+    protected int enemyCount = 0;
+
     protected CoolDownTimer spawnTimer;
-	[SerializeField] protected float delaySpawn = 1.3f;
 
+    public int EnemyCount { get => enemyCount; set { enemyCount = value; } }
 
-	private void Awake()
-	{
-		spawnTimer = new CoolDownTimer(delaySpawn);
-	}
-
-	protected void Start() {
-		possibleWaveEnemies = allSpawnableEnemies[0].SpawnRateList;
-
+    protected void Start() {
+        spawnTimer = new CoolDownTimer();
         spawnTimer.OnCoolDownEnd += SpawnWave;
-		sizeCamera.y = 2f * Camera.main.orthographicSize;
-		sizeCamera.x = sizeCamera.y * Camera.main.aspect;
 
-	}
-	private void Update()
-	{
-		spawnTimer.CountTime(Time.deltaTime);
-	}
+        isWavePeak = waveCurrent.IsSpawnPeak;
+        if (!isWavePeak)
+        {
+            SetSpawnInfo(waveCurrent.SpawnEnemyInfo);
+        }
+        timeNextWave += waveCurrent.SpawnEnemyInfo.operationTimeMinutes;
 
-	protected virtual void SpawnWave()
+        possibleWaveEnemies = allSpawnableEnemies[0].SpawnRateList;
+    }
+    private void Update()
+    {
+        spawnTimer.CountTime(Time.deltaTime);
+        if (CanNextWave())
+        {
+            NextWave();
+        }
+        if (isWavePeak && IsPeakTimeOver())
+        {
+            EndPeak();
+        }
+    }
+
+    protected bool IsPeakTimeOver(){
+        return Time.timeSinceLevelLoad < operationTimePeak;
+    }
+
+    protected void SetSpawnInfo(SpawnEnemyInfo infoNew) {
+        info = infoNew;
+        spawnTimer.CoolDown = info.spawnIntervalSeconds;
+    }
+
+    protected bool CanNextWave()
+    {
+        return Time.timeSinceLevelLoad / 60f > timeNextWave;
+    }
+
+    protected void NextWave() {
+        waveCurrent = waveCurrent.NextWave;
+
+        isWavePeak = waveCurrent.IsSpawnPeak;
+        if (isWavePeak)
+        {
+            operationTimePeak = waveCurrent.SpawnEnemyInfo.operationTimeMinutes * 60 + Time.timeSinceLevelLoad;
+            SetSpawnInfo(waveCurrent.SpawnPeak.info);
+        }
+        else
+        {
+            SetSpawnInfo(waveCurrent.SpawnEnemyInfo);
+        }
+        timeNextWave += waveCurrent.SpawnEnemyInfo.operationTimeMinutes;
+    }
+
+    protected void EndPeak() { 
+        info = waveCurrent.SpawnEnemyInfo;
+        spawnTimer.CoolDown = waveCurrent.SpawnEnemyInfo.spawnIntervalSeconds;
+    }
+
+    protected virtual void SpawnWave()
 	{
-		Vector3 spawnPosition = new Vector3();
-		Vector2 randomDistanceCamera = new Vector2();
-		Vector3 positionCamera;
-		GameObject enemy; 
-		for (int i = 0; i < spawnCountPerWave; i++) {
+        if (IsSpawnMax())
+            return;
+		GameObject enemy;
+        enemyCount += info.spawnAmount;
+		for (int i = 0; i < info.spawnAmount; i++) {
             enemy = GetRandomEnemy();
-            positionCamera = Camera.main.transform.position;
-			randomDistanceCamera.x = UnityEngine.Random.Range(randomMinDistance.x, randomMaxDistance.x);
-			randomDistanceCamera.y = UnityEngine.Random.Range(randomMinDistance.x, randomMaxDistance.y);
-			spawnPosition.x = positionCamera.x + GetRandomSign() * (sizeCamera.x / 2 + randomDistanceCamera.x);
-			spawnPosition.y = positionCamera.y + GetRandomSign() * sizeCamera.y / 2 + GetRandomSign() * randomDistanceCamera.y;
-
-			EnemyPool.instance.Spawn(enemy, spawnPosition, Quaternion.identity);
+			EnemyPool.instance.Spawn(enemy, spawnZones.GetRandomSpawnPosition(), Quaternion.identity);
 		}
 	}
 
-	protected int GetRandomSign() {
-		return UnityEngine.Random.value <= 0.5f ? -1 : 1;
-	}
+    private bool IsSpawnMax() { 
+        return info.maxEnemySpawn <= enemyCount;
+    }
 
-	protected GameObject GetRandomEnemy(){
-		float rate = UnityEngine.Random.value;
-		float temp = 0;
-		foreach (SpawnRate rateEnemy in possibleWaveEnemies) {
-			temp += rateEnemy.Rate;
-			if(rate <= temp)
-				return rateEnemy.Prefab; 
-		}
-		return null;
+    private GameObject GetRandomEnemy()
+    {
+        float rateRandom = Random.value;
+        float rateCurrent = 0;
+        foreach (SpawnRate rateEnemy in possibleWaveEnemies)
+        {
+            rateCurrent += rateEnemy.Rate;
+            if (rateRandom <= rateCurrent)
+                return rateEnemy.Prefab;
+        }
+        return null;
 
     }
+
 }
