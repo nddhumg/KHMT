@@ -2,35 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : Singleton<EnemySpawn> {
+public class EnemySpawn : Singleton<EnemySpawn>
+{
 
     [SerializeField] protected SpawnZones spawnZones;
     protected List<SpawnRate> possibleWaveEnemies = new List<SpawnRate>();
-    [SerializeField] protected List<SOSpawnRate> allSpawnableEnemies;
     [SerializeField] protected SOSpawnWave waveCurrent;
+    protected EnemyStatBonusByLevelPlayer stat;
+
     protected SpawnEnemyInfo info;
     protected float timeNextWave = 0;
-    protected bool isWavePeak = false;
-    protected float operationTimePeak;
 
-    protected int enemyCount = 0;
+    [SerializeField, ReadOnly] protected int enemyCount = 0;
+    [SerializeField, ReadOnly] protected int enemyDie = 0;
 
     protected CoolDownTimer spawnTimer;
 
-    public int EnemyCount { get => enemyCount; set { enemyCount = value; } }
+    public EnemyStatBonusByLevelPlayer Stat => stat;
 
-    protected void Start() {
-        spawnTimer = new CoolDownTimer();
-        spawnTimer.OnCoolDownEnd += SpawnWave;
+    public int EnemyCount { get => enemyCount; set => enemyCount = value; }
+    public int EnemyKill { get => enemyDie; set => enemyDie = value; }
 
-        isWavePeak = waveCurrent.IsSpawnPeak;
-        if (!isWavePeak)
-        {
-            SetSpawnInfo(waveCurrent.SpawnEnemyInfo);
-        }
-        timeNextWave += waveCurrent.SpawnEnemyInfo.operationTimeMinutes;
-
-        possibleWaveEnemies = allSpawnableEnemies[0].SpawnRateList;
+    protected void Start()
+    {
+        stat = new EnemyStatBonusByLevelPlayer(Player.instance.Level);
+        CreateTimerSpawn();
+        SetUpNextWave();
     }
     private void Update()
     {
@@ -39,19 +36,6 @@ public class EnemySpawn : Singleton<EnemySpawn> {
         {
             NextWave();
         }
-        if (isWavePeak && IsPeakTimeOver())
-        {
-            EndPeak();
-        }
-    }
-
-    protected bool IsPeakTimeOver(){
-        return Time.timeSinceLevelLoad < operationTimePeak;
-    }
-
-    protected void SetSpawnInfo(SpawnEnemyInfo infoNew) {
-        info = infoNew;
-        spawnTimer.CoolDown = info.spawnIntervalSeconds;
     }
 
     protected bool CanNextWave()
@@ -59,44 +43,38 @@ public class EnemySpawn : Singleton<EnemySpawn> {
         return Time.timeSinceLevelLoad / 60f > timeNextWave;
     }
 
-    protected void NextWave() {
+    protected void NextWave()
+    {
+        if(waveCurrent.NextWave == null)
+        {
+            Debug.Log("No next wave");
+            return;
+        }
         waveCurrent = waveCurrent.NextWave;
-
-        isWavePeak = waveCurrent.IsSpawnPeak;
-        if (isWavePeak)
-        {
-            operationTimePeak = waveCurrent.SpawnEnemyInfo.operationTimeMinutes * 60 + Time.timeSinceLevelLoad;
-            SetSpawnInfo(waveCurrent.SpawnPeak.info);
-        }
-        else
-        {
-            SetSpawnInfo(waveCurrent.SpawnEnemyInfo);
-        }
-        timeNextWave += waveCurrent.SpawnEnemyInfo.operationTimeMinutes;
-    }
-
-    protected void EndPeak() { 
-        info = waveCurrent.SpawnEnemyInfo;
-        spawnTimer.CoolDown = waveCurrent.SpawnEnemyInfo.spawnIntervalSeconds;
+        SetUpNextWave();
     }
 
     protected virtual void SpawnWave()
-	{
+    {
         if (IsSpawnMax())
             return;
-		GameObject enemy;
         enemyCount += info.spawnAmount;
-		for (int i = 0; i < info.spawnAmount; i++) {
-            enemy = GetRandomEnemy();
-			EnemyPool.instance.Spawn(enemy, spawnZones.GetRandomSpawnPosition(), Quaternion.identity);
-		}
-	}
+        bool isGetFromPool;
+        GameObject enemy;
+        SpawnRate spawnRate;
+        for (int i = 0; i < info.spawnAmount; i++)
+        {
+            spawnRate = GetRandomSpawnRate();
+            enemy = EnemyPool.instance.Spawn(spawnRate.Prefab, spawnZones.GetRandomSpawnPosition(), Quaternion.identity, out isGetFromPool);
+        }
+    }
 
-    private bool IsSpawnMax() { 
+    private bool IsSpawnMax()
+    {
         return info.maxEnemySpawn <= enemyCount;
     }
 
-    private GameObject GetRandomEnemy()
+    private SpawnRate GetRandomSpawnRate()
     {
         float rateRandom = Random.value;
         float rateCurrent = 0;
@@ -104,10 +82,22 @@ public class EnemySpawn : Singleton<EnemySpawn> {
         {
             rateCurrent += rateEnemy.Rate;
             if (rateRandom <= rateCurrent)
-                return rateEnemy.Prefab;
+                return rateEnemy;
         }
         return null;
-
     }
 
+    private void CreateTimerSpawn()
+    {
+        spawnTimer = new CoolDownTimer();
+        spawnTimer.OnCoolDownEnd += SpawnWave;
+    }
+
+    private void SetUpNextWave()
+    {
+        info = waveCurrent.SpawnEnemyInfo;
+        timeNextWave += info.operationTimeMinutes;
+        possibleWaveEnemies = waveCurrent.EnemysSpawn;
+        spawnTimer.CoolDown = info.spawnIntervalSeconds;
+    }
 }

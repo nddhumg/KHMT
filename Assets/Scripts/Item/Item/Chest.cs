@@ -11,7 +11,7 @@ public class Chest : MonoBehaviour, IItemPickUp
     {
         coin = Random.Range(0, coinMax);
         //GameSystem.Pause();
-        GameSystem.AddCoin(coin);
+        //GameSystem.AddCoin(coin);
         gameObject.SetActive(false);
     }
 

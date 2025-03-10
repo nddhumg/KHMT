@@ -67,7 +67,7 @@ public class SOStat : ScriptableObject
         }
         catch
         {
-            Debug.LogWarning("No " + statKey.ToString() + " stat");
+            Debug.LogWarning("No " + statKey.ToString() + " in stat");
             return 0;
         }
     }

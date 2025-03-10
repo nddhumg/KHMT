@@ -19,3 +19,5 @@ MonoBehaviour:
     value: 1
   - key: 5
     value: 100
+  - key: 4
+    value: 0.2

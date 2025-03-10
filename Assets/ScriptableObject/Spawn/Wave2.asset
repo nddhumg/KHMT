@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   info:
-    spawnAmount: 4
-    maxEnemySpawn: 30
+    spawnAmount: 10
+    maxEnemySpawn: 100
     spawnIntervalSeconds: 2.5
-    operationTimeMinutes: 3
-  spawnPeak: {fileID: 0}
+    operationTimeMinutes: 1
   nextWave: {fileID: 11400000, guid: 3827cb77bc815fd4cadd795b143ead33, type: 2}
+  enemysSpawn:
+  - rate: 1
+    prefab: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Wave7
   m_EditorClassIdentifier: 
   info:
-    spawnAmount: 11
-    maxEnemySpawn: 50
-    spawnIntervalSeconds: 1
-    operationTimeMinutes: 5
-  spawnPeak: {fileID: 11400000, guid: 6ffa8618349186344821d0f026211cd4, type: 2}
-  nextWave: {fileID: 0}
+    spawnAmount: 20
+    maxEnemySpawn: 100
+    spawnIntervalSeconds: 1.5
+    operationTimeMinutes: 1
+  nextWave: {fileID: 11400000, guid: 5d9029b12eed182478f4bcc8ba4c239b, type: 2}
+  enemysSpawn:
+  - rate: 1
+    prefab: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}

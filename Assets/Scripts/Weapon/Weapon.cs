@@ -8,11 +8,17 @@ public abstract class Weapon : MonoBehaviour {
 	protected float damageMultiplier = 1;
 	[SerializeField] protected GameObject bullet;
 	[SerializeField] protected Transform muzzle;
+	protected SOStat statPlayer;
 
     private void Awake()
     {
 		timer = new CoolDownTimer(attackSpeed);
 		timer.OnCoolDownEnd += Attack;	
+    }
+
+    private void Start()
+    {
+		statPlayer = Player.instance.StatsManager.StatCurrent;
     }
 
     protected virtual void Update(){
@@ -27,16 +33,13 @@ public abstract class Weapon : MonoBehaviour {
         attackSpeed -= value;
     }
 
-
     protected virtual Vector2 GetAttackDirection()
 	{
         return Player.instance.Direction;
     }
 
-
-
 	protected virtual int GetDamge() { 
-		return (int)(Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
+		return (int)(statPlayer.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
 	}
 
 	protected abstract void Attack();

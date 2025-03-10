@@ -13,16 +13,15 @@ public class MusicManager : PersistentSingleton<MusicManager>
 {
     [SerializeField] protected AudioSource musicAudio;
     [SerializeField] protected AudioSource soundAudio;
-    protected bool isMuteMusic;
-    protected bool isMuteSound;
 
 
     [SerializeField] protected float fadeDuration;
 
     public float VolumeMusic => musicAudio.volume;
     public float VolumeSound => soundAudio.volume;
-    public bool IsMuteMusic => isMuteMusic;
-    public bool IsMuteSound => isMuteSound;
+    public bool IsMuteMusic => musicAudio.mute;
+    public bool IsMuteSound => soundAudio.mute;
+
     public void PlayerMusic(MusicData data)
     {
         musicAudio.clip = data.clip;
@@ -40,14 +39,12 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     public void ChangeMuteMusic()
     {
-        musicAudio.mute = !isMuteMusic;
-        isMuteMusic = !isMuteMusic;
+        musicAudio.mute = !musicAudio.mute;
     }
 
     public void ChangeMuteSound()
     {
-        soundAudio.mute = !isMuteSound;
-        isMuteSound = !isMuteSound;
+        soundAudio.mute = !soundAudio.mute;
     }
 
     protected IEnumerator SwitchMusic(MusicData data)

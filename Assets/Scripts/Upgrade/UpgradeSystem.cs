@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Systems.Inventory;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 {
     [SerializeField] protected List<UpgradeSelect> upgradesSelect;
     [SerializeField] protected List<SOUpgrade> availableUpgrades;
-    [SerializeField] protected List <SOUpgradeSkill> weaponBase;
+    [SerializeField] protected List <SOUpgradeWeapon> weaponBase;
     protected int countUpgradeSelect = 3;
     protected List<SOUpgrade> infoUpgradeSelect = new List<SOUpgrade>();
 
@@ -17,14 +18,16 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         SetActiveUpgrade(false);
         AddUpgradeWeapon();
     }
-
+    [Button]
     public void AddUpgradeWeapon()
     {
         foreach(var weapon in weaponBase)
         {
-            if (weapon.SkillName.ToString() == Inventory.instance.EquippedWeapon.nameItem.ToString()) { 
+            if (weapon.SkillName.ToString() == InventoryManager.instance.EquippedWeapon.nameItem.ToString()) { 
                 availableUpgrades.Add(weapon);
                 weapon.ApplyUpgrade();
+                Player.instance.SkillManager.GetGameObj(weapon.SkillName.ToString()).transform.localPosition = weapon.Position;
+                return;
             }
         }
     }

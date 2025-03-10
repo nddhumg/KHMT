@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using Systems.Inventory;
 
 namespace Systems.SaveLoad
 {
     public class SaveLoadSystem : PersistentSingleton<SaveLoadSystem>
     {
-        [SerializeField] private GameData saveData;
+        [SerializeField ] private GameData saveData;
         private IDataService dataService;
 
         protected override void Awake()
@@ -16,22 +17,22 @@ namespace Systems.SaveLoad
             base.Awake();
             dataService = new FileDataService(new JsonSerializer(), "json");
             LoadGame();
-        }
-        private void Start()
-        {
-            Bind<Inventory, InventorySave>(saveData.inventory);
+            Bind<InventoryManager, InventoryData>(saveData.inventory);
+            Bind<TimeManager, TimeData>(saveData.time);
+            Bind<ResourceController, ResourceData>(saveData.resource);
         }
 
         private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        private void OnApplicationQuit()
+        private void OnDestroy()
         {
             SaveGame();
         }
 
         void OnSceneLoaded(Scene s, LoadSceneMode mode)
         {
+            Bind<ShopManager, ShopData>(saveData.shop);
         }
 
         void Bind<T, TData>(TData data) where T : MonoBehaviour, IBind<TData> where TData : ISaveable, new()

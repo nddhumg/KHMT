@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8934031541394727138}
-  - component: {fileID: 2813450083206872269}
+  - component: {fileID: 1559739714795263787}
   m_Layer: 9
   m_Name: Level
   m_TagString: Untagged
@@ -199,7 +199,7 @@ Transform:
   m_Father: {fileID: 2896326138018498685}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2813450083206872269
+--- !u!114 &1559739714795263787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,4 +212,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCurrent: 0
-  levelMax: 0
+  levelMax: 1

@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class PlayerLevel : Level {
 	[SerializeField] protected uint exp = 0;
-	[SerializeField] protected uint expLevelUp = 20;
+	[SerializeField] protected uint expLevelUp = 10;
 
-	public void ExpUp(uint expUp){
+	public uint Exp => exp;
+	public uint ExpLevelUp => expLevelUp;
+
+	public void ExpUp(uint expUp) {
 		this.exp += expUp;
 		if (this.exp >= expLevelUp) {
-			LevelUp ();
-            exp -= expLevelUp;
+			LevelUp();
+            exp  = 0;
 		}
 	}
-	[ButtonAttribute]
-	public override bool LevelUp ()
+
+	[Button]
+	public override bool LevelUp()
 	{
-		if (base.LevelUp ()) {
-			if (levelCurrent == 10) {
-				expLevelUp = 40;
-			}
-			UpgradeSystem.instance.CreateUpgrade ();
+		if (base.LevelUp()) {
+			IncreaseExpForLevelUp() ;
+			UpgradeSystem.instance.CreateUpgrade();
 			return true;
 		}
 		return false;
 	}
 
+	protected void IncreaseExpForLevelUp(){
+		expLevelUp =  5 * levelCurrent;
+	}
 }

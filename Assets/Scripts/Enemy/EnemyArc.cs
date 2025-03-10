@@ -7,8 +7,9 @@ public class EnemyArc : Enemy
     [SerializeField] protected GameObject bullet;
 
     public GameObject Bullet => bullet;
-    private void Awake()
+    
+    protected override void CreateStateManager()
     {
-        state = new EnemyArcStateManager(this, stat);
+        state = new EnemyArcStateManager(this, statBase);
     }
 }

@@ -44,7 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa1ebcfee947d047afe942917945c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsDrop: {fileID: 11400000, guid: 307fb42bc103d444ca978c74574953c2, type: 2}
+  itemsDrop:
+  - rate: 0.99
+    prefab: {fileID: 1971977629443170, guid: a52df83e254d8714786f391f94f29532, type: 3}
+  - rate: 0.005
+    prefab: {fileID: 8155792244978648837, guid: 648227568e73d5c4b9cec11c5f62ce16,
+      type: 3}
+  - rate: 0.005
+    prefab: {fileID: 8106686446101657813, guid: 6ec9f08788b6531448f21051c6f17512,
+      type: 3}
 --- !u!1 &1353859731769456
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,9 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteTf: {fileID: 4072569145266658}
-  stat: {fileID: 11400000, guid: 2cfc837f7ddc1744db16006d937c4533, type: 2}
+  statBase: {fileID: 11400000, guid: 2cfc837f7ddc1744db16006d937c4533, type: 2}
   dropItem: {fileID: 114000029852165948}
-  attackCoolDown: 0.3
 --- !u!1 &1619708366256838
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Systems.Inventory;
 using UnityEngine;
 
-namespace UI.Charector
+namespace Inventory
 {
     public class InventoryEquip : InventorySlot
     {
         [SerializeField] protected EnumName.EquipmentType typeItem;
-         
-        public override void ItemSwap(DraggableItem draggable)
+
+        public override void DropItem(UIItem item)
         {
-            this.draggableItem?.ItemInfo.Dequip();
-            base.ItemSwap(draggable);
-            this.draggableItem.ItemInfo.Equip();
+            InventoryManager.instance.DequipItem(this.item?.info);
+            base.DropItem(item);
+            InventoryManager.instance.EquipItem(this.item.info);
         }
 
-        public override bool CanItemSwap(DraggableItem draggable)
+        protected override bool CanItemSwap(UIItem item)
         {
-            return draggable.ItemInfo.equipmentType == typeItem && base.CanItemSwap(draggable);
+            return item.info.equipmentType == typeItem && base.CanItemSwap(item);
         }
     }
 }

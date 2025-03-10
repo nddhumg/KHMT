@@ -6,12 +6,12 @@ using UnityEngine;
 public class SOSpawnWave : ScriptableObject
 {
     [SerializeField] protected SpawnEnemyInfo info = new SpawnEnemyInfo();
-    [SerializeField] protected SOSpawnPeak spawnPeak;
     [SerializeField] protected SOSpawnWave nextWave;
+    [SerializeField] protected List<SpawnRate> enemysSpawn;
 
-    public bool IsSpawnPeak => spawnPeak != null;
     public SpawnEnemyInfo SpawnEnemyInfo => info;
-    public SOSpawnPeak SpawnPeak => spawnPeak;
+
+    public List<SpawnRate> EnemysSpawn => enemysSpawn; 
 
     public SOSpawnWave NextWave => nextWave;
 }

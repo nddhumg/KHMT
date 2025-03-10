@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b8fd73c11f40448dcfa6aaeff681b, type: 3}
+  m_Name: Wave8Max
+  m_EditorClassIdentifier: 
+  info:
+    spawnAmount: 50
+    maxEnemySpawn: 100
+    spawnIntervalSeconds: 0.8
+    operationTimeMinutes: 1
+  nextWave: {fileID: 0}
+  enemysSpawn:
+  - rate: 1
+    prefab: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}

@@ -10,14 +10,14 @@ public class IBindEditor : Editor
 
     private void OnEnable()
     {
-        objectEditor = CreateEditor(target, typeof(ObjectEditor)); 
+        objectEditor = CreateEditor(target, typeof(ObjectEditor));
     }
 
     public override void OnInspectorGUI()
     {
         if (objectEditor != null)
         {
-            objectEditor.OnInspectorGUI(); 
+            objectEditor.OnInspectorGUI();
         }
 
         object targetObject = target;

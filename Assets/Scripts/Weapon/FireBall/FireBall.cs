@@ -42,7 +42,7 @@ public class FireBall :  Weapon
             rotationBullet = Quaternion.Euler(0f,0f, directionBullet.x > 0 ? Vector2.Angle(Vector2.down, directionBullet) : -Vector2.Angle(Vector2.down, directionBullet));
             bulletCurrent = BulletPool.instance.Spawn(this.bullet, muzzle.position, rotationBullet);
             bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBulletCurrent;
-            bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
+            bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage(GetDamge());
 
             yield return new WaitForSeconds(Random.Range(0, 0.1f));
         }

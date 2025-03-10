@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8866940260347660749}
   - component: {fileID: 8866940260347660750}
   - component: {fileID: 8866940260347660747}
+  - component: {fileID: 7014547502690298697}
   m_Layer: 5
   m_Name: UIItem
   m_TagString: Untagged
@@ -91,10 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 8866940260347660749}
-  canvas: {fileID: 0}
   group: {fileID: 8866940260347660747}
-  itemInfo: {fileID: 11400000, guid: a5297290db862e647bfde710bc09d5ef, type: 2}
-  inventorySlot: {fileID: 0}
+  rect: {fileID: 8866940260347660751}
+  item: {fileID: 7014547502690298697}
 --- !u!225 &8866940260347660747
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -107,3 +107,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &7014547502690298697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866940260347660736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ec4933d78890544874c1809f664d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: {fileID: 0}
+  dragged: {fileID: 8866940260347660750}

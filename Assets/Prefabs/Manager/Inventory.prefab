@@ -44,12 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb69a57e1a6c7b4d8718729366b53fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsCurrent:
-  - {fileID: 11400000, guid: becc7bbbfc34e0b4b9e45356fc795531, type: 2}
-  - {fileID: 11400000, guid: 1ae85d8637333fa4e816912646fda247, type: 2}
-  - {fileID: 11400000, guid: 5921829cd739e8c42bb24ab34d149d0d, type: 2}
   statPlayer: {fileID: 11400000, guid: 43080e3fba4df4843a252de2979b31b4, type: 2}
   data:
-    id: 61eab8ee-1658-43ce-9a99-6baa4f9558a2
     items: []
     equippedItem: []

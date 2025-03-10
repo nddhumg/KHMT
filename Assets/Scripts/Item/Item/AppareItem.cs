@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UI.Charector;
 using UnityEngine;
-
-public class AppareItem : MonoBehaviour, IItemPickUp
+namespace Systems.Inventory
 {
-    public SOItem itemInfo { get; set; }
-
-    public void PickUpAble()
+    public class AppareItem : MonoBehaviour, IItemPickUp
     {
-        Inventory.instance.AddItem(itemInfo);
-        gameObject.SetActive(false);
+        public SOItem itemInfo { get; set; }
+
+        public void PickUpAble()
+        {
+            InventoryManager.instance.AddItem(itemInfo);
+            gameObject.SetActive(false);
+        }
+
     }
 
 }

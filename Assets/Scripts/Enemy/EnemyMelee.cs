@@ -6,18 +6,26 @@ public class EnemyMelee : Enemy
 {
     protected int damageCollsion =1;
     protected CoolDownTimer timer;
-    [SerializeField] protected float attackCoolDown = 0.3f;
-    private void Awake()
-    {
-        state = new EnemyMeleeStateManager(this,stat);
-        timer = new CoolDownTimer(attackCoolDown, false);
-        damageCollsion = (int)stat.GetStatValue(EnumName.Stat.Damage);
-    }
+    protected float attackCoolDown = 0.3f;
+    
 
     protected override void Update()
     {
         base.Update();
         timer.CountTime(Time.deltaTime);
+    }
+
+    public override void Init()
+    {
+        base.Init();
+        damageCollsion = (int)statBase.GetStatValue(EnumName.Stat.Damage) * EnemySpawn.instance.Stat.GetBonusDamage();
+        attackCoolDown = statBase.GetStatValue(EnumName.Stat.AttackRate);
+        timer = new CoolDownTimer(attackCoolDown,false);
+    }
+
+    protected override void CreateStateManager()
+    {
+        state = new EnemyMeleeStateManager(this, statBase);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

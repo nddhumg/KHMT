@@ -6,7 +6,6 @@ public class HealthPoint : MonoBehaviour ,IItemPickUp
 {
     [SerializeField] protected int hpRecovery;
     [SerializeField] protected bool isPercentage;
-    [SerializeField] protected GameObject effectHealing;
     public void PickUpAble()
     {
         if(!isPercentage)

@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Systems.Inventory;
 
 public class Player : Singleton<Player>
 {
     PlayerStateMachine state;
     [SerializeField] Animator anim;
-    [SerializeField] Transform weapon;
+    Transform weapon;
     [SerializeField] private PlayerLevel level;
     [SerializeField] private PlayerStat statManager;
     [SerializeField] private PlayerSkill skillManager;
 
     [SerializeField] private GameObject healingEffect;
+    [SerializeField] private Transform sprite;
     private Vector2 directionMove = Vector2.up;
     private int directionLook = 1;
     private Vector3 rotationWeapon = Vector3.zero;
@@ -22,14 +24,9 @@ public class Player : Singleton<Player>
     public PlayerSkill SkillManager => skillManager;
     public Vector2 Direction => directionMove;
 
-    public void SetWeapon(Transform weapon)
-    {
-        this.weapon = weapon;
-    }
-
     public void Flip()
     {
-        transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        sprite.localScale = new Vector3(-1 * sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
     }
 
     public void ActiveEffectHealing()
@@ -40,7 +37,8 @@ public class Player : Singleton<Player>
     {
         state = new PlayerStateMachine(anim, this, statManager);
         state.Initialize();
-        weapon = skillManager.GetGameObj(Inventory.instance.EquippedWeapon.nameItem.ToString()).transform;
+        //weapon = skillManager.GetGameObj(InventoryManager.instance.EquippedWeapon.nameItem.ToString()).transform;
+        statManager.StatCurrent.OnChangeStat += CheckDead;
     }
 
     void FixedUpdate()
@@ -75,18 +73,16 @@ public class Player : Singleton<Player>
     void RotateWeapon()
     {
         rotationWeapon = transform.localRotation.eulerAngles;
-        if (directionLook == 1)
-        {
-            rotationWeapon.z = Vector2.Angle(Vector2.right, directionMove);
-        }
-        else
-        {
-            rotationWeapon.z = Vector2.Angle(Vector2.left, directionMove);
-        }
-        if (directionMove.y < 0)
-            rotationWeapon.z *= -1;
+        rotationWeapon.z = Vector2.Angle(Vector2.right, directionMove);
+        rotationWeapon.z *= directionMove.y < 0 ? -1 : 1;
 
-        //weapon.localRotation = Quaternion.Euler(rotationWeapon);
+        weapon.localRotation = Quaternion.Euler(rotationWeapon);
     }
 
+    void CheckDead(EnumName.Stat stat ,float value) { 
+        if(stat == EnumName.Stat.Hp && value <= 0)
+        {
+            ScreenGameOver.instance.Deffeat();
+        }
+    }
 }
