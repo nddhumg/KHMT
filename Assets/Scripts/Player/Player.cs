@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Systems.Inventory;
+using UnityEngine.InputSystem;
 
 public class Player : Singleton<Player>
 {
@@ -14,9 +15,13 @@ public class Player : Singleton<Player>
 
     [SerializeField] private GameObject healingEffect;
     [SerializeField] private Transform sprite;
+    
     private Vector2 directionMove = Vector2.up;
     private int directionLook = 1;
     private Vector3 rotationWeapon = Vector3.zero;
+    
+    private InputAction moveAction;
+    private PlayerInput playerInput;
 
 
     public PlayerLevel Level => level;
@@ -24,20 +29,23 @@ public class Player : Singleton<Player>
     public PlayerSkill SkillManager => skillManager;
     public Vector2 Direction => directionMove;
 
-    public void Flip()
+    private void OnEnable()
     {
-        sprite.localScale = new Vector3(-1 * sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
+        playerInput = new PlayerInput();
+        playerInput.enabled = true;
+
     }
 
-    public void ActiveEffectHealing()
+    private void OnDisable()
     {
-        healingEffect.SetActive(true);
+        playerInput.enabled = false;
     }
+
     void Start()
     {
         state = new PlayerStateMachine(anim, this, statManager);
         state.Initialize();
-        //weapon = skillManager.GetGameObj(InventoryManager.instance.EquippedWeapon.nameItem.ToString()).transform;
+        weapon = skillManager.GetGameObj(InventoryManager.instance.EquippedWeapon.nameItem.ToString()).transform;
         statManager.StatCurrent.OnChangeStat += CheckDead;
     }
 
@@ -69,7 +77,15 @@ public class Player : Singleton<Player>
         }
         RotateWeapon();
     }
+    public void Flip()
+    {
+        sprite.localScale = new Vector3(-1 * sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
+    }
 
+    public void ActiveEffectHealing()
+    {
+        healingEffect.SetActive(true);
+    }
     void RotateWeapon()
     {
         rotationWeapon = transform.localRotation.eulerAngles;

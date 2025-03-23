@@ -12,11 +12,5 @@ namespace Systems.Inventory
         public EnumName.EquipmentType equipmentType;
         public List<StatEntry> bonusStat;
 
-        public void CreateItemInGame(Vector3 position, Quaternion rotation)
-        {
-            AppareItem item = ItemPool.instance.SpawnItemAppare(position, rotation).GetComponent<AppareItem>();
-            item.itemInfo = this;
-        }
-
     }
 }

@@ -4,29 +4,28 @@ using EnumName;
 using Systems.SaveLoad;
 using UnityEngine;
 
-public class ResourceController : PersistentSingleton<ResourceController> , IBind<ResourceData>
+public class ResourceController : PersistentSingleton<ResourceController>
 {
     [SerializeField, ReadOnly] protected ResourceData data;
-    [SerializeField]protected int energyMax = 30;
-    [SerializeField]protected float energyRegenTimeMinutes = 5;
+    [SerializeField] protected int energyMax = 30;
+    [SerializeField] protected float energyRegenTimeMinutes = 5;
     protected float timer = 0;
     public Action<ResourceName> OnChangeResource;
 
-    public string ID { get; set; }
+    protected override void Awake()
+    {
+        base.Awake();
+        data = SaveLoadSystem.DataService.Load<ResourceData>();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveLoadSystem.DataService.Save<ResourceData>(ref data);
+    }
 
     void Start() {
-        TimeSpan offlineDuration = (DateTime.Now - TimeManager.instance.GameExitTime);
-        float offlineRecoveredEnergy = offlineDuration.Minutes / energyRegenTimeMinutes;
-        if (offlineRecoveredEnergy + data.energy >= energyMax)
-        {
-            data.energy = energyMax;
-        }
-        else
-        {
-            IncreaseResource(ResourceName.Energy, (int)offlineRecoveredEnergy);
-            timer = Mathf.FloorToInt(offlineRecoveredEnergy * 60)+ offlineDuration.Seconds /60f;
-        }
-        
+        OfflineEnergy();
+
     }
 
     void Update() {
@@ -35,12 +34,6 @@ public class ResourceController : PersistentSingleton<ResourceController> , IBin
             RegenerateEnergy();
         }
     }
-    public void Bind(ResourceData data)
-    {
-        this.data = data;
-        this.data.ID = ID;
-    }
-
     public void IncreaseResource(ResourceName resource, int value)
     {
         if (resource == ResourceName.Coin)
@@ -74,6 +67,24 @@ public class ResourceController : PersistentSingleton<ResourceController> , IBin
 
         }
         return 0;
+    }
+
+    protected void OfflineEnergy(){
+        if (TutorialControl.instance.IsFirstInGame) {
+            data.energy = energyMax;
+            return;
+        }
+        TimeSpan offlineDuration = (DateTime.Now - TimeManager.instance.GameExitTime);
+        float offlineRecoveredEnergy = offlineDuration.Minutes / energyRegenTimeMinutes;
+        if (offlineRecoveredEnergy + data.energy >= energyMax)
+        {
+            data.energy = energyMax;
+        }
+        else
+        {
+            IncreaseResource(ResourceName.Energy, (int)offlineRecoveredEnergy);
+            timer = Mathf.FloorToInt(offlineRecoveredEnergy * 60) + offlineDuration.Seconds / 60f;
+        }
     }
 
     protected void RegenerateEnergy(){

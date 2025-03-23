@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 
-namespace System{
+namespace Systems.SaveLoad{
 	public class FileDataService : IDataService {
 		ISerializer serializer;
 		string dataPath;
@@ -21,21 +21,27 @@ namespace System{
 			}
 
 			File.WriteAllText (fileLocation, serializer.Serialize (data));
-			Debug.Log (dataPath);
 		}
 
-		public T Load <T>(string name){
+		public T Load <T>(string name) where T : new()
+		{
 			string fileLocation = GetPathToFile (name);
 
 			if (!File.Exists (fileLocation)) {
 				Debug.LogWarning ($"No presisted GameData with name '{name}'" );
-				return default(T);
+				return new T();
 			}
-
-			return serializer.Deserialize<T> (File.ReadAllText (fileLocation));
+			T data = serializer.Deserialize<T>(File.ReadAllText(fileLocation));
+			return data ?? new T();
 		}
 
-		public void Delete (string name){
+        public T Load<T>() where T : new()
+        {
+			return Load<T>(typeof(T).Name);
+        }
+
+
+        public void Delete (string name){
 			string fileLocation = GetPathToFile (name);
 
 			if (File.Exists (fileLocation)) {

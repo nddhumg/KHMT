@@ -6,19 +6,26 @@ using Systems.SaveLoad;
 using Unity.Collections;
 namespace Systems.Inventory
 {
-    public class InventoryManager : PersistentSingleton<InventoryManager>, IBind<InventoryData>
+    public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         [SerializeField] SOStat statPlayer;
-        [SerializeField, ReadOnly] InventoryData data;
+        [SerializeField] InventoryData data;
+
         public List<SOItem> ItemsCurrent => data.items;
 
         public SOItem EquippedWeapon => data.equippedItem[0];
 
         public SOItem[] EquippedItem => data.equippedItem;
 
-        public string ID { get; set; }
-
-
+        protected override void Awake()
+        {
+            base.Awake();
+            data = SaveLoadSystem.DataService.Load<InventoryData>();
+        }
+        private void OnApplicationQuit()
+        {
+            SaveLoadSystem.DataService.Save<InventoryData>(ref data);
+        }
         public void AddItem(SOItem item)
         {
             data.items.Add(item);
@@ -61,14 +68,6 @@ namespace Systems.Inventory
                     break;
             }
         }
-
-        public void Bind(InventoryData dataSave)
-        {
-            this.data = dataSave;
-            this.data.ID = ID;
-            ClearSlotEmty();
-        }
-
         public void ClearSlotEmty()
         {
             data.items.RemoveAll(item => item == null);

@@ -5,20 +5,26 @@ using Systems.SaveLoad;
 using System;
 using System.Globalization;
 
-public class ShopManager : MonoBehaviour, IBind<ShopData>
+public class ShopManager : MonoBehaviour
 {
     [SerializeField] protected Button btnFreeCoin;
     [SerializeField] protected Button btnFreeCoinVip;
     [SerializeField] protected Color hiddenButtonColor;
-    [SerializeField] protected Color enabledButtonColor; 
+    [SerializeField] protected Color enabledButtonColor;
     [SerializeField, ReadOnly] protected ShopData data;
     string format = "dd-MM-yyyy";
 
 
     protected ResourceName resourceAds;
     protected int valueAds;
-
-    public string ID { get ; set ; }
+    void Awake()
+    {
+        data = SaveLoadSystem.DataService.Load<ShopData>();
+    }
+    private void OnApplicationQuit()
+    {
+        SaveLoadSystem.DataService.Save<ShopData>(ref data);
+    }
 
     private void Start()
     {
@@ -26,11 +32,6 @@ public class ShopManager : MonoBehaviour, IBind<ShopData>
 
         CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin);
         CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip);
-    }
-    public void Bind(ShopData data)
-    {
-        this.data = data;
-        data.ID = this.ID;
     }
 
     public void ClickFreeCoin(int coin)
@@ -47,12 +48,12 @@ public class ShopManager : MonoBehaviour, IBind<ShopData>
 
     public void ClickAdsCoin(int coin)
     {
-        ClickGetAds(ResourceName.Coin,coin);
+        ClickGetAds(ResourceName.Coin, coin);
     }
 
-    public void ClickAdsCoinVip(int coin)
+    public void ClickAdsCoinVip(int coinVip)
     {
-        ClickGetAds(ResourceName.CoinVip,coin);
+        ClickGetAds(ResourceName.CoinVip, coinVip);
     }
 
     protected void CompleteAds()
@@ -60,12 +61,14 @@ public class ShopManager : MonoBehaviour, IBind<ShopData>
         ResourceController.instance.IncreaseResource(resourceAds, valueAds);
     }
 
-    protected void ClickGetFree(ResourceName resource, int value, Button btn) {
+    protected void ClickGetFree(ResourceName resource, int value, Button btn)
+    {
         ResourceController.instance.IncreaseResource(resource, value);
         SetEnableBtnFree(btn, false);
     }
 
-    protected void ClickGetAds(ResourceName resource,int value) {
+    protected void ClickGetAds(ResourceName resource, int value)
+    {
         AdsManager.instance.ShowAdRewaded();
         resourceAds = resource;
         valueAds = value;
@@ -74,11 +77,15 @@ public class ShopManager : MonoBehaviour, IBind<ShopData>
     protected void SetEnableBtnFree(Button btn, bool isEnable)
     {
         btn.enabled = isEnable;
-        btn.GetComponent<Image>().color = isEnable?enabledButtonColor : hiddenButtonColor;
+        btn.GetComponent<Image>().color = isEnable ? enabledButtonColor : hiddenButtonColor;
     }
 
-    protected void CheckEnableBtnFree(string lastDateData, Button btnFree) {
+    protected void CheckEnableBtnFree(string lastDateData, Button btnFree)
+    {
+        if (TutorialControl.instance.IsFirstInGame)
+            return;
         DateTime lastDate = DateTime.ParseExact(lastDateData, format, CultureInfo.InvariantCulture);
+
         bool isEnableBtnFreeCoin = (DateTime.Now - lastDate).Days >= 1 ? true : false;
         SetEnableBtnFree(btnFree, isEnableBtnFreeCoin);
     }

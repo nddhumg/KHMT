@@ -3,21 +3,22 @@ using System.Data;
 using Systems.SaveLoad;
 using UnityEngine;
 
-public class TimeManager : PersistentSingleton<TimeManager>, IBind<TimeData>
+public class TimeManager : PersistentSingleton<TimeManager>
 {
 
     [SerializeField, ReadOnly] TimeData data;
-    public string ID { get; set; }
 
-    public DateTime GameExitTime => DateTime.Parse(data.gameExitTime);
-    public void Bind(TimeData data)
+    public DateTime GameExitTime =>  DateTime.Parse(data.gameExitTime);
+    protected override void Awake()
     {
-        this.data = data;
-        this.data.ID = ID;
+        base.Awake();
+        data = SaveLoadSystem.DataService.Load<TimeData>();
     }
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         data.gameExitTime = DateTime.Now.ToString();
+        SaveLoadSystem.DataService.Save<TimeData>(ref data);
     }
+
 }

@@ -10,11 +10,8 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
 
     public SOStat StatCurrent => statCurrent;
 
-
-
     public void TakeDamage(int damage)
     {
-        Debug.Log("test1");
         statCurrent.IncreaseStat(EnumName.Stat.Hp, -damage);
     }
 

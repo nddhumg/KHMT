@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class RifleLevel : Level
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected Rifle rifle;
 
-    // Update is called once per frame
-    void Update()
+    public override bool LevelUp()
     {
-        
+        if (!base.LevelUp())
+            return false;
+
+        switch (levelCurrent)
+        {
+            case 0:
+
+                break;
+        }
+        return true;
     }
 }

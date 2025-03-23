@@ -213,3 +213,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCurrent: 0
   levelMax: 1
+  rifle: {fileID: 2896326138018498684}

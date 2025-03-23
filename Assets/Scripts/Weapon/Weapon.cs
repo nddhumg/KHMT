@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour {
 	protected CoolDownTimer timer;
 	[SerializeField] protected float attackSpeed;
-	protected float damageMultiplier = 1;
+	[SerializeField] protected float damageMultiplier = 1;
 	[SerializeField] protected GameObject bullet;
 	[SerializeField] protected Transform muzzle;
 	protected SOStat statPlayer;

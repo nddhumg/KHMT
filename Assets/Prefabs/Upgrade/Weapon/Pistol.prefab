@@ -211,4 +211,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCurrent: 0
   levelMax: 5
-  pistol: {fileID: 0}
+  pistol: {fileID: 5512369140017546086}

@@ -8,10 +8,5 @@ namespace Systems.SaveLoad
     {
         string ID { get; set; }
     }
-    public interface IBind<TData> where TData : ISaveable
-    {
-        string ID { get; set; }
-        void Bind(TData data);
-    }
 
 }

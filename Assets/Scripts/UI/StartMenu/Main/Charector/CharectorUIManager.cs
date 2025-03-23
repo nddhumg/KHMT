@@ -4,7 +4,6 @@ using UnityEngine;
 using Systems.SaveLoad;
 using TMPro;
 using Systems.Inventory;
-using static UnityEditor.Progress;
 
 namespace UI.Charector
 {
