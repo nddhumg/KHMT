@@ -9,7 +9,7 @@ namespace Systems.Inventory
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         [SerializeField] SOStat statPlayer;
-        [SerializeField] InventoryData data;
+        [SerializeField] InventoryData data = new();
 
         public List<SOItem> ItemsCurrent => data.items;
 
@@ -20,7 +20,7 @@ namespace Systems.Inventory
         protected override void Awake()
         {
             base.Awake();
-            data = SaveLoadSystem.DataService.Load<InventoryData>();
+            data = SaveLoadSystem.DataService.Load<InventoryData>() ?? data;
         }
         private void OnApplicationQuit()
         {

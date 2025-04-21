@@ -10,7 +10,7 @@ public class ResourceData : ISaveable
 {
     public string ID { get; set; }
 
-    public int coin;
-    public int coinVip;
-    public int energy;
+    public int coin = 0;
+    public int coinVip = 0;
+    public int energy = 30;
 }

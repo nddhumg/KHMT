@@ -6,13 +6,13 @@ using UnityEngine;
 public class TimeManager : PersistentSingleton<TimeManager>
 {
 
-    [SerializeField, ReadOnly] TimeData data;
+    [SerializeField, ReadOnly] TimeData data = new();
 
     public DateTime GameExitTime =>  DateTime.Parse(data.gameExitTime);
     protected override void Awake()
     {
         base.Awake();
-        data = SaveLoadSystem.DataService.Load<TimeData>();
+        data = SaveLoadSystem.DataService.Load<TimeData>() ?? data;
     }
 
     private void OnApplicationQuit()

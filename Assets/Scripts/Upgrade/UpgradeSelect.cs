@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeSelect : MonoBehaviour {
 	[SerializeField] protected Image icon;
-	[SerializeField] protected Text text;
+	[SerializeField] protected TMP_Text text;
 
 	private int indexSelect;
 

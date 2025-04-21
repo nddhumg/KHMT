@@ -9,23 +9,27 @@ namespace Systems.Inventory
     public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler ,IEndDragHandler
     {
         [SerializeField] protected Image icon;
-        [SerializeField] protected CanvasGroup group;
         [SerializeField] protected RectTransform rect;
 
         [SerializeField] protected UIItem item;
+
+        [SerializeField] private Color colorDrag;
+        [SerializeField] private Color colorNormal;
 
         public Image Icon => icon;
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            group.alpha = 0.6f;
-            group.blocksRaycasts = false;
+            icon.color = colorDrag;
+            icon.raycastTarget = false;
             transform.SetParent(transform.root);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            rect.anchoredPosition += eventData.delta;
+            Vector3 positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            positionMouse.z = rect.position.z;
+            rect.position = positionMouse;
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -34,8 +38,8 @@ namespace Systems.Inventory
         }
 
         public void UpdateUI() {
-            group.alpha = 1f;
-            group.blocksRaycasts = true;
+            icon.color = colorNormal;
+            icon.raycastTarget = true;
             transform.SetParent(item.slot.transform);
             rect.anchoredPosition = Vector2.zero;
         }

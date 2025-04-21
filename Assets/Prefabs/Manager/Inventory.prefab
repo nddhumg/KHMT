@@ -47,4 +47,8 @@ MonoBehaviour:
   statPlayer: {fileID: 11400000, guid: 43080e3fba4df4843a252de2979b31b4, type: 2}
   data:
     items: []
-    equippedItem: []
+    equippedItem:
+    - {fileID: 11400000, guid: 875a6d2248fa05743b3511f3874726de, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

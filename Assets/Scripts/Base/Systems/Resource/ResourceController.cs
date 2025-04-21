@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ResourceController : PersistentSingleton<ResourceController>
 {
-    [SerializeField, ReadOnly] protected ResourceData data;
+    [SerializeField, ReadOnly] protected ResourceData data = new();
     [SerializeField] protected int energyMax = 30;
     [SerializeField] protected float energyRegenTimeMinutes = 5;
     protected float timer = 0;
@@ -15,7 +15,7 @@ public class ResourceController : PersistentSingleton<ResourceController>
     protected override void Awake()
     {
         base.Awake();
-        data = SaveLoadSystem.DataService.Load<ResourceData>();
+        data = SaveLoadSystem.DataService.Load<ResourceData>() ?? data;
     }
 
     private void OnApplicationQuit()

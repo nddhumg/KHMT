@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   icon: {fileID: -1352501374, guid: 0ecdedd525a314c44a923dcfcdd2c4fb, type: 3}
-  skillName: 0
+  skillName: 100
   description:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - You can now cast Fireball!
+  - Your Fireball now deals 50% more damage!
+  - Your Fireball fires an additional projectile!
+  - Your Fireball fires an additional projectile!
+  - Your Fireball fires an extra projectile, deals more damage, and attacks faster!
   prefabSkill: {fileID: 8431809898027811966, guid: 96dd7d306f5267e43bbed9990d01944f,
     type: 3}

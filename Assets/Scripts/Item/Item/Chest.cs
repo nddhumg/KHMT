@@ -9,9 +9,7 @@ public class Chest : MonoBehaviour, IItemPickUp
     
     public void PickUpAble()
     {
-        coin = Random.Range(0, coinMax);
-        //GameSystem.Pause();
-        //GameSystem.AddCoin(coin);
+        SystemChest.instance.CreateChest();
         gameObject.SetActive(false);
     }
 

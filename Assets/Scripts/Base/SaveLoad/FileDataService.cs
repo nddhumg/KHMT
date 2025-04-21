@@ -10,6 +10,7 @@ namespace Systems.SaveLoad{
 
 		public FileDataService(ISerializer serializer, string fileExtension){
 			this.dataPath = Application.persistentDataPath;
+			Debug.Log(dataPath);
 			this.fileExtension = fileExtension;
 			this.serializer = serializer;
 		}
@@ -19,23 +20,25 @@ namespace Systems.SaveLoad{
 			if (!overwrite && File.Exists (fileLocation)) {
 				Debug.LogWarning ($"The file '{typeof(T).Name}.{fileExtension}' already exits and cannot be overwite." );
 			}
-
 			File.WriteAllText (fileLocation, serializer.Serialize (data));
 		}
 
-		public T Load <T>(string name) where T : new()
-		{
-			string fileLocation = GetPathToFile (name);
+        public T Load<T>(string name)
+        {
+            string fileLocation = GetPathToFile(name);
 
-			if (!File.Exists (fileLocation)) {
-				Debug.LogWarning ($"No presisted GameData with name '{name}'" );
-				return new T();
-			}
-			T data = serializer.Deserialize<T>(File.ReadAllText(fileLocation));
-			return data ?? new T();
-		}
+            if (!File.Exists(fileLocation))
+            {
+                Debug.LogWarning($"No persisted GameData with name '{name}'");
+                return default(T); 
+            }
 
-        public T Load<T>() where T : new()
+            T data = serializer.Deserialize<T>(File.ReadAllText(fileLocation));
+            return data ?? default(T);
+        }
+
+
+        public T Load<T>() 
         {
 			return Load<T>(typeof(T).Name);
         }

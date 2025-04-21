@@ -20,7 +20,5 @@ namespace Systems.Inventory
             this.info = info;
             dragged.Icon.sprite = info.icon;
         }
-
-        //public void SetIs
     }
 }

@@ -12,7 +12,11 @@ public class SOUpgradeSkill : SOUpgrade
     public EnumName.Skill SkillName => skillName;
     public override void ApplyUpgrade()
     {
-        Player.instance.SkillManager.Upgrade(skillName, prefabSkill);
+        PlayerSkill skill = Player.instance.SkillManager;
+        skill.Upgrade(skillName, prefabSkill);
+        if (skill.GetCanLevelUp(SkillName)) {
+            UpgradeSystem.instance.RemoveUpgradeSkill(this);
+        }
     }
 
     public override string GetDescription()

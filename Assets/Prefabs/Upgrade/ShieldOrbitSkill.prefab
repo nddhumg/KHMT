@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCurrent: 0
   levelMax: 5
-  shieldOrbit: {fileID: 4043714685015915366}
+  orbital: {fileID: 4043714685015915366}
 --- !u!1 &4043714685015915360
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,4 +97,3 @@ MonoBehaviour:
   shieldRotationSpeed: 80
   shieldOrbitRadius: 1.5
   damageMultiplier: 1
-  rotate: {x: 0, y: 0, z: 0}

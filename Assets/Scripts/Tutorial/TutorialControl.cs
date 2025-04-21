@@ -4,14 +4,14 @@ using UnityEngine;
 using Systems.SaveLoad;
 public class TutorialControl : PersistentSingleton<TutorialControl>
 {
-    [SerializeField,ReadOnly]TutorialData data;
-    
+    [SerializeField,ReadOnly]TutorialData data = new TutorialData();
+
     public bool IsFirstInGame => data.isFirstInGame;
 
     protected override void Awake()
     {
         base.Awake();
-        data = SaveLoadSystem.DataService.Load<TutorialData>();
+        data = SaveLoadSystem.DataService.Load<TutorialData>() ?? data;
     }
 
     private void Start()

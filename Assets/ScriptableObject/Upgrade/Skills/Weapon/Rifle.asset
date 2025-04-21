@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Rifle
   m_EditorClassIdentifier: 
   icon: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  skillName: 3
+  skillName: 2
   description:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - Your rifle fires 30% faster!
+  - Your rifle fires 30% faster!
+  - Your rifle deals 50% more damage and holds 2 extra bullets!
+  - Your rifle fires 30% faster and deals 50% more damage!
+  - Your rifle can no longer fire but deals 30% more damage!
   prefabSkill: {fileID: 2896326138018498682, guid: e6faae5532c17414d9e25ce82f96b165,
     type: 3}
   position: {x: -0.02, y: -0.071, z: 0}

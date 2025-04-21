@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] protected Button btnFreeCoinVip;
     [SerializeField] protected Color hiddenButtonColor;
     [SerializeField] protected Color enabledButtonColor;
-    [SerializeField, ReadOnly] protected ShopData data;
+    [SerializeField, ReadOnly] protected ShopData data = new();
     string format = "dd-MM-yyyy";
 
 
@@ -19,7 +19,7 @@ public class ShopManager : MonoBehaviour
     protected int valueAds;
     void Awake()
     {
-        data = SaveLoadSystem.DataService.Load<ShopData>();
+        data = SaveLoadSystem.DataService.Load<ShopData>() ?? data;
     }
     private void OnApplicationQuit()
     {
@@ -29,7 +29,6 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         AdsManager.instance.adsShowComplete += this.CompleteAds;
-
         CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin);
         CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip);
     }

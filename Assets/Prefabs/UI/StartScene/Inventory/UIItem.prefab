@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8866940260347660748}
   - component: {fileID: 8866940260347660749}
   - component: {fileID: 8866940260347660750}
-  - component: {fileID: 8866940260347660747}
   - component: {fileID: 7014547502690298697}
   m_Layer: 5
   m_Name: UIItem
@@ -92,21 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 8866940260347660749}
-  group: {fileID: 8866940260347660747}
   rect: {fileID: 8866940260347660751}
   item: {fileID: 7014547502690298697}
---- !u!225 &8866940260347660747
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866940260347660736}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  colorDrag: {r: 1, g: 1, b: 1, a: 0.69803923}
+  colorNormal: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &7014547502690298697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,5 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ec4933d78890544874c1809f664d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 0}
   slot: {fileID: 0}
   dragged: {fileID: 8866940260347660750}

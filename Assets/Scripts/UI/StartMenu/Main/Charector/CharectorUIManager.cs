@@ -35,6 +35,10 @@ namespace UI.Charector
             UIItem itemUI;
             foreach (SOItem item in InventoryManager.instance.ItemsCurrent)
             {
+                if (item == null) {
+                    Debug.LogError("Empty inventory list",gameObject);
+                    continue;
+                }
                 slot = Instantiate(prefabSlot, inventoryUI).GetComponent<InventorySlot>();
                 itemUI = Instantiate(prefabItem, slot.transform).GetComponent<UIItem>();
                 slot.Initialized(itemUI);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Systems.Inventory;
-using UnityEngine.InputSystem;
 
 public class Player : Singleton<Player>
 {
@@ -20,26 +19,11 @@ public class Player : Singleton<Player>
     private int directionLook = 1;
     private Vector3 rotationWeapon = Vector3.zero;
     
-    private InputAction moveAction;
-    private PlayerInput playerInput;
-
 
     public PlayerLevel Level => level;
     public PlayerStat StatsManager => statManager;
     public PlayerSkill SkillManager => skillManager;
     public Vector2 Direction => directionMove;
-
-    private void OnEnable()
-    {
-        playerInput = new PlayerInput();
-        playerInput.enabled = true;
-
-    }
-
-    private void OnDisable()
-    {
-        playerInput.enabled = false;
-    }
 
     void Start()
     {
@@ -88,6 +72,8 @@ public class Player : Singleton<Player>
     }
     void RotateWeapon()
     {
+        if (weapon == null)
+            return;
         rotationWeapon = transform.localRotation.eulerAngles;
         rotationWeapon.z = Vector2.Angle(Vector2.right, directionMove);
         rotationWeapon.z *= directionMove.y < 0 ? -1 : 1;

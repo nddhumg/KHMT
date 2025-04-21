@@ -6,7 +6,6 @@ using UnityEngine;
 public class Exp : MonoBehaviour, IItemPickUp {
 
     [SerializeField] protected uint exp;
-    [SerializeField] protected SOExp dataExp;
     private bool isBeingPulled = false;
 
     public void PickUpAble()
@@ -30,11 +29,6 @@ public class Exp : MonoBehaviour, IItemPickUp {
         MoveToPlayer();
     }
 
-    private void OnValidate()
-    {
-        if (dataExp != null)
-            exp = dataExp.ExpValue;
-    }
     private void MoveToPlayer() {
         if (isBeingPulled) 
         transform.position = Vector3.Slerp(transform.position, Player.instance.transform.position, 2 * Time.deltaTime);

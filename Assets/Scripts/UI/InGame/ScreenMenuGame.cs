@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ScreenMenuGame : Singleton<ScreenMenuGame>
 {
     [SerializeField] protected Button btnOpenMenu;
-    [SerializeField] protected GameObject menu;
 
     [Header("Music")]
     [SerializeField] protected Button btnMusic;
@@ -31,7 +30,6 @@ public class ScreenMenuGame : Singleton<ScreenMenuGame>
     private void Start()
     {
         btnOpenMenu.gameObject.SetActive(true);
-        menu.SetActive(false);
         SetUpBtn();
         UpdateImageMusicMute();
         UpdateImageSoundMute();
@@ -39,7 +37,7 @@ public class ScreenMenuGame : Singleton<ScreenMenuGame>
 
     public void OpenMenu(bool isOpen)
     {
-        menu.SetActive(isOpen);
+        gameObject.SetActive(isOpen);
         if (isOpen)
             GameSystem.Pause();
         else

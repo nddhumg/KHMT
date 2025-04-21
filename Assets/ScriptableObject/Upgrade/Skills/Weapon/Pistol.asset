@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   icon: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  skillName: 1
+  skillName: 0
   description:
   - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - Your pistol now fires 50% faster!
+  - Your pistol deals double damage!
+  - Your pistol fires 30% faster and deals 100% more damage!
+  - Your pistol fires 200% faster and deals 100% more damage!
   prefabSkill: {fileID: 5512369140017546080, guid: 551767db50f6bac45b298e324f871d39,
     type: 3}
   position: {x: -0.018, y: -0.071, z: 0}

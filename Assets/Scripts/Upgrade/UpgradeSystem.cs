@@ -7,24 +7,26 @@ using UnityEngine;
 public class UpgradeSystem : Singleton<UpgradeSystem>
 {
     [SerializeField] protected List<UpgradeSelect> upgradesSelect;
-    [SerializeField] protected List<SOUpgrade> availableUpgrades;
-    [SerializeField] protected List <SOUpgradeWeapon> weaponBase;
+    [SerializeField] protected List<SOUpgradeStats> availableUpgradesStat;
+    [SerializeField] private List<SOUpgradeSkill> availableUpgradesSkill;
+    [SerializeField] protected List<SOUpgradeWeapon> weaponBase;
     protected int countUpgradeSelect = 3;
     protected List<SOUpgrade> infoUpgradeSelect = new List<SOUpgrade>();
 
     protected override void Awake()
     {
         base.Awake();
-        SetActiveUpgrade(false);
+        SetActiveUIUpgrade(false);
         AddUpgradeWeapon();
     }
-    [Button]
+
     public void AddUpgradeWeapon()
     {
-        foreach(var weapon in weaponBase)
+        foreach (var weapon in weaponBase)
         {
-            if (weapon.SkillName.ToString() == InventoryManager.instance.EquippedWeapon.nameItem.ToString()) { 
-                availableUpgrades.Add(weapon);
+            if (weapon.SkillName.ToString() == InventoryManager.instance.EquippedWeapon.nameItem.ToString())
+            {
+                availableUpgradesSkill.Add(weapon);
                 weapon.ApplyUpgrade();
                 Player.instance.SkillManager.GetGameObj(weapon.SkillName.ToString()).transform.localPosition = weapon.Position;
                 return;
@@ -32,10 +34,16 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         }
     }
 
+    public void UppgradeSkill(SOUpgradeSkill UpgradeSkill) { 
+        UpgradeSkill.ApplyUpgrade();
+    }
+
+    [Button]
     public virtual void CreateUpgrade()
     {
 
-        List<SOUpgrade> available = new List<SOUpgrade>(availableUpgrades);
+        List<SOUpgrade> available = new List<SOUpgrade>(availableUpgradesStat);
+        available.AddRange(availableUpgradesSkill);
 
         System.Random random = new();
         infoUpgradeSelect.Clear();
@@ -45,15 +53,30 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
             infoUpgradeSelect.Add(available[index]);
             available.RemoveAt(index);
         }
+
+
         for (int i = 0; i < countUpgradeSelect; i++)
         {
             upgradesSelect[i].SetInfo(i, infoUpgradeSelect[i].Icon, infoUpgradeSelect[i].GetDescription());
         }
-        SetActiveUpgrade(true);
+        SetActiveUIUpgrade(true);
         GameSystem.Pause();
     }
 
-    private void SetActiveUpgrade(bool isActive)
+    public SOUpgradeSkill GetRandomUpgradeSkill(){
+        return availableUpgradesSkill[Random.Range(0,availableUpgradesSkill.Count)];
+    }
+
+    public virtual void RemoveUpgradeSkill(SOUpgradeSkill upgrade)
+    {
+        availableUpgradesSkill.Remove(upgrade);
+    }
+
+    public bool CanUpgradeSkill() { 
+        return availableUpgradesSkill.Count > 0;
+    }
+
+    private void SetActiveUIUpgrade(bool isActive)
     {
         foreach (UpgradeSelect upgrade in upgradesSelect)
         {
@@ -64,7 +87,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     public void ApllyUpgrade(int index)
     {
         infoUpgradeSelect[index].ApplyUpgrade();
-        SetActiveUpgrade(false);
+        SetActiveUIUpgrade(false);
         GameSystem.RePause();
 
     }

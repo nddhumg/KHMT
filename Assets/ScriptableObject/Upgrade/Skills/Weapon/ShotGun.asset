@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: ShotGun
   m_EditorClassIdentifier: 
   icon: {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  skillName: 2
+  skillName: 1
   description:
   - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - Your shotgun fires 50% faster!
+  - Your shotgun deals double damage!
+  - Your shotgun fires 2 more pellets per shot!
+  - Your shotgun fires 30% faster, deals 50% more damage, and fires an extra pellet!
   prefabSkill: {fileID: 7691159704375065707, guid: a0ec18248acd94446a1a30ea6c5e1af2,
     type: 3}
   position: {x: -0.011, y: -0.075, z: 0}

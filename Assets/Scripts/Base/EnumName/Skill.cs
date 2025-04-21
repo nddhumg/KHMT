@@ -5,10 +5,12 @@ using UnityEngine;
 namespace EnumName {
     public enum Skill 
     {
-        FireBall,
-        PistolGun,
-        ShotGun,
-        RifleGun
+        PistolGun = 0,
+        ShotGun = 1,
+        RifleGun = 2,
+
+        FireBall = 100,
+        ShieldOrbit = 101,
     }
 }
 
