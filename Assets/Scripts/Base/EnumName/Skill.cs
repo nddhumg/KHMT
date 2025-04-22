@@ -11,6 +11,8 @@ namespace EnumName {
 
         FireBall = 100,
         ShieldOrbit = 101,
+        RadiantBlast = 102,
+        BiA = 103,
     }
 }
 

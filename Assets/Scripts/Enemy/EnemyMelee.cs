@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyMelee : Enemy
 {
-    protected int damageCollsion =1;
+    protected int damageCollsion = 1;
     protected CoolDownTimer timer;
     protected float attackCoolDown = 0.3f;
-    
+
 
     protected override void Update()
     {
@@ -20,7 +20,7 @@ public class EnemyMelee : Enemy
         base.Init();
         damageCollsion = (int)statBase.GetStatValue(EnumName.Stat.Damage) * EnemySpawn.instance.Stat.GetBonusDamage();
         attackCoolDown = statBase.GetStatValue(EnumName.Stat.AttackRate);
-        timer = new CoolDownTimer(attackCoolDown,false);
+        timer = new CoolDownTimer(attackCoolDown, false);
     }
 
     protected override void CreateStateManager()
@@ -33,10 +33,12 @@ public class EnemyMelee : Enemy
         if (collision.gameObject.layer != LayerMask.NameToLayer("Player") || !timer.IsCoolDownOver)
             return;
         IReceiveDamage receiver = collision.gameObject.GetComponentInChildren<IReceiveDamage>();
-        if (receiver != null) {
+        if (receiver != null)
+        {
             receiver.TakeDamage(damageCollsion);
             timer.ResetCoolDown();
         }
 
     }
 }
+

@@ -9,6 +9,8 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] protected Button btnFreeCoin;
     [SerializeField] protected Button btnFreeCoinVip;
+    [SerializeField] protected Image bgBtnFreeCoin;
+    [SerializeField] protected Image bgBtnFreeCoinVip;
     [SerializeField] protected Color hiddenButtonColor;
     [SerializeField] protected Color enabledButtonColor;
     [SerializeField, ReadOnly] protected ShopData data = new();
@@ -29,19 +31,19 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         AdsManager.instance.adsShowComplete += this.CompleteAds;
-        CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin);
-        CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip);
+        CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin,bgBtnFreeCoin);
+        CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip, bgBtnFreeCoinVip);
     }
 
     public void ClickFreeCoin(int coin)
     {
-        ClickGetFree(ResourceName.Coin, coin, btnFreeCoin);
+        ClickGetFree(ResourceName.Coin, coin, btnFreeCoin,bgBtnFreeCoin);
         data.lastFreeCoinClaimDate = DateTime.Now.ToString(format);
     }
 
     public void ClickFreeCoinVip(int coinVip)
     {
-        ClickGetFree(ResourceName.CoinVip, coinVip, btnFreeCoinVip);
+        ClickGetFree(ResourceName.CoinVip, coinVip, btnFreeCoinVip, bgBtnFreeCoinVip);
         data.lastFreeCoinVipClaimDate = DateTime.Now.ToString(format);
     }
 
@@ -60,10 +62,10 @@ public class ShopManager : MonoBehaviour
         ResourceController.instance.IncreaseResource(resourceAds, valueAds);
     }
 
-    protected void ClickGetFree(ResourceName resource, int value, Button btn)
+    protected void ClickGetFree(ResourceName resource, int value, Button btn,Image bg)
     {
         ResourceController.instance.IncreaseResource(resource, value);
-        SetEnableBtnFree(btn, false);
+        SetEnableBtnFree(btn, false,bg);
     }
 
     protected void ClickGetAds(ResourceName resource, int value)
@@ -73,20 +75,25 @@ public class ShopManager : MonoBehaviour
         valueAds = value;
     }
 
-    protected void SetEnableBtnFree(Button btn, bool isEnable)
+    protected void SetEnableBtnFree(Button btn, bool isEnable,Image bg)
     {
         btn.enabled = isEnable;
-        btn.GetComponent<Image>().color = isEnable ? enabledButtonColor : hiddenButtonColor;
+        bg.color = isEnable ? enabledButtonColor : hiddenButtonColor;
     }
 
-    protected void CheckEnableBtnFree(string lastDateData, Button btnFree)
+    protected void CheckEnableBtnFree(string lastDateData, Button btnFree,Image imgBg)
     {
-        if (TutorialControl.instance.IsFirstInGame)
-            return;
-        DateTime lastDate = DateTime.ParseExact(lastDateData, format, CultureInfo.InvariantCulture);
+        try
+        {
+            DateTime lastDate = DateTime.ParseExact(lastDateData, format, CultureInfo.InvariantCulture);
 
-        bool isEnableBtnFreeCoin = (DateTime.Now - lastDate).Days >= 1 ? true : false;
-        SetEnableBtnFree(btnFree, isEnableBtnFreeCoin);
+            bool isEnableBtnFreeCoin = (DateTime.Now - lastDate).Days >= 1 ? true : false;
+
+            SetEnableBtnFree(btnFree, isEnableBtnFreeCoin, imgBg);
+        }
+        catch {
+            SetEnableBtnFree(btnFree, true, imgBg);
+        }
     }
 
 }

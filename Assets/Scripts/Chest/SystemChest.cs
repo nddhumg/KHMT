@@ -71,7 +71,6 @@ public class SystemChest : Singleton<SystemChest>
                 uiBox.SetIcon(box.GetIcon());
                 uiBox.SetText(box.GetStringValue());
                 box.GenerateChestReward();
-                Debug.Log("d");
                 return;
             }
         }

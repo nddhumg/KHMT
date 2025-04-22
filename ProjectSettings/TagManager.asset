@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Item
   - BulletEnemy
-  - BulletPlayer
+  - PlayerAttack
   - Player
   - Enemy
   - 

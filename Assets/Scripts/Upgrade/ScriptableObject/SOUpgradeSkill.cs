@@ -14,7 +14,7 @@ public class SOUpgradeSkill : SOUpgrade
     {
         PlayerSkill skill = Player.instance.SkillManager;
         skill.Upgrade(skillName, prefabSkill);
-        if (skill.GetCanLevelUp(SkillName)) {
+        if (!skill.GetCanLevelUp(SkillName)) {
             UpgradeSystem.instance.RemoveUpgradeSkill(this);
         }
     }

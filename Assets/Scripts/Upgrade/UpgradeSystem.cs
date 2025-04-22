@@ -17,6 +17,10 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     {
         base.Awake();
         SetActiveUIUpgrade(false);
+    }
+
+    private void Start()
+    {
         AddUpgradeWeapon();
     }
 
