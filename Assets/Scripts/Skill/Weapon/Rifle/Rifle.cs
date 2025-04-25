@@ -5,7 +5,6 @@ namespace Core.Skill
 {
     public class Rifle : ShotSkill
     {
-        [SerializeField] protected float maxAmmo = 5f;
         [SerializeField] protected float recoildAmount = 0.1f;
 
         protected override void Start()
@@ -17,9 +16,9 @@ namespace Core.Skill
             coolDownComponent.Timer.SetAutoResetCoolDown(false);
         }
 
-        public void IncreaseAmmoCapacity(int amoIncrease)
+        private void Reset()
         {
-            maxAmmo += amoIncrease;
+            bulletCount = 3;
         }
 
         protected override void Attack()
@@ -32,7 +31,7 @@ namespace Core.Skill
             GameObject bulletCurrent;
             float recoil = 0;
             Vector2 directionBullet;
-            for (int countAmmo = 0; countAmmo < maxAmmo; countAmmo++)
+            for (int countAmmo = 0; countAmmo < bulletCount; countAmmo++)
             {
                 recoil = Random.Range(-recoildAmount, recoildAmount);
                 directionBullet = GetAttackDirection();

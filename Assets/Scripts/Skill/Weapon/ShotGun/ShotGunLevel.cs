@@ -26,13 +26,13 @@ namespace Core.Skill
                     break;
 
                 case 4:
-                    shotGun.IncreasePelletCount((uint)2);
+                    shotGun.IncreaseBulletCount(2);
                     break;
 
                 case 5:
                     shotGun.CoolDownSkillComponent.IncreaseAttackSpeed(0.3f);
                     shotGun.DamageComponent.IncreaseDamageMultiplier(0.5f);
-                    shotGun.IncreasePelletCount(1);
+                    shotGun.IncreaseBulletCount(1);
                     break;
 
             }

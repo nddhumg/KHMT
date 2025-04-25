@@ -20,10 +20,14 @@ namespace Core.Skill
                 return false;
             switch (LevelCurrent) {
                 case 1:
+                    biA.DamageComponent.IncreaseDamageMultiplier(0.1f);
+                    biA.IncreaseBulletCount(1);
                     return true;
                 case 2:
+                    biA.DamageComponent.IncreaseDamageMultiplier(0.1f);
                     return true;
                 case 3:
+
                     return true;
                 case 4:
                     return true;

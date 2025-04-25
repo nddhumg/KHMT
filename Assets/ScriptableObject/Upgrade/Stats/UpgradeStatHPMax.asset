@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7e7fef002fa2a4faa1895997ccb622, type: 3}
   m_Name: UpgradeStatHPMax
   m_EditorClassIdentifier: 
-  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  typeUpgrade: 0
+  icon: {fileID: 21300000, guid: 1170365f1d2681e4fa972deeab4efe21, type: 3}
   statName: 5
   statIncreaseValue: 10
   percentageIncrease: 1

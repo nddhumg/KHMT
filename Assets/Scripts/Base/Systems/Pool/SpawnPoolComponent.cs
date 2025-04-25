@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpawnPool<T> : Singleton<T> where T : MonoBehaviour
+public class SpawnPoolComponent<T,TObject> : Singleton<T> where T : MonoBehaviour where TObject : Component
 {
-    [SerializeField] protected Dictionary<GameObject, List<GameObject>> pool;
+    protected Dictionary<TObject, List<TObject>> pool;
     [SerializeField] protected Transform holder;
 
     protected virtual void Reset()
@@ -16,31 +16,32 @@ public class SpawnPool<T> : Singleton<T> where T : MonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        pool = new Dictionary<GameObject, List<GameObject>>();
+        pool = new Dictionary<TObject, List<TObject>>();
 
     }
 
-    public virtual GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, out bool isGetFromPool)
+
+    public virtual TObject Spawn(TObject prefab, Vector3 pos, Quaternion rot, out bool isGetFromPool)
     {
-        GameObject obj = Spawn(prefab,out isGetFromPool);
+        TObject obj = Spawn(prefab,out isGetFromPool);
         obj.transform.SetPositionAndRotation(pos, rot);
         return obj;
     }
-    public virtual GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot) => Spawn(prefab, pos, rot, out _);
+    public virtual TObject Spawn(TObject prefab, Vector3 pos, Quaternion rot) => Spawn(prefab, pos, rot, out _);
     
-    public virtual GameObject Spawn(GameObject prefab, out bool isGetFromPool)
+    public virtual TObject Spawn(TObject prefab, out bool isGetFromPool)
     {
         if (!pool.TryGetValue(prefab, out var list))
         {
-            list = new List<GameObject>();
+            list = new List<TObject>();
             pool[prefab] = list;
         }
 
         foreach (var obj in list)
         {
-            if (!obj.activeSelf)
+            if (!obj.gameObject.activeSelf)
             {
-                obj.SetActive(true);
+                obj.gameObject.SetActive(true);
                 obj.transform.SetParent(holder);
                 isGetFromPool = true;
                 return obj;
@@ -48,19 +49,23 @@ public class SpawnPool<T> : Singleton<T> where T : MonoBehaviour
         }
 
         var prefabClone = Instantiate(prefab);
-        prefabClone.SetActive(true);
+        prefabClone.gameObject.SetActive(true);
         list.Add(prefabClone);
         prefabClone.transform.SetParent(holder);
         isGetFromPool = false;
         return prefabClone;
     }
-    public virtual GameObject Spawn(GameObject prefab) => Spawn(prefab, out _);
+    public virtual TObject Spawn(TObject prefab) => Spawn(prefab, out _);
 
 
-    public virtual void ClearPool(GameObject prefab)
+    public virtual void ClearPool(TObject prefab)
     {
+        foreach (var obj in pool[prefab]) { 
+            Destroy(obj.gameObject);
+        }
         pool[prefab].Clear();
     }
+
 
     private void LoadHolder()
     {

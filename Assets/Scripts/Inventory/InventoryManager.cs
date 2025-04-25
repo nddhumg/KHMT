@@ -9,7 +9,7 @@ namespace Systems.Inventory
     public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         [SerializeField] SOStat statPlayer;
-        [SerializeField] InventoryData data = new();
+        [SerializeField] InventoryData data ;
 
         public List<SOItem> ItemsCurrent => data.items;
 

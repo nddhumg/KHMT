@@ -2,5 +2,5 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPool : SpawnPool<ItemPool> {
+public class ItemPool : SpawnPoolGameObject<ItemPool> {
 }

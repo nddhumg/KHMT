@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPool : SpawnPool<BulletPool> {
+public class BulletPool : SpawnPoolGameObject<BulletPool> {
 	
 }
 

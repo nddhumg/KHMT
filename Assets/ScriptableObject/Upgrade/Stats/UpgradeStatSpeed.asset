@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7e7fef002fa2a4faa1895997ccb622, type: 3}
   m_Name: UpgradeStatSpeed
   m_EditorClassIdentifier: 
-  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  typeUpgrade: 0
+  icon: {fileID: 21300000, guid: e6991d06e89a1e94aa4f948374f083f5, type: 3}
   statName: 1
   statIncreaseValue: 0.1
   percentageIncrease: 0

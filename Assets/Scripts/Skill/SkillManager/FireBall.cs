@@ -5,7 +5,6 @@ namespace Core.Skill
 {
     public class FireBall : ShotSkill
     {
-        [SerializeField] protected int perFire = 3;
         [SerializeField] protected float recoildAmount = 0.3f;
 
         protected override void Start()
@@ -22,10 +21,6 @@ namespace Core.Skill
             muzzle = transform;
         }
 
-        public void IncreasePrerFire(int value)
-        {
-            perFire += value;
-        }
         protected override Vector2 GetAttackDirection()
         {
             return Random.insideUnitCircle;
@@ -40,7 +35,7 @@ namespace Core.Skill
             float recoil = 0;
             Vector2 directionBullet = GetAttackDirection();
             Quaternion rotationBullet = new Quaternion();
-            for (int countAmmo = 0; countAmmo < perFire; countAmmo++)
+            for (int countAmmo = 0; countAmmo < bulletCount; countAmmo++)
             {
                 Vector2 directionBulletCurrent = directionBullet;
                 recoil = Random.Range(-recoildAmount, recoildAmount);

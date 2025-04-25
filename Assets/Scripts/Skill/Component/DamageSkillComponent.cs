@@ -1,33 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DamageSkillComponent 
+namespace Core.Skill
 {
-    [SerializeField] protected float damageMultiplier = 1;
-    protected SOStat statPlayer;
-
-    public float DamageMultiplier => damageMultiplier;
-
-    public DamageSkillComponent(float damageMultiplier, SOStat stat)
+    public class DamageSkillComponent
     {
-        this.damageMultiplier = damageMultiplier;
-        this.statPlayer = stat;
-    }
+        [SerializeField] protected float damageMultiplier = 1;
+        protected SOStat statPlayer;
 
-    public virtual void IncreaseDamageMultiplier(float value)
-    {
-        damageMultiplier += value;
-    }
+        public float DamageMultiplier => damageMultiplier;
 
-    public virtual void SetDamageMultiplier(float value)
-    {
-        damageMultiplier = value;
-    }
+        public DamageSkillComponent(float damageMultiplier, SOStat stat)
+        {
+            this.damageMultiplier = damageMultiplier;
+            this.statPlayer = stat;
+        }
 
-    public virtual int GetDamge()
-    {
-        return (int)(statPlayer.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
-    }
+        public virtual void IncreaseDamageMultiplier(float value)
+        {
+            damageMultiplier += value;
+        }
 
+        public virtual void SetDamageMultiplier(float value)
+        {
+            damageMultiplier = value;
+        }
+
+        public virtual int GetDamge()
+        {
+            return (int)(statPlayer.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
+        }
+
+    }
 }

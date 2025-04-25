@@ -20,7 +20,7 @@ namespace Core.Skill
 
                 case 3:
                     rifle.DamageComponent.IncreaseDamageMultiplier(0.5f);
-                    rifle.IncreaseAmmoCapacity(2);
+                    rifle.IncreaseBulletCount(2);
                     break;
 
                 case 4:

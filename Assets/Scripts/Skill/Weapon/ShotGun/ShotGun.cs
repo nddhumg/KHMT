@@ -5,7 +5,6 @@ namespace Core.Skill
 {
     public class ShotGun : ShotSkill
     {
-        [SerializeField] protected uint shotPelletCount = 4;
         [SerializeField] protected uint fireSpread = 45;
 
         protected override void Start()
@@ -15,19 +14,20 @@ namespace Core.Skill
             coolDownComponent.SetAttackSpeed(1.5f);
         }
 
-        public void IncreasePelletCount(uint value)
+        private void Reset()
         {
-            shotPelletCount += value;
+            bulletCount = 4;
         }
+
         protected override void Attack()
         {
             Vector2 directionShoot = new Vector2();
             directionShoot = RotateVector2(GetAttackDirection(), -fireSpread / 2f);
-            float angle = fireSpread / shotPelletCount;
+            float angle = fireSpread / bulletCount;
             GameObject bullet;
             MoveInDirection moveBullet;
             DamageSender damageBullet;
-            for (int bulletCount = 0; bulletCount < shotPelletCount; bulletCount++)
+            for (int bulletIndex = 0; bulletIndex < bulletCount; bulletIndex++)
             {
                 bullet = BulletPool.instance.Spawn(this.bullet, muzzle.position, Quaternion.identity);
                 moveBullet = bullet.GetComponentInChildren<MoveInDirection>();

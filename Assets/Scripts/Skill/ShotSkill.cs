@@ -10,6 +10,7 @@ namespace Core.Skill
 
         [SerializeField] protected GameObject bullet;
         [SerializeField] protected Transform muzzle;
+        [SerializeField] protected uint bulletCount = 1;
 
         public DamageSkillComponent DamageComponent => damageComponent;
         public CoolDownSkillComponent CoolDownSkillComponent => coolDownComponent;
@@ -24,8 +25,16 @@ namespace Core.Skill
         {
             coolDownComponent.Update();
         }
-        protected abstract void Attack();
 
+        public void SetBulletCount(uint bulletCount) { 
+            this.bulletCount = bulletCount;
+        }
+
+        public void IncreaseBulletCount(uint increaseBullet) {
+            this.bulletCount += increaseBullet;
+        }
+
+        protected abstract void Attack();
 
 
         protected virtual Vector2 GetAttackDirection()

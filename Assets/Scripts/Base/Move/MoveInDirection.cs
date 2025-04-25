@@ -31,4 +31,5 @@ public class MoveInDirection : MonoBehaviour
         transform.parent.position += speed * Time.deltaTime * direction;
     }
 
+
 }

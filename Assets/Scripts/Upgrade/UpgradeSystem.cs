@@ -32,13 +32,16 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
             {
                 availableUpgradesSkill.Add(weapon);
                 weapon.ApplyUpgrade();
-                Player.instance.SkillManager.GetGameObj(weapon.SkillName.ToString()).transform.localPosition = weapon.Position;
+                GameObject weaponGO = Player.instance.SkillManager.GetGameObj(weapon.SkillName.ToString());
+                weaponGO.transform.localPosition = weapon.Position;
+                Player.instance.SetWeapon(weaponGO);
                 return;
             }
         }
     }
 
-    public void UppgradeSkill(SOUpgradeSkill UpgradeSkill) { 
+    public void UppgradeSkill(SOUpgradeSkill UpgradeSkill)
+    {
         UpgradeSkill.ApplyUpgrade();
     }
 
@@ -67,8 +70,9 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         GameSystem.Pause();
     }
 
-    public SOUpgradeSkill GetRandomUpgradeSkill(){
-        return availableUpgradesSkill[Random.Range(0,availableUpgradesSkill.Count)];
+    public SOUpgradeSkill GetRandomUpgradeSkill()
+    {
+        return availableUpgradesSkill[Random.Range(0, availableUpgradesSkill.Count)];
     }
 
     public virtual void RemoveUpgradeSkill(SOUpgradeSkill upgrade)
@@ -76,7 +80,8 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
         availableUpgradesSkill.Remove(upgrade);
     }
 
-    public bool CanUpgradeSkill() { 
+    public bool CanUpgradeSkill()
+    {
         return availableUpgradesSkill.Count > 0;
     }
 

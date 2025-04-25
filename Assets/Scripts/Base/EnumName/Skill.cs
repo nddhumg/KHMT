@@ -13,6 +13,7 @@ namespace EnumName {
         ShieldOrbit = 101,
         RadiantBlast = 102,
         BiA = 103,
+        Meteor = 104,
     }
 }
 

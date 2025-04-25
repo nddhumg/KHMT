@@ -29,9 +29,10 @@ public class Player : Singleton<Player>
     {
         state = new PlayerStateMachine(anim, this, statManager);
         state.Initialize();
-        weapon = skillManager.GetGameObj(InventoryManager.instance.EquippedWeapon.nameItem.ToString()).transform;
         statManager.StatCurrent.OnChangeStat += CheckDead;
     }
+
+
 
     void FixedUpdate()
     {
@@ -61,6 +62,11 @@ public class Player : Singleton<Player>
         }
         RotateWeapon();
     }
+
+    public void SetWeapon(GameObject weapon) {
+        this.weapon = weapon.transform;
+    }
+
     public void Flip()
     {
         sprite.localScale = new Vector3(-1 * sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
@@ -70,15 +76,19 @@ public class Player : Singleton<Player>
     {
         healingEffect.SetActive(true);
     }
+
+
     void RotateWeapon()
     {
         if (weapon == null)
             return;
-        rotationWeapon = transform.localRotation.eulerAngles;
+        //rotationWeapon = transform.localRotation.eulerAngles;
         rotationWeapon.z = Vector2.Angle(Vector2.right, directionMove);
         rotationWeapon.z *= directionMove.y < 0 ? -1 : 1;
+        rotationWeapon.x = directionMove.x < 0 ? 0 : 180;
 
-        weapon.localRotation = Quaternion.Euler(rotationWeapon);
+        weapon.eulerAngles = rotationWeapon;
+        //weapon.localRotation = Quaternion.Euler(rotationWeapon);
     }
 
     void CheckDead(EnumName.Stat stat ,float value) { 

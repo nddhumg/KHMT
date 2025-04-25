@@ -48,6 +48,8 @@ MonoBehaviour:
   bullet: {fileID: 8450025615201185452, guid: 264ef154e822be847ac09aa6a59d5b52, type: 3}
   muzzle: {fileID: 1631962410611324704}
   maxCollider: 3
+  effectCollider: {fileID: 7910543836447106886, guid: 4edc3f5dc7811db4a83ff9c24abdf5e3,
+    type: 3}
 --- !u!1 &5373409958897788446
 GameObject:
   m_ObjectHideFlags: 0

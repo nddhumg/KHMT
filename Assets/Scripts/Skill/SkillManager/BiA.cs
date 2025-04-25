@@ -6,28 +6,30 @@ namespace Core.Skill {
     public class BiA : ShotSkill
     {
         [SerializeField] private uint maxCollider = 3;
-
+        [SerializeField] private ParticleSystem effectCollider;
+        public ParticleSystem EffectCollider => effectCollider;
         protected override void Start()
         {
             base.Start();
-
+            coolDownComponent.SetAttackSpeed(5f);
         }
 
         private void Reset()
         {
+            
             muzzle = transform;
         }
 
         protected override void Attack()
         {
-            GameObject bulletSpawn = BulletPool.instance.Spawn(bullet, transform.position, Quaternion.identity);
-            bulletSpawn.GetComponent<BulletBiA>().MaxCollider = maxCollider;
-            int  test= (int)bulletSpawn.GetComponent<BulletBiA>().MaxCollider;
-            Debug.Log(test.ToString(), bulletSpawn);
-            bulletSpawn.GetComponentInChildren<MoveInDirection>().Direction = GetAttackDirection();
-            bulletSpawn.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());
-
+            for (uint bulletIndex = 0; bulletIndex < bulletCount; bulletIndex++) {
+                GameObject bulletSpawn = BulletPool.instance.Spawn(bullet, transform.position, Quaternion.identity);
+                bulletSpawn.GetComponent<BulletBiA>().Init(maxCollider, this);
+                bulletSpawn.GetComponentInChildren<MoveInDirection>().Direction = GetAttackDirection();
+                bulletSpawn.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());
+            }
         }
+
 
         protected override Vector2 GetAttackDirection()
         {
