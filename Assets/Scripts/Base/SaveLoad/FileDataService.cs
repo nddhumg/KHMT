@@ -23,13 +23,13 @@ namespace Systems.SaveLoad{
 			File.WriteAllText (fileLocation, serializer.Serialize (data));
 		}
 
-        public T Load<T>(string name)
+        public T Load<T>(string name, GameObject obj)
         {
             string fileLocation = GetPathToFile(name);
 
             if (!File.Exists(fileLocation))
             {
-                Debug.LogWarning($"No persisted GameData with name '{name}'");
+                Debug.LogWarning($"No persisted GameData with name '{name}'",obj);
                 return default(T); 
             }
 
@@ -38,9 +38,9 @@ namespace Systems.SaveLoad{
         }
 
 
-        public T Load<T>() 
+        public T Load<T>(GameObject obj) 
         {
-			return Load<T>(typeof(T).Name);
+			return Load<T>(typeof(T).Name,obj);
         }
 
 

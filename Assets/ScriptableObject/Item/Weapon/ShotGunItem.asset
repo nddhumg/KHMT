@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728e5f0f24089ea4ca342c49591a0fb6, type: 3}
   m_Name: ShotGunItem
   m_EditorClassIdentifier: 
-  nameItem: 2
+  nameItem: 3
   icon: {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   equipmentType: 0
   bonusStat:

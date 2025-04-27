@@ -4,6 +4,7 @@ using UnityEngine;
 using Systems.SaveLoad;
 using TMPro;
 using Systems.Inventory;
+using EnumName;
 
 namespace UI.Charector
 {
@@ -33,16 +34,17 @@ namespace UI.Charector
         protected void CreateInventory() {
             InventorySlot slot;
             UIItem itemUI;
-            foreach (SOItem item in InventoryManager.instance.ItemsCurrent)
+            foreach (Item item in InventoryManager.instance.ItemsCurrent)
             {
-                if (item == null) {
+                if (item == Item.None) {
                     Debug.LogError("Empty inventory list",gameObject);
                     continue;
                 }
+                SOItem soItem = InventoryManager.instance.GetSOItem(item);
                 slot = Instantiate(prefabSlot, inventoryUI).GetComponent<InventorySlot>();
                 itemUI = Instantiate(prefabItem, slot.transform).GetComponent<UIItem>();
                 slot.Initialized(itemUI);
-                itemUI.Initialized(slot, item);
+                itemUI.Initialized(slot, soItem);
             }
         }
 
@@ -54,7 +56,8 @@ namespace UI.Charector
             SOItem item;
             for (int i = 0; i< 4; i++)
             {
-                item = InventoryManager.instance.EquippedItem[i];
+                Item name = InventoryManager.instance.EquippedItem[i];
+                item = InventoryManager.instance.GetSOItem(name);
                 if (item == null)
                     continue;
                 slot = charectorSlot[i];

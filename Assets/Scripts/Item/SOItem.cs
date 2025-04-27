@@ -7,7 +7,7 @@ namespace Systems.Inventory
     [CreateAssetMenu(menuName = "SO/Item/Appare")]
     public class SOItem : ScriptableObject
     {
-        public EnumName.AppareItem nameItem;
+        public EnumName.Item nameItem;
         public Sprite icon;
         public EnumName.EquipmentType equipmentType;
         public List<StatEntry> bonusStat;

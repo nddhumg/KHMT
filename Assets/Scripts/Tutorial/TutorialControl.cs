@@ -11,11 +11,11 @@ public class TutorialControl : PersistentSingleton<TutorialControl>
     protected override void Awake()
     {
         base.Awake();
-        data = SaveLoadSystem.DataService.Load<TutorialData>() ?? data;
     }
 
     private void Start()
     {
+        data = SaveLoadSystem.DataService.Load<TutorialData>(gameObject) ?? data;
     }
 
     private void OnApplicationQuit()

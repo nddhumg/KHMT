@@ -1,20 +1,19 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Systems.SaveLoad;
+using EnumName;
 namespace Systems.Inventory
 {
     [Serializable]
     public class InventoryData : ISaveable
     {
-        public List<SOItem> items;
-        public SOItem[] equippedItem;
+        public List<Item> items;
+        public Item[] equippedItem;
 
         public InventoryData()
         {
-            items = new List<SOItem>();
-            equippedItem = new SOItem[4];
+            items = new List<Item>();
+            equippedItem = new Item[4];
         }
         public string ID { get; set; }
     }

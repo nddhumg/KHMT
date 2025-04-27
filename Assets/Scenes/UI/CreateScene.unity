@@ -203,6 +203,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: itemCollection.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: itemCollection.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 875a6d2248fa05743b3511f3874726de,
+        type: 2}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: itemCollection.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b71b1e3f31b870c4ea53485b20365082,
+        type: 2}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: itemCollection.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 848fe55c68151034e97fefc8cd409427,
+        type: 2}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: data.equippedItem.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8616884015024209453, guid: 7a7d30321162b244885bca48537fa7a2,
         type: 3}
       propertyPath: m_RootOrder

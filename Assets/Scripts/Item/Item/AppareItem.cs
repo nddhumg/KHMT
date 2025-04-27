@@ -10,7 +10,7 @@ namespace Systems.Inventory
 
         public void PickUpAble()
         {
-            InventoryManager.instance.AddItem(itemInfo);
+            InventoryManager.instance.AddItem(itemInfo.nameItem);
             gameObject.SetActive(false);
         }
 

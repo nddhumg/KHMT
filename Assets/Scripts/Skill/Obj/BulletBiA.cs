@@ -41,7 +41,6 @@ namespace Core.Skill
         void Update()
         {
             Vector3 pos = transform.position;
-            Debug.Log(pos);
             if ((pos.x <= mainCamera.MinCameraBounds.x + radius && move.Direction.x < 0) || (pos.x >= mainCamera.MaxCameraBounds.x - radius && move.Direction.x > 0))
             {
                 float posColliderX = move.Direction.x < 0 ? mainCamera.MinCameraBounds.x + radius : mainCamera.MaxCameraBounds.x - radius;

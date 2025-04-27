@@ -10,4 +10,5 @@ public class SpawnEnemyInfo
     public int maxEnemySpawn = 30;
     public float spawnIntervalSeconds = 3f;
     public float operationTimeMinutes;
+
 }

@@ -47,10 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d085a2f9f854164eb30f32affee2e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1.5
   bullet: {fileID: 1881158491904852301, guid: ee7fe1bf3604ea240ad0c7a9728b2880, type: 3}
   muzzle: {fileID: 1300138235590060473}
-  maxAmmo: 5
+  bulletCount: 3
   recoildAmount: 0.1
 --- !u!1 &3864069637426682969
 GameObject:

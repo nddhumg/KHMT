@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace EnumName
 {
-    public enum AppareItem 
+    public enum Item 
     {
+        None = 0,
         //Weapon 0 - 100
-        PistolGun = 0,
-        RifleGun = 1,
-        ShotGun = 2,
+        PistolGun = 1,
+        RifleGun = 2,
+        ShotGun = 3,
 
         //Ammor 101 - 200
     }

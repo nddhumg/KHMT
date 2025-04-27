@@ -8,17 +8,18 @@ public class Player : Singleton<Player>
     PlayerStateMachine state;
     [SerializeField] Animator anim;
     Transform weapon;
+    SpriteRenderer spriteWeapon;
     [SerializeField] private PlayerLevel level;
     [SerializeField] private PlayerStat statManager;
     [SerializeField] private PlayerSkill skillManager;
 
     [SerializeField] private GameObject healingEffect;
     [SerializeField] private Transform sprite;
-    
+
     private Vector2 directionMove = Vector2.up;
     private int directionLook = 1;
     private Vector3 rotationWeapon = Vector3.zero;
-    
+
 
     public PlayerLevel Level => level;
     public PlayerStat StatsManager => statManager;
@@ -63,8 +64,10 @@ public class Player : Singleton<Player>
         RotateWeapon();
     }
 
-    public void SetWeapon(GameObject weapon) {
+    public void SetWeapon(GameObject weapon)
+    {
         this.weapon = weapon.transform;
+        this.spriteWeapon = weapon.GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Flip()
@@ -82,17 +85,18 @@ public class Player : Singleton<Player>
     {
         if (weapon == null)
             return;
-        //rotationWeapon = transform.localRotation.eulerAngles;
         rotationWeapon.z = Vector2.Angle(Vector2.right, directionMove);
         rotationWeapon.z *= directionMove.y < 0 ? -1 : 1;
-        rotationWeapon.x = directionMove.x < 0 ? 0 : 180;
-
+        if (directionMove.x < 0)
+            spriteWeapon.flipY = true;
+        else
+            spriteWeapon.flipY = false;
         weapon.eulerAngles = rotationWeapon;
-        //weapon.localRotation = Quaternion.Euler(rotationWeapon);
     }
 
-    void CheckDead(EnumName.Stat stat ,float value) { 
-        if(stat == EnumName.Stat.Hp && value <= 0)
+    void CheckDead(EnumName.Stat stat, float value)
+    {
+        if (stat == EnumName.Stat.Hp && value <= 0)
         {
             ScreenGameOver.instance.Deffeat();
         }

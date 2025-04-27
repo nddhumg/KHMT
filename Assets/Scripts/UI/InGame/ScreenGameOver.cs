@@ -48,7 +48,7 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     protected void OnClickHome()
     {
         GameSystem.RePause();
-        LoadingSceneManager.instance.SwitchToSceneGame("StartSceen");
+        LoadingSceneManager.instance.SwichToScene("StartSceen");
     }
 
 

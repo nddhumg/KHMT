@@ -11,9 +11,9 @@ namespace Inventory
 
         public override void DropItem(UIItem item)
         {
-            InventoryManager.instance.DequipItem(this.item?.info);
+            InventoryManager.instance.DequipItem(this.item.info.nameItem);
             base.DropItem(item);
-            InventoryManager.instance.EquipItem(this.item.info);
+            InventoryManager.instance.EquipItem(this.item.info.nameItem);
         }
 
         protected override bool CanItemSwap(UIItem item)

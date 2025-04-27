@@ -19,10 +19,6 @@ public class ShopManager : MonoBehaviour
 
     protected ResourceName resourceAds;
     protected int valueAds;
-    void Awake()
-    {
-        data = SaveLoadSystem.DataService.Load<ShopData>() ?? data;
-    }
     private void OnApplicationQuit()
     {
         SaveLoadSystem.DataService.Save<ShopData>(ref data);
@@ -30,6 +26,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        data = SaveLoadSystem.DataService.Load<ShopData>(gameObject) ?? data;
         AdsManager.instance.adsShowComplete += this.CompleteAds;
         CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin,bgBtnFreeCoin);
         CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip, bgBtnFreeCoinVip);

@@ -9,10 +9,9 @@ public class TimeManager : PersistentSingleton<TimeManager>
     [SerializeField, ReadOnly] TimeData data = new();
 
     public DateTime GameExitTime =>  DateTime.Parse(data.gameExitTime);
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-        data = SaveLoadSystem.DataService.Load<TimeData>() ?? data;
+        data = SaveLoadSystem.DataService.Load<TimeData>(gameObject) ?? data;
     }
 
     private void OnApplicationQuit()
