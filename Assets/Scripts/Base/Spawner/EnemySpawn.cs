@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class EnemySpawn : Singleton<EnemySpawn>
 {
-
+    string mapId = "1";
     [SerializeField] protected SpawnZones spawnZones;
-    protected List<SpawnRate> possibleWaveEnemies = new List<SpawnRate>();
-    [SerializeField] protected SOSpawnWave waveCurrent;
+    [SerializeField]protected List<SpawnRate> possibleWaveEnemies = new List<SpawnRate>();
     protected EnemyStatBonusByLevelPlayer stat;
 
-    protected SpawnEnemyInfo info;
+
+    [SerializeField] protected SOSpawnWave soSpawnWave;
+    protected ISpawnWaveInfo info;
     protected float timeNextWave = 0;
+    protected int indexWave = 0;
 
     [SerializeField, ReadOnly] protected int enemyCount = 0;
     [SerializeField, ReadOnly] protected int enemyDie = 0;
 
     protected CoolDownTimer spawnTimer;
+
 
     public EnemyStatBonusByLevelPlayer Stat => stat;
 
@@ -45,12 +48,6 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
     protected void NextWave()
     {
-        if(waveCurrent.NextWave == null)
-        {
-            Debug.Log("No next wave");
-            return;
-        }
-        waveCurrent = waveCurrent.NextWave;
         SetUpNextWave();
     }
 
@@ -58,20 +55,18 @@ public class EnemySpawn : Singleton<EnemySpawn>
     {
         if (IsSpawnMax())
             return;
-        enemyCount += info.spawnAmount;
-        bool isGetFromPool;
-        GameObject enemy;
+        enemyCount += info.SpawnAmount;
         SpawnRate spawnRate;
-        for (int i = 0; i < info.spawnAmount; i++)
+        for (int i = 0; i < info.SpawnAmount; i++)
         {
             spawnRate = GetRandomSpawnRate();
-            enemy = EnemyPool.instance.Spawn(spawnRate.Prefab, spawnZones.GetRandomSpawnPosition(), Quaternion.identity, out isGetFromPool);
+            EnemyPool.instance.Spawn(spawnRate.Prefab, spawnZones.GetRandomSpawnPosition(), Quaternion.identity);
         }
     }
 
     private bool IsSpawnMax()
     {
-        return info.maxEnemySpawn <= enemyCount;
+        return info.MaxEnemySpawn <= enemyCount;
     }
 
     private SpawnRate GetRandomSpawnRate()
@@ -95,9 +90,10 @@ public class EnemySpawn : Singleton<EnemySpawn>
 
     private void SetUpNextWave()
     {
-        info = waveCurrent.SpawnEnemyInfo;
-        timeNextWave += info.operationTimeMinutes;
-        possibleWaveEnemies = waveCurrent.EnemysSpawn;
-        spawnTimer.CoolDown = info.spawnIntervalSeconds;
+        info = soSpawnWave.GetWaveInfo(mapId).GetInfoSpawnEnemy(indexWave);
+        indexWave++;
+        timeNextWave += info.OperationTimeMinutes;
+        //possibleWaveEnemies = waveCurrent.EnemysSpawn;
+        spawnTimer.CoolDown = info.SpawnIntervalSeconds;
     }
 }

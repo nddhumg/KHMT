@@ -44,7 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa1ebcfee947d047afe942917945c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsDrop: {fileID: 11400000, guid: 307fb42bc103d444ca978c74574953c2, type: 2}
+  itemsDrop:
+  - rate: 0
+    prefab: {fileID: 0}
+  - rate: 0
+    prefab: {fileID: 0}
+  - rate: 0
+    prefab: {fileID: 0}
 --- !u!1 &6111057786810178812
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,9 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteTf: {fileID: 6108127953884661102}
-  stat: {fileID: 11400000, guid: bbb002339f4802248950aa67362efc5d, type: 2}
+  statBase: {fileID: 0}
   dropItem: {fileID: 6151665945785873328}
-  attackCoolDown: 0.3
 --- !u!1 &6111341694691094090
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +235,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 836a723706f614e498fb10630fbf6514, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

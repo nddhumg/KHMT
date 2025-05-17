@@ -48,7 +48,25 @@ MonoBehaviour:
   data:
     items: []
     equippedItem:
-    - {fileID: 11400000, guid: 875a6d2248fa05743b3511f3874726de, type: 2}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - nameItem: PistolGun
+      level: 0
+    - nameItem: 
+      level: 0
+    - nameItem: 
+      level: 0
+    - nameItem: 
+      level: 0
+  itemCollection:
+  - {fileID: 11400000, guid: 875a6d2248fa05743b3511f3874726de, type: 2}
+  - {fileID: 11400000, guid: b71b1e3f31b870c4ea53485b20365082, type: 2}
+  - {fileID: 11400000, guid: 848fe55c68151034e97fefc8cd409427, type: 2}
+  - {fileID: 11400000, guid: f0eb6c5e04195204eb4829b326144f98, type: 2}
+  - {fileID: 11400000, guid: 92de4d41dc0fc3e45a3d5d7ee7e339c0, type: 2}
+  - {fileID: 11400000, guid: 29dcb8143241bba46888abbb60ffedf9, type: 2}
+  - {fileID: 11400000, guid: ff102b7a97f0a364db9cd3735ea5998c, type: 2}
+  - {fileID: 11400000, guid: b6ca58ecc5f5f294eb92a57ac3338a3f, type: 2}
+  - {fileID: 11400000, guid: e6a45e2993d41ed4dba8ba3206c54c35, type: 2}
+  - {fileID: 11400000, guid: ad0580aa836d4804d9603e9efb8fd6d1, type: 2}
+  - {fileID: 11400000, guid: 19db0f8da52550e479702e083b5ecdb4, type: 2}
+  - {fileID: 11400000, guid: 9bedd60d893df3f4c925f3c0ff565aca, type: 2}
+  soEquipmentStats: {fileID: 0}

@@ -29,11 +29,17 @@ public abstract class Enemy : MonoBehaviour, IReceiveDamage
 
     protected void OnEnable() {
         Init();
+        //EnemySpawn.instance.Enemies.Add(gameObject);
+    }
+
+    protected void OnDisable()
+    {
+        //EnemySpawn.instance.Enemies.Remove(gameObject);
     }
 
     public virtual void Init()
     {
-        hp = statBase.GetStatValue(EnumName.Stat.HpMax) * EnemySpawn.instance.Stat.GetBonusHp();
+        //hp = statBase.GetStatValue(EnumName.Stat.HpMax) * EnemySpawn.instance.Stat.GetBonusHp();
     }
 
     protected virtual void Update()
@@ -64,7 +70,7 @@ public abstract class Enemy : MonoBehaviour, IReceiveDamage
     {
         dropItem.Drop(transform.position);
         gameObject.SetActive(false);
-        EnemySpawn.instance.EnemyCount--;
+            EnemySpawn.instance.EnemyCount--;
         EnemySpawn.instance.EnemyKill++;
     }
 

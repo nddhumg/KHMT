@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class SpawnZones : MonoBehaviour
 {
-    private Vector2 sizeCamera = new();
-    private Vector2 randomMaxDistance = new Vector3(5f, 5f);
-    private Vector2 randomMinDistance = new Vector3(2f, 2f);
+    [SerializeField] private Vector2 randomMaxDistance = new Vector3(1f, 1f);
     private Vector3 positionCamera = new();
     private Vector2 randomDistanceCamera = new Vector2();
     private Vector3 spawnPosition = new Vector3();
 
-    private void Start()
+    public Vector2 GetRandomSpawnPosition()
     {
-        sizeCamera.y = 2f * Camera.main.orthographicSize;
-        sizeCamera.x = sizeCamera.y * Camera.main.aspect;
-    }
-
-    public Vector2 GetRandomSpawnPosition(){
-        randomDistanceCamera.x = Random.Range(randomMinDistance.x, randomMaxDistance.x);
-        randomDistanceCamera.y = Random.Range(randomMinDistance.x, randomMaxDistance.y);
+        Vector2 sizeCamera = CameraMain.instance.Size;
+        sizeCamera = sizeCamera / 2;
         positionCamera = Camera.main.transform.position;
-        
-        spawnPosition.x = positionCamera.x + GetRandomSign() * (sizeCamera.x / 2 + randomDistanceCamera.x);
-        spawnPosition.y = positionCamera.y + GetRandomSign() * sizeCamera.y / 2 + GetRandomSign() * randomDistanceCamera.y;
+        randomDistanceCamera.x = Random.Range(0f, sizeCamera.x + randomMaxDistance.x);
+        randomDistanceCamera.y = Random.Range(randomDistanceCamera.x <= sizeCamera.x ? sizeCamera.y : 0, sizeCamera.y + randomMaxDistance.y);
+
+        spawnPosition.x = randomDistanceCamera.x * GetRandomSign() + positionCamera.x;
+        spawnPosition.y = randomDistanceCamera.y * GetRandomSign() + positionCamera.y;
         return spawnPosition;
     }
 
