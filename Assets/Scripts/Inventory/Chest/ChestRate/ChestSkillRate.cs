@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChestSkillRate : ChestRate
 {
     private SOUpgradeSkill skillUpgrade;
-    public ChestSkillRate(float rate) : base(rate)
+    public ChestSkillRate() : base()
     {
     }
 

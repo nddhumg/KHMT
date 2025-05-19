@@ -15,7 +15,7 @@ namespace Core.Skill
         protected virtual void Start()
         {
             coolDownComponent = new CoolDownSkillComponent(0.5f);
-            coolDownComponent.Timer.OnCoolDownEnd += Attack;
+            coolDownComponent.Timer.AddTimeoutListener(Attack);
             damageComponent = new DamageSkillComponent(1, Player.instance.StatsManager.StatCurrent);
         }
 

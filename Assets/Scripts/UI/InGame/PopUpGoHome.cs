@@ -19,7 +19,7 @@ public class PopUpGoHome : MonoBehaviour
     private void ClickYes()
     {
         ScreenGameOver.instance.Deffeat();
-        menuGame.OpenMenu(false);
+        //menuGame.OpenMenu(false);
         gameObject.SetActive(false);
     }
 

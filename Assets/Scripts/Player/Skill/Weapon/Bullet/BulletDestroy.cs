@@ -6,7 +6,7 @@ public class BulletDestroy : DestroyAfterTime {
 
     private void OnDisable()
     {
-        timer.ResetCoolDown();
+        timer.ResetCooldown();
     }
 
     protected override void DestroyObject ()

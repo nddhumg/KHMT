@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class EnemyMeleeStateManager : EnemyStateManager
+namespace Core.Enemies
 {
-    public IState moveState;
-
-    public EnemyMeleeStateManager(Enemy enemy, SOStat stat) : base(enemy, stat)
+    public class EnemyMeleeStateManager : EnemyStateManager
     {
+        public IState moveState;
+
+        public EnemyMeleeStateManager(Enemy enemy) : base(enemy)
+        {
+
+        }
+
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            moveState = new MoveStateEnemy(this, enemy.Stat.GetStatValue(EnumName.Stat.Speed));
+            ChangeState(moveState);
+        }
 
     }
-
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        moveState = new MoveStateEnemy(this,stat.GetStatValue(EnumName.Stat.Speed));
-        ChangeState(moveState);
-    }
-
 }

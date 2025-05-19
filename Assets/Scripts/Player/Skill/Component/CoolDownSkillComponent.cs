@@ -6,31 +6,31 @@ namespace Core.Skill
 {
     public class CoolDownSkillComponent
     {
-        protected CoolDownTimer timer;
+        protected ICoolDownAuto timer;
         protected float attackSpeed;
 
-        public CoolDownTimer Timer => timer;
+        public ICoolDownAuto Timer => timer;
         public CoolDownSkillComponent(float attackSpeed)
         {
             this.attackSpeed = attackSpeed;
-            this.timer = new CoolDownTimer(attackSpeed);
+            this.timer = new AutoCooldownTimer(attackSpeed);
         }
 
         public void Update()
         {
-            timer.CountTime(Time.deltaTime);
+            timer.UpdateCooldown(Time.deltaTime);
         }
 
         public virtual void IncreaseAttackSpeed(float value)
         {
             attackSpeed -= value;
-            timer.CoolDown = attackSpeed;
+            timer.Cooldown = attackSpeed;
         }
 
         public virtual void SetAttackSpeed(float value)
         {
             attackSpeed = value;
-            timer.CoolDown = attackSpeed;
+            timer.Cooldown = attackSpeed;
         }
     }
 

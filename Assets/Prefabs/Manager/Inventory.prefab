@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb69a57e1a6c7b4d8718729366b53fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statPlayer: {fileID: 11400000, guid: 43080e3fba4df4843a252de2979b31b4, type: 2}
   data:
     items: []
     equippedItem:
@@ -57,16 +56,16 @@ MonoBehaviour:
     - nameItem: 
       level: 0
   itemCollection:
-  - {fileID: 11400000, guid: 875a6d2248fa05743b3511f3874726de, type: 2}
-  - {fileID: 11400000, guid: b71b1e3f31b870c4ea53485b20365082, type: 2}
-  - {fileID: 11400000, guid: 848fe55c68151034e97fefc8cd409427, type: 2}
-  - {fileID: 11400000, guid: f0eb6c5e04195204eb4829b326144f98, type: 2}
-  - {fileID: 11400000, guid: 92de4d41dc0fc3e45a3d5d7ee7e339c0, type: 2}
-  - {fileID: 11400000, guid: 29dcb8143241bba46888abbb60ffedf9, type: 2}
-  - {fileID: 11400000, guid: ff102b7a97f0a364db9cd3735ea5998c, type: 2}
-  - {fileID: 11400000, guid: b6ca58ecc5f5f294eb92a57ac3338a3f, type: 2}
-  - {fileID: 11400000, guid: e6a45e2993d41ed4dba8ba3206c54c35, type: 2}
-  - {fileID: 11400000, guid: ad0580aa836d4804d9603e9efb8fd6d1, type: 2}
-  - {fileID: 11400000, guid: 19db0f8da52550e479702e083b5ecdb4, type: 2}
-  - {fileID: 11400000, guid: 9bedd60d893df3f4c925f3c0ff565aca, type: 2}
-  soEquipmentStats: {fileID: 0}
+  - {fileID: 11400000, guid: 96f0749dca9f180499934085ac1dac07, type: 2}
+  - {fileID: 11400000, guid: 8e367b713a8e0d34ebeea6d30df76662, type: 2}
+  - {fileID: 11400000, guid: 05349bf1835a3704abe1a2650e06bfeb, type: 2}
+  - {fileID: 11400000, guid: ec91eb7aa66188f4789d87db73fe61a6, type: 2}
+  - {fileID: 11400000, guid: 25140f25c8092544b901fc7996f48a53, type: 2}
+  - {fileID: 11400000, guid: fcdd8f862d593b74baf611a7265974e7, type: 2}
+  - {fileID: 11400000, guid: 22f180c9704a0a446ade5ab43a5e61e8, type: 2}
+  - {fileID: 11400000, guid: 9b299b2c7c49077459d319706d5c6b89, type: 2}
+  - {fileID: 11400000, guid: 5384579c5ac53dd4cad9d37d4eab9e9c, type: 2}
+  - {fileID: 11400000, guid: b8c7ad047624bdb4fa3c6396229384de, type: 2}
+  - {fileID: 11400000, guid: 5d764b6a0009fcf46953a982ea2035cc, type: 2}
+  - {fileID: 11400000, guid: 99b982592f18960448249c81eb4fb231, type: 2}
+  soEquipmentStats: {fileID: 11400000, guid: bde2f2b23d03fee4295c230387cead27, type: 2}

@@ -8,7 +8,7 @@ public class ChestResourceRate : ChestRate
     private int valueIncrease;
     private ResourceName resourceName;
 
-    public ChestResourceRate(ResourceName resource,int coin,float rate) : base(rate)
+    public ChestResourceRate(ResourceName resource,int coin) : base()
     {
         this.valueIncrease = coin;
         this.resourceName = resource;

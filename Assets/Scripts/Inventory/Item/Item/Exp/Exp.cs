@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Bson;
 using UnityEngine;
 
-public class Exp : MonoBehaviour, IItemPickUp {
+public class Exp : MonoBehaviour, IItemPickUp
+{
 
     [SerializeField] protected uint exp;
     private bool isBeingPulled = false;
@@ -14,8 +15,9 @@ public class Exp : MonoBehaviour, IItemPickUp {
         gameObject.SetActive(false);
     }
 
-   
-    void OnEnable() {
+
+    void OnEnable()
+    {
         Magnet.pickUpMagnet += Pull;
     }
 
@@ -25,20 +27,23 @@ public class Exp : MonoBehaviour, IItemPickUp {
         Magnet.pickUpMagnet -= Pull;
     }
 
-    void Update() {
+    void Update()
+    {
         MoveToPlayer();
     }
 
-    private void MoveToPlayer() {
-        if (isBeingPulled) 
-        transform.position = Vector3.Slerp(transform.position, Player.instance.transform.position, 2 * Time.deltaTime);
+    private void MoveToPlayer()
+    {
+        if (isBeingPulled)
+            transform.position = Vector3.Lerp(transform.position, Player.instance.transform.position, 2 * Time.deltaTime);
     }
 
-    private void Pull() {
+    private void Pull()
+    {
         SetIsBeingPulled(true);
     }
 
-    private void SetIsBeingPulled(bool isPulled) 
+    private void SetIsBeingPulled(bool isPulled)
     {
         this.isBeingPulled = isPulled;
     }

@@ -133,6 +133,7 @@ MonoBehaviour:
   spriteTf: {fileID: 7223310470242096881}
   statBase: {fileID: 11400000, guid: 599c2aeb577f9ec49aa4a049594091dd, type: 2}
   dropItem: {fileID: 7324312100520665135}
+  Stat: {fileID: 11400000, guid: 599c2aeb577f9ec49aa4a049594091dd, type: 2}
   bullet: {fileID: 1804428089213200, guid: b698bec10b89c084bb63bd5b68fa1c5f, type: 3}
 --- !u!1 &7220937600278117845
 GameObject:

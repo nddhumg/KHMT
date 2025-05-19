@@ -35,7 +35,7 @@ namespace Systems.Inventory
 
         protected virtual void Start()
         {
-            //data = SaveLoadSystem.DataService.Load<InventoryData>(gameObject) ?? data;
+            data = SaveLoadSystem.DataService.Load<InventoryData>(gameObject) ?? data;
             data.CreateItem(this);
         }
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class ChestRate 
 {
-    private float rate;
-    public ChestRate(float rate) {
-        this.rate = rate;
+    //private float rate;
+    public ChestRate() {
+        //this.rate = rate;
     }
 
-    public float Rate { get => rate; set => rate = value; }
+    //public float Rate { get => rate; set => rate = value; }
 
     public abstract void GenerateChestReward();
     public abstract Sprite GetIcon();

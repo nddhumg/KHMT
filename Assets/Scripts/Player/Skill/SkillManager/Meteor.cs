@@ -16,7 +16,7 @@ namespace Core.Skill {
         {
             damageComponent = new DamageSkillComponent(1,Player.instance.StatsManager.StatCurrent);
             coolDownComponent = new CoolDownSkillComponent(1);
-            coolDownComponent.Timer.OnCoolDownEnd += Attack;
+            coolDownComponent.Timer.AddTimeoutListener(Attack);
         }
 
         private void Update()

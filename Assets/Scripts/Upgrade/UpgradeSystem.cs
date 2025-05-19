@@ -26,9 +26,11 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 
     public void AddUpgradeWeapon()
     {
+        IItemData weaponInInventory = InventoryManager.instance.EquippedWeapon;
+
         foreach (var weapon in weaponBase)
         {
-            if (weapon.SkillName.ToString() == InventoryManager.instance.EquippedWeapon.ToString())
+            if (weapon.SkillName.ToString() == weaponInInventory.Model.NameItem.ToString())
             {
                 availableUpgradesSkill.Add(weapon);
                 weapon.ApplyUpgrade();

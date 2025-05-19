@@ -13,7 +13,6 @@ namespace Core.Skill
             damageComponent.SetDamageMultiplier(0.5f);
             coolDownComponent.SetAttackSpeed(1.5f);
 
-            coolDownComponent.Timer.SetAutoResetCoolDown(false);
         }
 
         private void Reset()
@@ -44,7 +43,6 @@ namespace Core.Skill
                 bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
                 yield return new WaitForSeconds(Random.Range(0, 0.1f));
             }
-            coolDownComponent.Timer.ResetCoolDown();
             yield return null;
         }
 

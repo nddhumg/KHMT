@@ -44,7 +44,6 @@ namespace Core.Skill
                 else
                     directionBulletCurrent.x += recoil;
                 directionBulletCurrent.Normalize();
-                Debug.Log(Vector2.Angle(Vector2.down, directionBulletCurrent));
                 rotationBullet = Quaternion.Euler(0f, 0f, (directionBulletCurrent.x > 0 ? 1 : -1) * Vector2.Angle(Vector2.down, directionBulletCurrent));
                 bulletCurrent = BulletPool.instance.Spawn(this.bullet, muzzle.position, rotationBullet);
                 bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBulletCurrent;
@@ -52,7 +51,7 @@ namespace Core.Skill
 
                 yield return new WaitForSeconds(Random.Range(0, 0.1f));
             }
-            coolDownComponent.Timer.ResetCoolDown();
+            coolDownComponent.Timer.ResetCooldown();
             yield return null;
         }
 
