@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Systems.SaveLoad;
 using EnumName;
-using UnityEngine.Rendering.VirtualTexturing;
-using UnityEngine.XR;
 using System;
 namespace Systems.Inventory
 {
-    public class InventoryManager : PersistentSingleton<InventoryManager>, IItemDataBase
+    public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         [SerializeField] InventoryData data;
-        [SerializeField] private List<SOItem> itemCollection;
+        [SerializeField] private SOItemContainerModel containerModel;
+        private IItemDataBase itemModelContainer;
         [SerializeField] private SOEquipmentStats soEquipmentStats;
-        private Dictionary<string, SOItem> dictionaryItem;
+
+        private IStat statbonus;
         public List<Item> ItemsCurrent => data.items;
 
         public Item EquippedWeapon => data.equippedItem[0];
@@ -21,22 +21,24 @@ namespace Systems.Inventory
 
         public SOEquipmentStats SOEquipmentStats => soEquipmentStats;
 
-        public Action<IItemData> OnEquip;
-        public Action<IItemData> OnDequip;
-        public Action<IItemData, IItemData> OnSwapItem;
-        public Action<EnumName.Stat, float> onChangeStat;
+        public IStat StatsBonus { get => statbonus; set => statbonus = value; }
+
+        public Action<Item> OnEquip;
+        public Action<Item> OnDequip;
+        public Action<Item, Item> OnSwapItem;
 
 
         protected override void Awake()
         {
             base.Awake();
-            CreateItemController();
+            itemModelContainer = new InventoryModelContainer(containerModel.ItemCollection);
+            statbonus = ScriptableObject.CreateInstance<SOStat>(); ;
         }
 
         protected virtual void Start()
         {
             data = SaveLoadSystem.DataService.Load<InventoryData>(gameObject) ?? data;
-            data.CreateItem(this);
+            CreateItem(itemModelContainer);
         }
 
         private void OnApplicationQuit()
@@ -49,44 +51,27 @@ namespace Systems.Inventory
             data.items.Add(item);
         }
 
-
-        public IItemModel GetModelByName(string name)
-        {
-            if (!dictionaryItem.ContainsKey(name))
-            {
-                Debug.LogWarning("The model " + name + " is not in the list.");
-                return null;
-            }
-            return dictionaryItem[name];
-        }
-
         public void EquipItem(Item item)
         {
-            EquipmentType typeItem = item.Model.Type;
+            EquipmentType typeItem = item.ModelData.Type;
             if (IsSlotEmty(typeItem))
             {
                 data.items.Remove(item);
                 data.equippedItem[(int)typeItem] = item;
-                IEquipmentStats stats = soEquipmentStats.GetEquipmentStats(item.Model.Type);
-                onChangeStat?.Invoke(stats.StatBonus, stats.GetBonus(0));
-                OnEquip?.Invoke(item);
             }
             else
             {
-                data.items.Remove(item);
                 Item itemCurrent = data.equippedItem[(int)typeItem];
+                itemCurrent.Dequip();
+                data.items.Remove(item);
                 data.equippedItem[(int)typeItem] = item;
-                IEquipmentStats stats = soEquipmentStats.GetEquipmentStats(item.Model.Type);
-                onChangeStat?.Invoke(stats.StatBonus, stats.GetBonus(0));
-                data.items.Add(itemCurrent);
-                onChangeStat?.Invoke(stats.StatBonus, -1 * stats.GetBonus(0));
-                OnSwapItem?.Invoke(item, itemCurrent);
             }
+            OnEquip?.Invoke(item);
         }
 
         public void DequipItem(Item item)
         {
-            data.equippedItem[(int)item.Model.Type] = null;
+            data.equippedItem[(int)item.ModelData.Type] = null;
             data.items.Add(item);
             OnDequip?.Invoke(item);
         }
@@ -104,19 +89,19 @@ namespace Systems.Inventory
             catch { return true; }
         }
 
-        private void CreateItemController()
+        protected void CreateItem(IItemDataBase dataBase)
         {
-            dictionaryItem = new();
-            foreach (SOItem model in itemCollection)
+            foreach (var item in data.equippedItem)
             {
-                try
-                {
-                    dictionaryItem.Add(model.NameItem, model);
-                }
-                catch
-                {
-                    Debug.Log(model.NameItem);
-                }
+                if (item.Name == string.Empty)
+                    continue;
+                item.Init(dataBase.GetModelByName(item.Name));
+                statbonus.IncreaseStat(item.EquipmentStats.StatBonus, item.GetBonusStat());
+            }
+
+            foreach (var item in data.items)
+            {
+                item.Init(dataBase.GetModelByName(item.Name));
             }
         }
     }

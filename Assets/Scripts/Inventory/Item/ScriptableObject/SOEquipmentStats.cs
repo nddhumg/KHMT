@@ -14,9 +14,6 @@ namespace Systems.Inventory {
             return equipmentStats.Find(stat => stat.Type == type);
         }
 
-
-
-        
     }
     [System.Serializable]
     public class EquipmentStats : IEquipmentStats
@@ -25,6 +22,7 @@ namespace Systems.Inventory {
         [SerializeField] private EnumName.EquipmentType type;
         [SerializeField] private EnumName.Stat statBonus;
         [SerializeField] private List<float> bonus;
+        [SerializeField] private List<float> bonusLevelUp;
         [SerializeField] private Sprite iconType;
         [SerializeField] private Sprite iconStat;
 
@@ -36,9 +34,14 @@ namespace Systems.Inventory {
 
         public Stat StatBonus => statBonus;
 
-        public float GetBonus(int level)
+        public float GetBonus(int rarity)
         {
-            return bonus[level];
+            return bonus[rarity];
+        }
+
+        public float GetBonusLevelUp(int rarity)
+        {
+            return bonusLevelUp[rarity];
         }
     }
 }

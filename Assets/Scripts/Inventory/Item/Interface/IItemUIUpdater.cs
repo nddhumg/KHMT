@@ -7,6 +7,6 @@ namespace UI.Charector
 {
     public interface IItemUIUpdater
     {
-        void Init(IItemData data, bool isEquiped);
+        void Init(IItemData data,IItemLevel levelItem, bool isEquiped);
     }
 }

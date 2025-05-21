@@ -9,7 +9,9 @@ namespace Systems.Inventory
 
         EnumName.Stat StatBonus { get; }
 
-        float GetBonus(int level);
+        float GetBonus(int rarity);
+
+        float GetBonusLevelUp(int rarity);
 
         Sprite IconType { get; }
 

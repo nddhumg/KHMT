@@ -30,7 +30,7 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
 
         foreach (var weapon in weaponBase)
         {
-            if (weapon.SkillName.ToString() == weaponInInventory.Model.NameItem.ToString())
+            if (weapon.SkillName.ToString() == weaponInInventory.ModelData.NameItem.ToString())
             {
                 availableUpgradesSkill.Add(weapon);
                 weapon.ApplyUpgrade();

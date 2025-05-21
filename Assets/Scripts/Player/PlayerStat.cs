@@ -17,7 +17,7 @@ public class PlayerStat : MonoBehaviour, IReceiveDamage
 
     private void Awake()
     {
-        statCurrent = statBase.Copy();
+        statCurrent = statBase.Clone();
         statCurrent.Stats.Add(new StatEntry(EnumName.Stat.Hp, statBase.GetStatValue(EnumName.Stat.HpMax)));
     }
 

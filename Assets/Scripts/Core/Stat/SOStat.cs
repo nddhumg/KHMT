@@ -29,19 +29,26 @@ public class StatEntry
 }
 
 [CreateAssetMenu(fileName = "StatData", menuName = "SO/Stat")]
-public class SOStat : ScriptableObject
+public class SOStat : ScriptableObject, IStat
 {
     [SerializeField] private List<StatEntry> stats = new List<StatEntry>();
-    public Action<Stat,float> OnChangeStat;
-    public List<StatEntry> Stats
+
+    public Action<Stat, float> OnChangeStat { get; set; }
+    public List<StatEntry> Stats => stats;
+
+    public static SOStat operator + (SOStat a, SOStat b)
     {
-        get
+        SOStat result = a.Clone();
+        foreach (StatEntry entry in b.Stats)
         {
-            return stats;
+            result.IncreaseStat(entry.key, entry.value);
         }
+
+        return result;
     }
 
-    public SOStat Copy()
+
+    public SOStat Clone()
     {
         SOStat result = ScriptableObject.CreateInstance<SOStat>();
         foreach (StatEntry entry in Stats)
@@ -51,7 +58,7 @@ public class SOStat : ScriptableObject
         return result;
     }
 
-    public void Copy(SOStat statCopy)
+    public void Copy(IStat statCopy)
     {
         this.stats.Clear();
         foreach (StatEntry entry in statCopy.Stats)
@@ -88,9 +95,8 @@ public class SOStat : ScriptableObject
         {
             NormalizeHp();
         }
-        OnChangeStat?.Invoke(statKey,GetStatValue(statKey));
+        OnChangeStat?.Invoke(statKey, GetStatValue(statKey));
     }
-
 
     public void IncreaseStat(Stat statKey, float value)
     {
@@ -157,6 +163,25 @@ public class SOStat : ScriptableObject
         if (hp > hpmax && hp != -1 && hpmax != -1)
         {
             GetStatEntry(Stat.Hp).value = hpmax;
+        }
+    }
+
+    public void AddStatValue(Stat statKey, float value)
+    {
+        if (GetStatEntry(statKey) == null)
+        {
+            stats.Add(new StatEntry(statKey, value));
+        }
+        else
+        {
+            Debug.LogWarning("Stats already contains " + statKey.ToString());
+        }
+    }
+
+    public void Add(IStat stats)
+    {
+        foreach (StatEntry stat in stats.Stats) {
+            IncreaseStat(stat.key, stat.value);
         }
     }
 }

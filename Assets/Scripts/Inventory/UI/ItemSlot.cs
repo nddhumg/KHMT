@@ -19,6 +19,7 @@ namespace UI.Charector
         private static CharectorUIManager manager;
 
         private IItemData data;
+        private IItemLevel levelItem;
 
         public bool IsEquiped => isEquiped;
 
@@ -32,17 +33,27 @@ namespace UI.Charector
             manager = uiManager;
         }
 
-        public void Init(IItemData data, bool isEquiped)
+        public void Init(IItemData data, IItemLevel levelItem, bool isEquiped)
         {
+            if (this.levelItem != null)
+            {
+                this.levelItem.OnLevelUp -= SetTextLevel;
+            }
             this.data = data;
-            icon.sprite = data.Model.Icon;
-            level.text = "Lv " + data.Level.ToString();
+            this.levelItem = levelItem;
+            this.levelItem.OnLevelUp += SetTextLevel;
+            icon.sprite = data.ModelData.Icon;
+            SetTextLevel(levelItem.Level);
             this.isEquiped = isEquiped;
         }
 
         private void Click()
         {
             manager.OpenPopupInfoItem(data, this);
+        }
+
+        private void SetTextLevel(int levelCurrent) {
+            level.text = "Lv " + levelCurrent.ToString();
         }
     }
 }

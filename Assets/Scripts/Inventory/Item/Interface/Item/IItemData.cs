@@ -5,12 +5,15 @@ namespace Systems.Inventory
 {
     public interface IItemData
     {
-        IItemModel Model { get; }
+        IItemModel ModelData { get; }
 
-        int Level { get; }
+        IItemLevel LevelData { get; }
+
+        IItemBonusStat BonusStatData { get; }
 
         void Equip();
         void Dequip();
+
     }
 }
 
