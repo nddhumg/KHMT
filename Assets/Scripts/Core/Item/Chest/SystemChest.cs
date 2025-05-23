@@ -1,3 +1,4 @@
+using Ndd.Random;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class SystemChest : Singleton<SystemChest>
     [SerializeField] private Sprite iconCoin;
     [SerializeField] private Sprite iconCoinVip;
     [SerializeField] private List<ChestRate> boxRates = new List<ChestRate>();
-    private IWeightedRandomSelector<ChestRate> boxRate = new WeightedRandomSelector<ChestRate>();
+    private IRandomSelector<ChestRate> boxRate = new GuaranteedSelectorRandom<ChestRate>();
     [SerializeField] private GameObject panel;
     [SerializeField] private Button btnClaim;
     public Sprite IconCoin => iconCoin;

@@ -1,3 +1,4 @@
+using Ndd.Random;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Core.Spawn.Enemy
         protected int wave = 1;
         protected SOSpawnEnemy soEnemySpawn;
         protected SOEnemyContainer soEnemyContainer;
-        protected IWeightedRandomSelector<GameObject> weightedRandomSelector;
+        protected IRandomSelector<GameObject> weightedRandomSelector;
         protected ICoolDownAuto timer;
 
         public EnemySelector(string idMap, int wave, SOSpawnEnemy soEnemySpawn, SOEnemyContainer soEnemyContainer)
@@ -20,7 +21,7 @@ namespace Core.Spawn.Enemy
             this.soEnemySpawn = soEnemySpawn;
             this.soEnemyContainer = soEnemyContainer;
 
-            weightedRandomSelector = new WeightedRandomSelector<GameObject>();
+            weightedRandomSelector = new GuaranteedSelectorRandom<GameObject>();
             timer = new AutoCooldownTimer(timeScale: 60f);
             GetEnemyWave(wave);
             timer.AddTimeoutListener(() => GetEnemyWave(wave++));

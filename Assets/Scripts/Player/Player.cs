@@ -33,8 +33,6 @@ public class Player : Singleton<Player>
         statManager.StatCurrent.OnChangeStat += CheckDead;
     }
 
-
-
     void FixedUpdate()
     {
         state.FixedUpdate();

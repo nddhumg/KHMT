@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "nameItem": "BanditLightShoe",
+            "level": 0
+        },
+        {
+            "nameItem": "BanditLightShoe",
+            "level": 0
+        }
+    ],
+    "equippedItem": [
+        {
+            "nameItem": "PistolGun",
+            "level": 0
+        },
+        {
+            "nameItem": "",
+            "level": 0
+        },
+        {
+            "nameItem": "",
+            "level": 0
+        },
+        {
+            "nameItem": "",
+            "level": 0
+        }
+    ]
+}

@@ -34,7 +34,7 @@ public class CsvCollectionManager : ScriptableObject
 
     public static async void LoadSheetContainer()
     {
-            await container.Bake(converter);
+        await container.Bake(converter);
     }
 
     [Button]

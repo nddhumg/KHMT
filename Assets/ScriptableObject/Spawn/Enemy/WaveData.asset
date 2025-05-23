@@ -15,35 +15,35 @@ MonoBehaviour:
   waveData:
   - id: 1
     infoWave:
-    - spawnAmount: 5
+    - spawnAmount: 10
       maxEnemySpawn: 100
       spawnIntervalSeconds: 3
       operationTimeMinutes: 2
-    - spawnAmount: 10
-      maxEnemySpawn: 100
-      spawnIntervalSeconds: 2.5
-      operationTimeMinutes: 1
-    - spawnAmount: 30
-      maxEnemySpawn: 100
-      spawnIntervalSeconds: 2.5
-      operationTimeMinutes: 0.2
-    - spawnAmount: 12
-      maxEnemySpawn: 100
-      spawnIntervalSeconds: 2.5
-      operationTimeMinutes: 0.8
     - spawnAmount: 15
       maxEnemySpawn: 100
-      spawnIntervalSeconds: 2
-      operationTimeMinutes: 2
-    - spawnAmount: 15
-      maxEnemySpawn: 100
-      spawnIntervalSeconds: 1.7
-      operationTimeMinutes: 2
-    - spawnAmount: 20
-      maxEnemySpawn: 100
-      spawnIntervalSeconds: 1.5
+      spawnIntervalSeconds: 2.5
       operationTimeMinutes: 1
     - spawnAmount: 50
-      maxEnemySpawn: 100
+      maxEnemySpawn: 600
+      spawnIntervalSeconds: 2.5
+      operationTimeMinutes: 0.2
+    - spawnAmount: 20
+      maxEnemySpawn: 400
+      spawnIntervalSeconds: 2.5
+      operationTimeMinutes: 0.8
+    - spawnAmount: 25
+      maxEnemySpawn: 800
+      spawnIntervalSeconds: 2
+      operationTimeMinutes: 2
+    - spawnAmount: 30
+      maxEnemySpawn: 800
+      spawnIntervalSeconds: 1.7
+      operationTimeMinutes: 2
+    - spawnAmount: 35
+      maxEnemySpawn: 800
+      spawnIntervalSeconds: 1.5
+      operationTimeMinutes: 1
+    - spawnAmount: 70
+      maxEnemySpawn: 10000
       spawnIntervalSeconds: 0.8
       operationTimeMinutes: 1

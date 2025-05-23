@@ -44,15 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa1ebcfee947d047afe942917945c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsDrop:
-  - rate: 0.99
-    prefab: {fileID: 1971977629443170, guid: a52df83e254d8714786f391f94f29532, type: 3}
-  - rate: 0.005
-    prefab: {fileID: 8155792244978648837, guid: 648227568e73d5c4b9cec11c5f62ce16,
-      type: 3}
-  - rate: 0.005
-    prefab: {fileID: 8106686446101657813, guid: 6ec9f08788b6531448f21051c6f17512,
-      type: 3}
+  itemsDrop: []
 --- !u!1 &1353859731769456
 GameObject:
   m_ObjectHideFlags: 0

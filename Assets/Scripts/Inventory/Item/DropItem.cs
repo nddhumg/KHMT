@@ -1,22 +1,28 @@
-﻿using System.Collections;
+﻿using Ndd.Random;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DropItem : MonoBehaviour {
-	[SerializeField] protected List<SpawnRate> itemsDrop;
+	[SerializeField] protected List<GameObjectRate> itemsDrop;
+	protected IRandomSelector<GameObject> itemDrop;
 
-	public virtual void Drop(Vector3 postionDrop)
+    protected virtual void Start()
+    {
+        itemDrop = new ChanceSelectorRandom<GameObject>();
+		foreach (GameObjectRate objRate in itemsDrop) {
+            itemDrop.AddItem(objRate.Object,objRate.Rate);
+        }
+
+	}
+
+    public virtual void Drop(Vector3 postionDrop)
 	{
-		float ran = Random.value;
-		float temp = 0;
-		foreach (SpawnRate item in itemsDrop)
-		{
-			temp += item.Rate;
-			if (ran <= temp)
-			{
-				ItemPool.instance.Spawn(item.Prefab, postionDrop, Quaternion.identity);
-				return;
-			}
-		}
+		GameObject item = itemDrop.GetRandomItem();
+        if (item == null)
+        {
+            return;
+        }
+        ItemPool.instance.Spawn(itemDrop.GetRandomItem(), postionDrop, Quaternion.identity);
 	}
 }
