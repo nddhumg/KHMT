@@ -27,6 +27,7 @@ namespace Systems.Inventory
         public Sprite Icon => icon;
 
         public int LevelMax => levelMax;
+#if UNITY_EDITOR
         private void OnValidate()
         {
             string thisFileNewName = NameItem;
@@ -34,5 +35,6 @@ namespace Systems.Inventory
             UnityEditor.AssetDatabase.RenameAsset(assetPath, thisFileNewName);
 
         }
+#endif
     }
 }

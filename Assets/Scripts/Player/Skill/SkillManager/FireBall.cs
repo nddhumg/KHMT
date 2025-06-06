@@ -45,7 +45,7 @@ namespace Core.Skill
                     directionBulletCurrent.x += recoil;
                 directionBulletCurrent.Normalize();
                 rotationBullet = Quaternion.Euler(0f, 0f, (directionBulletCurrent.x > 0 ? 1 : -1) * Vector2.Angle(Vector2.down, directionBulletCurrent));
-                bulletCurrent = BulletPool.instance.Spawn(this.bullet, muzzle.position, rotationBullet);
+                bulletCurrent = poolBullet.Take(this.bullet, muzzle.position, rotationBullet);
                 bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBulletCurrent;
                 bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());
 

@@ -8,5 +8,7 @@ namespace Systems.Inventory
     public interface IItemDataBase
     {
         IItemModel GetModelByName(string name);
+        IItemModel GetRandomModel();
+        List<IItemModel> GetRandomModels(int count);
     }
 }

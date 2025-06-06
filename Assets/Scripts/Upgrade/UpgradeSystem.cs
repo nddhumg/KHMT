@@ -27,19 +27,28 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     public void AddUpgradeWeapon()
     {
         IItemData weaponInInventory = InventoryManager.instance.EquippedWeapon;
-
-        foreach (var weapon in weaponBase)
+        SOUpgradeWeapon weaponUpgrade = null;
+        if (weaponInInventory.ModelData == null)
         {
-            if (weapon.SkillName.ToString() == weaponInInventory.ModelData.NameItem.ToString())
-            {
-                availableUpgradesSkill.Add(weapon);
-                weapon.ApplyUpgrade();
-                GameObject weaponGO = Player.instance.SkillManager.GetGameObj(weapon.SkillName.ToString());
-                weaponGO.transform.localPosition = weapon.Position;
-                Player.instance.SetWeapon(weaponGO);
-                return;
-            }
+            weaponUpgrade = weaponBase[0];
         }
+        else
+        {
+            foreach (var weapon in weaponBase)
+            {
+                if (weapon.SkillName.ToString() == weaponInInventory.ModelData.NameItem.ToString())
+                {
+                    weaponUpgrade = weapon;
+                    break;
+                }
+            }
+            weaponUpgrade = weaponUpgrade != null ? weaponUpgrade : weaponBase[0];
+        }
+        availableUpgradesSkill.Add(weaponUpgrade);
+        weaponUpgrade.ApplyUpgrade();
+        GameObject weaponGO = Player.instance.SkillManager.GetGameObj(weaponUpgrade.SkillName.ToString());
+        weaponGO.transform.localPosition = weaponUpgrade.Position;
+        Player.instance.SetWeapon(weaponGO);
     }
 
     public void UppgradeSkill(SOUpgradeSkill UpgradeSkill)

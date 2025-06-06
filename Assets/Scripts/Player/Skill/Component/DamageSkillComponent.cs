@@ -6,11 +6,11 @@ namespace Core.Skill
     public class DamageSkillComponent
     {
         [SerializeField] protected float damageMultiplier = 1;
-        protected SOStat statPlayer;
+        protected IStat statPlayer;
 
         public float DamageMultiplier => damageMultiplier;
 
-        public DamageSkillComponent(float damageMultiplier, SOStat stat)
+        public DamageSkillComponent(float damageMultiplier, IStat stat)
         {
             this.damageMultiplier = damageMultiplier;
             this.statPlayer = stat;

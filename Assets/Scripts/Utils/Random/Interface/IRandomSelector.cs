@@ -5,6 +5,7 @@ namespace Ndd.Random
 {
     public interface IRandomSelector<T>
     {
+        int CountItem { get; }
         float TotalWeight { get; }
         void AddItem(T item, float weight);
         void AddItems(List<T> items, List<float> weights);

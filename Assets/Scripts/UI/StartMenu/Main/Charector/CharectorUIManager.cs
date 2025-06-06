@@ -11,8 +11,6 @@ namespace UI.Charector
 
         [SerializeField] protected TMP_Text textHelth;
         [SerializeField] protected TMP_Text textDamage;
-        [SerializeField] protected SOStat soStatPlayer;
-        private IStat statPlayer;
 
         [SerializeField] private PopUpInfoItem popupInfoItem;
         [SerializeField] private ItemSlot[] slotItemsEquip;
@@ -22,6 +20,7 @@ namespace UI.Charector
 
         private void Start()
         {
+            IStat statPlayer = GameController.instance.StatPlayer;
             InventoryManager inventoryManager = InventoryManager.instance;
             inventoryManager.OnEquip += EquipItem;
             inventoryManager.OnDequip += DequipItem;
@@ -30,14 +29,24 @@ namespace UI.Charector
             CreateInventory();
             CreateItemEquip();
 
-            statPlayer = soStatPlayer.Clone();
-            statPlayer.Add(inventoryManager.StatsBonus);
-            inventoryManager.StatsBonus = statPlayer;
-
             statPlayer.OnChangeStat += UpdateTextHelth;
             statPlayer.OnChangeStat += UpdateTextDamage;
+
+
             textHelth.text = statPlayer.GetStatValue(EnumName.Stat.HpMax).ToString();
             textDamage.text = statPlayer.GetStatValue(EnumName.Stat.Damage).ToString();
+        }
+
+        protected void OnDestroy()
+        {
+            IStat statPlayer = GameController.instance.StatPlayer;
+            InventoryManager inventoryManager = InventoryManager.instance;
+            inventoryManager.OnEquip -= EquipItem;
+            inventoryManager.OnDequip -= DequipItem;
+            inventoryManager.OnSwapItem -= SwapItem;
+
+            statPlayer.OnChangeStat -= UpdateTextHelth;
+            statPlayer.OnChangeStat -= UpdateTextDamage;
         }
 
         [Button]
@@ -52,7 +61,7 @@ namespace UI.Charector
                     continue;
                 }
                 slot = Instantiate(prefabSlot, inventoryUI).GetComponent<IItemUIUpdater>();
-                slot.Init(item,item, false);
+                slot.Init(item, item, false);
             }
         }
 
@@ -72,7 +81,7 @@ namespace UI.Charector
                 Item item = InventoryManager.instance.EquippedItem[i];
                 if (item.Name == string.Empty)
                     continue;
-                slotItemsEquip[i].Init(item,item, true);
+                slotItemsEquip[i].Init(item, item, true);
                 slotItemsEquip[i].gameObject.SetActive(true);
             }
         }
@@ -96,18 +105,20 @@ namespace UI.Charector
         {
             ItemSlot slot = slotItemsEquip[(int)item.ModelData.Type];
             slot.Init(item, item, true);
-            slot.gameObject.SetActive(true);
+            slot.gameObject.SetActive(true);    
             Destroy(slotSelect.gameObject);
         }
 
-        protected void DequipItem(Item item) { 
+        protected void DequipItem(Item item)
+        {
             ItemSlot slotEquip = slotItemsEquip[(int)item.ModelData.Type];
             slotEquip.gameObject.SetActive(false);
-            IItemUIUpdater slotItem =  Instantiate(prefabSlot, inventoryUI).GetComponent<IItemUIUpdater>();
+            IItemUIUpdater slotItem = Instantiate(prefabSlot, inventoryUI).GetComponent<IItemUIUpdater>();
             slotItem.Init(item, item, false);
         }
 
-        protected void SwapItem(Item data, Item dataOld) {
+        protected void SwapItem(Item data, Item dataOld)
+        {
             DequipItem(dataOld);
             EquipItem(data);
         }

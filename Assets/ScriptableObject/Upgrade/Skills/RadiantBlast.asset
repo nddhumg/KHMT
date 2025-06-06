@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2ed5ce92e67544aa5690c20010ce60, type: 3}
   m_Name: RadiantBlast
   m_EditorClassIdentifier: 
-  icon: {fileID: 1373062697, guid: 3e8e31edbb9b48944bd6ac33915784e5, type: 3}
+  icon: {fileID: 21300000, guid: 07c25fcce1e57b141a207ddfc8fbbbc7, type: 3}
   skillName: 102
   description:
-  - A shield is summoned, orbiting around you and dealing damage!
-  - A new shield is added to your orbit, and they spin 20% faster!
-  - Your shields deal 50% more damage!
-  - A new shield is added to your orbit!
-  - Your shields rotate 10% faster, deal 30% more damage, and an extra shield joins
-    your orbit!
+  - Releases a radiant wave.
+  - ' Increased damage and slightly extended range.'
+  - Damage increased.
+  - Damage increased and cast speed improved.
+  - Greatly increased power
   prefabSkill: {fileID: 1210691202389384289, guid: 6c1d6ac6aba411443b72c7b93740b8fb,
     type: 3}

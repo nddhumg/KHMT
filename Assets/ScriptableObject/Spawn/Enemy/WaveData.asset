@@ -24,7 +24,7 @@ MonoBehaviour:
       spawnIntervalSeconds: 2.5
       operationTimeMinutes: 1
     - spawnAmount: 50
-      maxEnemySpawn: 600
+      maxEnemySpawn: 800
       spawnIntervalSeconds: 2.5
       operationTimeMinutes: 0.2
     - spawnAmount: 20

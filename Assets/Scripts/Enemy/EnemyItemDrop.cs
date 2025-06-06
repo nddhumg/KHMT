@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyItemDrop : DropItem
 {
+
     public override void Drop(Vector3 postionDrop)
     {
         base.Drop(postionDrop);
-        //ItemPool.instance.SpawnExp(postionDrop);
+        ItemManager.instance.SpawnExp(postionDrop);
     }
 }

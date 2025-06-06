@@ -3,6 +3,7 @@ using Cathei.BakingSheet;
 using UnityEngine;
 using Microsoft.Extensions.Logging;
 
+#if UNITY_EDITOR
 [CreateAssetMenu(menuName = ("SO/Tool/CsvManager"))]
 public class CsvCollectionManager : ScriptableObject
 {
@@ -44,3 +45,4 @@ public class CsvCollectionManager : ScriptableObject
         await container.Store(converter);
     }
 }
+#endif

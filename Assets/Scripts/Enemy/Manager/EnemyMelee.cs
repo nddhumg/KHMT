@@ -1,4 +1,5 @@
 using Core.Spawn.Enemy;
+using Ndd.Cooldown;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Core.Enemies
         public override void Init()
         {
             base.Init();
-            damageCollsion = (int)statBase.GetStatValue(EnumName.Stat.Damage) * EnemySpawn.instance.Stat.GetBonusDamage();
+            damageCollsion = (int)statBase.GetStatValue(EnumName.Stat.Damage) * EnemyManager.instance.Stat.GetBonusDamage();
             attackCoolDown = statBase.GetStatValue(EnumName.Stat.AttackRate);
             timer = new CooldownChecker(attackCoolDown);
         }

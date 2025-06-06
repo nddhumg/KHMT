@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Pool;
 namespace Core.Skill
 {
     public class ShotGun : ShotSkill
@@ -29,7 +30,7 @@ namespace Core.Skill
             DamageSender damageBullet;
             for (int bulletIndex = 0; bulletIndex < bulletCount; bulletIndex++)
             {
-                bullet = BulletPool.instance.Spawn(this.bullet, muzzle.position, Quaternion.identity);
+                bullet = poolBullet.Take(this.bullet, muzzle.position, Quaternion.identity);
                 moveBullet = bullet.GetComponentInChildren<MoveInDirection>();
                 damageBullet = bullet.GetComponentInChildren<DamageSender>();
                 moveBullet.Direction = directionShoot;

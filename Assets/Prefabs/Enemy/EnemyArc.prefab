@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7223678126466466049}
-  - component: {fileID: 7324312100520665135}
+  - component: {fileID: 5386867683440574196}
   m_Layer: 10
   m_Name: Drop
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 7214858131533036617}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7324312100520665135
+--- !u!114 &5386867683440574196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7220288890713035589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa1ebcfee947d047afe942917945c81, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e6fe85bb694de140828b3241585ef01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemsDrop: []
@@ -132,8 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteTf: {fileID: 7223310470242096881}
   statBase: {fileID: 11400000, guid: 599c2aeb577f9ec49aa4a049594091dd, type: 2}
-  dropItem: {fileID: 7324312100520665135}
-  Stat: {fileID: 11400000, guid: 599c2aeb577f9ec49aa4a049594091dd, type: 2}
+  dropItem: {fileID: 5386867683440574196}
   bullet: {fileID: 1804428089213200, guid: b698bec10b89c084bb63bd5b68fa1c5f, type: 3}
 --- !u!1 &7220937600278117845
 GameObject:

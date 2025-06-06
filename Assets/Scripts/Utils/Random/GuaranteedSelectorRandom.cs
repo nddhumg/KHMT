@@ -4,11 +4,23 @@ using UnityEngine;
 
 namespace Ndd.Random
 {
+    /// <summary>
+    /// A generic random selector that chooses an item based on weighted chances.
+    /// Each item has a fixed weight, and the probability of selection is proportional to its weight divided by the total weight (totalWeight).
+    /// 
+    /// Features:
+    /// - Add single or multiple items with their corresponding weights.
+    /// - Get a random item based on weighted probability.
+    /// - Update or remove items and their weights dynamically.
+    /// - Handles edge cases such as null items or invalid weights with warnings.
+    /// </summary>
     public class GuaranteedSelectorRandom<T> : IRandomSelector<T> where T : class
     {
         private List<float> weights = new();
         private List<T> items = new();
         private float totalWeight;
+
+        public int CountItem => items.Count;
 
         public float TotalWeight => totalWeight;
 

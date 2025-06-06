@@ -22,6 +22,7 @@ namespace Core.Skill
                     break;
                 case 2:
                     radiantBlast.DamageComponent.IncreaseDamageMultiplier(0.5f);
+                    radiantBlast.IncreaseSkillRange(0.3f);
                     break;
                 case 3:
                     radiantBlast.DamageComponent.IncreaseDamageMultiplier(0.5f);

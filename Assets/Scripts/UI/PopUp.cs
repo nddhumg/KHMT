@@ -17,4 +17,5 @@ public abstract class PopUp : MonoBehaviour
     {
         popupAnimation.AnimationEnable();
     }
+
 }

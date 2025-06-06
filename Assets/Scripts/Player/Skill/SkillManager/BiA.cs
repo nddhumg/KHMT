@@ -23,7 +23,7 @@ namespace Core.Skill {
         protected override void Attack()
         {
             for (uint bulletIndex = 0; bulletIndex < bulletCount; bulletIndex++) {
-                GameObject bulletSpawn = BulletPool.instance.Spawn(bullet, transform.position, Quaternion.identity);
+                GameObject bulletSpawn = poolBullet.Take(bullet, transform.position, Quaternion.identity);
                 bulletSpawn.GetComponent<BulletBiA>().Init(maxCollider, this);
                 bulletSpawn.GetComponentInChildren<MoveInDirection>().Direction = GetAttackDirection();
                 bulletSpawn.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());

@@ -203,6 +203,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: data.items.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: data.items.Array.data[0].nameItem
+      value: BanditLightShoe
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616884015024209452, guid: 7a7d30321162b244885bca48537fa7a2,
+        type: 3}
+      propertyPath: data.equippedItem.Array.data[0].nameItem
+      value: PistolGun
+      objectReference: {fileID: 0}
     - target: {fileID: 8616884015024209453, guid: 7a7d30321162b244885bca48537fa7a2,
         type: 3}
       propertyPath: m_RootOrder
@@ -260,6 +275,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a7d30321162b244885bca48537fa7a2, type: 3}
+--- !u!1001 &1739573635
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025486, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153808024819025487, guid: 021e1208ca1828a439eb0b46afc6df88,
+        type: 3}
+      propertyPath: m_Name
+      value: GameControllder
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 021e1208ca1828a439eb0b46afc6df88, type: 3}
 --- !u!1001 &1888859298
 PrefabInstance:
   m_ObjectHideFlags: 0

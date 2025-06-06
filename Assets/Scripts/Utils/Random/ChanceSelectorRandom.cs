@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Ndd.Random
 {
+    /// <summary>
+    /// A generic random selector that chooses an item based on weighted chances. The selection rate is the weight divided by totalLimit.
+    /// </summary>
+    /// <typeparam name="T">The type of items to select. Must be a reference type.</typeparam>
+    /// <remarks>
+    /// This class allows adding items with associated weights, and randomly selecting
+    /// one item where the probability of selection is proportional to its weight.
+    /// The total sum of weights is limited by a maximum value specified at construction.
+    /// </remarks>
     public class ChanceSelectorRandom<T> : IRandomSelector<T> where T : class
     {
         private List<T> items = new();
         private List<float> weights = new();
         private float totalMax;
         private float totalWeight = 0;
+
+        public int CountItem => items.Count;
 
         public ChanceSelectorRandom(float totalMax = 1)
         {

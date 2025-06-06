@@ -21,6 +21,8 @@ namespace Systems.Inventory
 
         public SOEquipmentStats SOEquipmentStats => soEquipmentStats;
 
+        public IItemDataBase ItemModelContainer => itemModelContainer;
+
         public IStat StatsBonus { get => statbonus; set => statbonus = value; }
 
         public Action<Item> OnEquip;
@@ -40,7 +42,6 @@ namespace Systems.Inventory
             data = SaveLoadSystem.DataService.Load<InventoryData>(gameObject) ?? data;
             CreateItem(itemModelContainer);
         }
-
         private void OnApplicationQuit()
         {
             SaveLoadSystem.DataService.Save<InventoryData>(ref data);
@@ -49,6 +50,10 @@ namespace Systems.Inventory
         public void AddItem(Item item)
         {
             data.items.Add(item);
+        }
+
+        public void AddItem(IItemModel model) { 
+            data.items.Add(new Item(model));
         }
 
         public void EquipItem(Item item)
@@ -96,7 +101,7 @@ namespace Systems.Inventory
                 if (item.Name == string.Empty)
                     continue;
                 item.Init(dataBase.GetModelByName(item.Name));
-                statbonus.IncreaseStat(item.EquipmentStats.StatBonus, item.GetBonusStat());
+                statbonus.IncreaseStat(item.EquipmentStats.StatBonus, item.GetBonusStat(),false);
             }
 
             foreach (var item in data.items)

@@ -23,10 +23,12 @@ namespace Core.Skill
         {
             coolDownComponent.Update();
         }
+
         public void IncreaseSkillRange(float amount)
         {
             float scaleCurent = transform.localScale.x;
             float scaleNew = scaleCurent + amount;
+            this.radius += amount;
             transform.localScale = new Vector3(scaleNew, scaleNew, 1f);
         }
 

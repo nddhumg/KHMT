@@ -29,7 +29,7 @@ namespace Core.Skill
                     break;
 
                 case 5:
-                    rifle.CoolDownSkillComponent.SetAttackSpeed(0);
+                    rifle.CoolDownSkillComponent.SetAttackSpeed(0.3f);
                     rifle.DamageComponent.IncreaseDamageMultiplier(0.3f);
                     break;
             }

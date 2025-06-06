@@ -12,7 +12,7 @@ public class ShieldOrbitSkill : MonoBehaviour
     [SerializeField] protected float shieldOrbitRadius = 1.5f;
     [SerializeField] protected float damageMultiplier = 1;
     protected Vector3 rotate = Vector3.zero;
-    protected SOStat statPlayer;
+    protected IStat statPlayer;
 
     private void Start()
     {

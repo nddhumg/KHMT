@@ -11,10 +11,11 @@ namespace Core.Enemies
         [SerializeField] protected Transform spriteTf;
         [SerializeField] protected SOStat statBase;
         protected float hp;
+        protected IStat statCurrent;
 
         [SerializeField] protected DropItem dropItem;
 
-        public SOStat Stat => statBase;
+        public IStat Stat => statCurrent;
 
         public void Flip()
         {
@@ -35,17 +36,15 @@ namespace Core.Enemies
         protected void OnEnable()
         {
             Init();
-            //EnemySpawn.instance.Enemies.Add(gameObject);
         }
-
-        protected void OnDisable()
-        {
-            //EnemySpawn.instance.Enemies.Remove(gameObject);
-        }
-
         public virtual void Init()
         {
-            //hp = statBase.GetStatValue(EnumName.Stat.HpMax) * EnemySpawn.instance.Stat.GetBonusHp();
+            if (statCurrent == null)
+            {
+                statCurrent = statBase.Clone();
+            }
+            hp = statBase.GetStatValue(EnumName.Stat.HpMax) * EnemyManager.instance.Stat.GetBonusHp();
+            statCurrent.SetStatValue(EnumName.Stat.Damage, statBase.GetStatValue(EnumName.Stat.HpMax) * EnemyManager.instance.Stat.GetBonusDamage());
         }
 
         protected virtual void Update()
@@ -72,8 +71,8 @@ namespace Core.Enemies
             }
         }
 
-        protected void Dead()
-        { 
+        public void Dead()
+        {
             dropItem.Drop(transform.position);
             gameObject.SetActive(false);
             EnemySpawn.instance.EnemyCount--;

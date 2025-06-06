@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovementState : PlayerState {
 	protected float speed = 10;
 	protected Vector3 position = Vector3.zero;
-
 	public PlayerMovementState (PlayerStateMachine statePlayer, float speed) : base (statePlayer){
 		this.speed = speed;
 	}

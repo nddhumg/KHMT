@@ -3,33 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoCooldownTimer : CooldownTimer, ICoolDownAuto
+namespace Ndd.Cooldown
 {
-    public Action OnTimeout;
-
-    public AutoCooldownTimer(float cooldown = 1f, float timeScale = 1) : base(cooldown,timeScale)
+    /// <summary>
+    /// AutoCooldownTimer is a timer that automatically triggers an event when the cooldown expires.
+    /// </summary>
+    /// <remarks>
+    /// This class extends CooldownTimer and implements ICoolDownAuto to provide automatic timeout handling.
+    /// </remarks>
+    /// <seealso cref="CooldownTimer"/>
+    /// <seealso cref="ICoolDownAuto"/>
+    /// </remarks>
+    public class AutoCooldownTimer : CooldownTimer, ICoolDownAuto
     {
-    }
+        public Action OnTimeout;
 
-    public void AddTimeoutListener(Action action)
-    {
-        OnTimeout += action;
-    }
+        public AutoCooldownTimer(float cooldown = 1f, float timeScale = 1,Action action = null) : base(cooldown, timeScale)
+        {
+            this.OnTimeout = action;
+        }
 
-    public void ClearTimeoutListeners()
-    {
-        OnTimeout = null;
-    }
+        public void AddTimeoutListener(Action action)
+        {
+            OnTimeout += action;
+        }
 
-    public void RemoveTimeoutListener(Action action)
-    {
-        OnTimeout -= action;
-    }
+        public void ClearTimeoutListeners()
+        {
+            OnTimeout = null;
+        }
 
-    protected override void TriggerTimeout()
-    {
-        base.TriggerTimeout();
-        OnTimeout?.Invoke();
+        public void RemoveTimeoutListener(Action action)
+        {
+            OnTimeout -= action;
+        }
+
+        protected override void TriggerTimeout()
+        {
+            base.TriggerTimeout();
+            OnTimeout?.Invoke();
+        }
     }
 }
-

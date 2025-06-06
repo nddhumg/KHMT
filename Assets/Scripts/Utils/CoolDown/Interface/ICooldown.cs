@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICooldown 
+namespace Ndd.Cooldown
 {
-    public float Cooldown { get; set; }
+    public interface ICooldown
+    {
+        public float TimeScale { get; set; }
+        public float Cooldown { get; set; }
 
-    public float Timer { get; }
+        public float Timer { get; }
 
-    void UpdateCooldown(float elapsedTime);
+        void UpdateCooldown(float elapsedTime);
 
-    void ResetCooldown();
+        void ResetCooldown();
 
+    }
 }

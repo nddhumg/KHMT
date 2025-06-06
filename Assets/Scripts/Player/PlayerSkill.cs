@@ -8,6 +8,11 @@ public class PlayerSkill : MonoBehaviour
 {
     Dictionary<Skill, Level> skillLevel = new Dictionary<Skill, Level>();
     Dictionary<string, GameObject> skillGameoObj = new Dictionary<string, GameObject>();
+
+    [SerializeField] private int maxSkill = 6;
+
+    public bool CanAddSkill => skillLevel.Count < maxSkill;
+
     public void Upgrade(Skill skill, GameObject prefab)
     {
         if (skillLevel.ContainsKey(skill))

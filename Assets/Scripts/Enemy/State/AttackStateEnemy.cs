@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Ndd.Cooldown;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Core.Enemies
@@ -41,7 +42,7 @@ namespace Core.Enemies
 
         protected virtual void Attack()
         {
-            MoveInDirection moveBullet = BulletPool.instance.Spawn(bullet, enemyState.GetPosition(), Quaternion.identity).GetComponentInChildren<MoveInDirection>();
+            MoveInDirection moveBullet = BulletManager.instance.Pool.Take(bullet, enemyState.GetPosition(), Quaternion.identity).GetComponentInChildren<MoveInDirection>();
             moveBullet.Direction = enemyState.GetDirecTionToPlayer();
             isAttack = false;
         }

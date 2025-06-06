@@ -14,10 +14,15 @@ public class TimeManager : PersistentSingleton<TimeManager>
         data = SaveLoadSystem.DataService.Load<TimeData>(gameObject) ?? data;
     }
 
+
     private void OnApplicationQuit()
     {
         data.gameExitTime = DateTime.Now.ToString();
         SaveLoadSystem.DataService.Save<TimeData>(ref data);
     }
 
+    public TimeSpan ConvertSecondsToTimeSpan(float seconds)
+    {
+        return TimeSpan.FromSeconds(seconds);
+    }
 }

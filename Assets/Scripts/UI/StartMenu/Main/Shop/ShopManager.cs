@@ -1,24 +1,36 @@
-using UnityEngine.UI;
-using UnityEngine;
 using EnumName;
-using Systems.SaveLoad;
 using System;
-using System.Globalization;
+using System.Collections;
+using System.Collections.Generic;
+using Systems.SaveLoad;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] protected Button btnFreeCoin;
-    [SerializeField] protected Button btnFreeCoinVip;
-    [SerializeField] protected Image bgBtnFreeCoin;
-    [SerializeField] protected Image bgBtnFreeCoinVip;
-    [SerializeField] protected Color hiddenButtonColor;
-    [SerializeField] protected Color enabledButtonColor;
-    [SerializeField, ReadOnly] protected ShopData data = new();
+    [SerializeField, ReadOnly] protected ShopData data;
     string format = "dd-MM-yyyy";
 
+    [Header("Panel Shop")]
+    [SerializeField] private GameObject shopResource;
+    [SerializeField] private GameObject shopEquipment;
 
-    protected ResourceName resourceAds;
-    protected int valueAds;
+    [Header("Btn ChangShop")]
+    [SerializeField] private Button btnChangeShopResource;
+    [SerializeField] private Button btnChangeShopEquipment;
+
+    private ShopName currentShop;
+    private GameObject currentPanelShop;
+    public enum ShopName
+    {
+        Equipment,
+        Resource,
+    }
+
+    public ShopData Data => data;
+    public string FormatTime => format;
+
+
     private void OnApplicationQuit()
     {
         SaveLoadSystem.DataService.Save<ShopData>(ref data);
@@ -26,71 +38,41 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        data = SaveLoadSystem.DataService.Load<ShopData>(gameObject) ?? data;
-        AdsManager.instance.adsShowComplete += this.CompleteAds;
-        CheckEnableBtnFree(data.lastFreeCoinClaimDate, btnFreeCoin,bgBtnFreeCoin);
-        CheckEnableBtnFree(data.lastFreeCoinVipClaimDate, btnFreeCoinVip, bgBtnFreeCoinVip);
+        data = SaveLoadSystem.DataService.Load<ShopData>(gameObject) ?? new();
+
+        btnChangeShopResource.onClick.AddListener(() => ChangeShop(ShopName.Resource));
+        btnChangeShopEquipment.onClick.AddListener(() => ChangeShop(ShopName.Equipment));
+
+        ChangeShop(ShopName.Resource);
     }
 
-    public void ClickFreeCoin(int coin)
+    public void ChangeShop(ShopName shopName)
     {
-        ClickGetFree(ResourceName.Coin, coin, btnFreeCoin,bgBtnFreeCoin);
-        data.lastFreeCoinClaimDate = DateTime.Now.ToString(format);
+        if (shopName == currentShop)
+            return;
+        currentShop = shopName;
+        EnablePanelShop(shopName);
     }
 
-    public void ClickFreeCoinVip(int coinVip)
+    protected void EnablePanelShop(ShopName shopName)
     {
-        ClickGetFree(ResourceName.CoinVip, coinVip, btnFreeCoinVip, bgBtnFreeCoinVip);
-        data.lastFreeCoinVipClaimDate = DateTime.Now.ToString(format);
+        currentPanelShop?.SetActive(false);
+        GameObject panel = GetPanelShop(shopName);
+        panel.SetActive(true);
+        currentPanelShop = panel;
     }
 
-    public void ClickAdsCoin(int coin)
+    protected GameObject GetPanelShop(ShopName shopName)
     {
-        ClickGetAds(ResourceName.Coin, coin);
-    }
-
-    public void ClickAdsCoinVip(int coinVip)
-    {
-        ClickGetAds(ResourceName.CoinVip, coinVip);
-    }
-
-    protected void CompleteAds()
-    {
-        ResourceController.instance.IncreaseResource(resourceAds, valueAds);
-    }
-
-    protected void ClickGetFree(ResourceName resource, int value, Button btn,Image bg)
-    {
-        ResourceController.instance.IncreaseResource(resource, value);
-        SetEnableBtnFree(btn, false,bg);
-    }
-
-    protected void ClickGetAds(ResourceName resource, int value)
-    {
-        AdsManager.instance.ShowAdRewaded();
-        resourceAds = resource;
-        valueAds = value;
-    }
-
-    protected void SetEnableBtnFree(Button btn, bool isEnable,Image bg)
-    {
-        btn.enabled = isEnable;
-        bg.color = isEnable ? enabledButtonColor : hiddenButtonColor;
-    }
-
-    protected void CheckEnableBtnFree(string lastDateData, Button btnFree,Image imgBg)
-    {
-        try
+        switch (shopName)
         {
-            DateTime lastDate = DateTime.ParseExact(lastDateData, format, CultureInfo.InvariantCulture);
-
-            bool isEnableBtnFreeCoin = (DateTime.Now - lastDate).Days >= 1 ? true : false;
-
-            SetEnableBtnFree(btnFree, isEnableBtnFreeCoin, imgBg);
-        }
-        catch {
-            SetEnableBtnFree(btnFree, true, imgBg);
+            case ShopName.Resource:
+                return shopResource;
+            case ShopName.Equipment:
+                return shopEquipment;
+            default:
+                return null;
         }
     }
-
 }
+

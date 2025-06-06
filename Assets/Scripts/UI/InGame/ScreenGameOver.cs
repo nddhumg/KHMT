@@ -16,6 +16,9 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     [SerializeField] protected TMP_Text textEnemyDie;
     [SerializeField] protected TMP_Text textTime;
 
+    [SerializeField] protected Color colorVictory;
+    [SerializeField] protected Color colorDeffeat;
+
 
     private void Start()
     {
@@ -27,6 +30,7 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     {
         GameSystem.Pause();
         textGameOver.text = "VICTORY";
+        bg.color = colorVictory;
         btnContinue.onClick.AddListener(OnClickContinue);
         textBtnContinue.text = "Continue";
         UpdateInfo();
@@ -36,6 +40,7 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     {
         GameSystem.Pause();
         textGameOver.text = "DEFFEAT";
+        bg.color = colorDeffeat;
         btnContinue.onClick.AddListener(OnClickReplay);
         textBtnContinue.text = "Replay";
         UpdateInfo();
@@ -56,13 +61,13 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     protected void OnClickReplay()
     {
         GameSystem.Pause();
-        LoadingSceneManager.instance.SwitchToSceneGame("game");
+        LoadingSceneManager.instance.SwitchToSceneGame("1");
     }
     protected void UpdateInfo()
     {
         main.SetActive(true);
         textEnemyDie.text = EnemySpawn.instance.EnemyKill.ToString();
-        textTime.text = TimePlay.instance.TextTime;
+        textTime.text = TimeManager.instance.ConvertSecondsToTimeSpan(Time.timeSinceLevelLoad).ToString(@"mm\:ss"); 
     }
 
     protected void SetUpButton() {

@@ -22,6 +22,7 @@ public class ScreenMenuGame : Singleton<ScreenMenuGame>
     [SerializeField] protected Button btnContinue;
 
     [SerializeField] protected GameObject popupGoHome;
+    [SerializeField] protected GameObject panel;
 
     protected bool isMuteMusic;
     protected bool isMuteSound;
@@ -29,15 +30,16 @@ public class ScreenMenuGame : Singleton<ScreenMenuGame>
 
     private void Start()
     {
+        panel.SetActive(false);
         btnOpenMenu.gameObject.SetActive(true);
-        SetUpBtn();
+        SetupBtn();
         UpdateImageMusicMute();
         UpdateImageSoundMute();
     }
 
     public void OpenMenu(bool isOpen)
     {
-        gameObject.SetActive(isOpen);
+        panel.SetActive(isOpen);
         if (isOpen)
             GameSystem.Pause();
         else
@@ -79,7 +81,7 @@ public class ScreenMenuGame : Singleton<ScreenMenuGame>
         }
     }
 
-    private void SetUpBtn()
+    private void SetupBtn()
     {
         btnOpenMenu.onClick.AddListener(() => OpenMenu(true));
         btnMusic.onClick.AddListener(ClickMuteMusic);

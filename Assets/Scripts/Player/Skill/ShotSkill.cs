@@ -1,3 +1,4 @@
+using Ndd.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Core.Skill
         [SerializeField] protected Transform muzzle;
         [SerializeField] protected uint bulletCount = 1;
 
+        protected IPoolObject<GameObject, GameObject> poolBullet;
         public DamageSkillComponent DamageComponent => damageComponent;
         public CoolDownSkillComponent CoolDownSkillComponent => coolDownComponent;
 
@@ -20,6 +22,7 @@ namespace Core.Skill
             damageComponent = new DamageSkillComponent(1, Player.instance.StatsManager.StatCurrent);
             coolDownComponent = new CoolDownSkillComponent(1);
             coolDownComponent.Timer.AddTimeoutListener(Attack);
+            poolBullet = BulletManager.instance.Pool;
         }
         protected virtual void Update()
         {

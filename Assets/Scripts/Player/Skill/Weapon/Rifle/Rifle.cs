@@ -38,7 +38,7 @@ namespace Core.Skill
                     directionBullet.y += recoil;
                 else
                     directionBullet.x += recoil;
-                bulletCurrent = BulletPool.instance.Spawn(bullet, transform.position, Quaternion.identity);
+                bulletCurrent = poolBullet.Take(bullet, transform.position, Quaternion.identity);
                 bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBullet;
                 bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
                 yield return new WaitForSeconds(Random.Range(0, 0.1f));

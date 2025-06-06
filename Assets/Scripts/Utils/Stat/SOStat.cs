@@ -98,7 +98,7 @@ public class SOStat : ScriptableObject, IStat
         OnChangeStat?.Invoke(statKey, GetStatValue(statKey));
     }
 
-    public void IncreaseStat(Stat statKey, float value)
+    public void IncreaseStat(Stat statKey, float value,bool isDebug = true)
     {
         try
         {
@@ -107,7 +107,10 @@ public class SOStat : ScriptableObject, IStat
         catch
         {
             stats.Add(new StatEntry(statKey, value));
-            Debug.LogWarning("Create stat :" + statKey.ToString());
+            if (isDebug)
+            {
+                Debug.LogWarning("Create stat :" + statKey.ToString());
+            }
         }
         if (statKey == Stat.Hp)
         {
@@ -135,7 +138,7 @@ public class SOStat : ScriptableObject, IStat
 
     }
 
-    protected StatEntry GetStatEntry(Stat statKey)
+    public StatEntry GetStatEntry(Stat statKey)
     {
         foreach (StatEntry stat in stats)
         {
@@ -184,6 +187,7 @@ public class SOStat : ScriptableObject, IStat
             IncreaseStat(stat.key, stat.value);
         }
     }
+
 }
 
 

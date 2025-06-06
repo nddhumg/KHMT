@@ -162,10 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea53e3fecb06efb4bb800ca41e239364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1.5
   bullet: {fileID: 1804428089213200, guid: 1a395cb5d78fd8546a0822b84e608012, type: 3}
   muzzle: {fileID: 1743740062748347481}
-  shotPelletCount: 4
+  bulletCount: 3
   fireSpread: 45
 --- !u!1 &9162049778645367719
 GameObject:
