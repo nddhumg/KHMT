@@ -49,7 +49,7 @@ namespace Core.Spawn.Enemy
             }
         }
 
-        public void Init(string mapId, SpawnZones zone) {
+        public void Init(string mapId, ISpawnZone zone) {
             this.mapId = mapId;
             enemySelector = new EnemySelector(mapId, 1, soEnemySpawn, soEnemyContainer);
             spawnZone = zone;

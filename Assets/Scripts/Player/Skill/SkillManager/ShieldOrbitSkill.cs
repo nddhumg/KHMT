@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Ndd.Stat;
 
 public class ShieldOrbitSkill : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class ShieldOrbitSkill : MonoBehaviour
 
     private void Start()
     {
-        statPlayer = Player.instance.StatsManager.StatCurrent;
-        statPlayer.OnChangeStat += UpdatePlayerDamage;
+        statPlayer = Player.instance.StatCurrent;
+        statPlayer.OnStatUpdatedValue += UpdatePlayerDamage;
         SpawnShield();
     }
 
@@ -36,7 +37,7 @@ public class ShieldOrbitSkill : MonoBehaviour
         Transform shieldCreate = Instantiate(shieldPrefab, transform).transform;
         shieldProjectiles.Add(shieldCreate);
         DamageSender damageSender = shieldCreate.GetComponentInChildren<DamageSender>();
-        int damage = (int)(statPlayer.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
+        int damage = (int)(statPlayer.GetStatValue(StatName.Damage) * damageMultiplier);
         damageSender.SetDamage(damage);
 
         UpdatePositionShield();
@@ -45,7 +46,7 @@ public class ShieldOrbitSkill : MonoBehaviour
     public void SetDamageMultiplier(float multiplier)
     {
         damageMultiplier = multiplier;
-        ChangeDamage(statPlayer.GetStatValue(EnumName.Stat.Damage));
+        ChangeDamage(statPlayer.GetStatValue(StatName.Damage));
     }
 
     public void IncreaseRotationSpeed(float value)
@@ -59,9 +60,9 @@ public class ShieldOrbitSkill : MonoBehaviour
         UpdatePositionShield();
     }
 
-    protected void UpdatePlayerDamage(EnumName.Stat key, float damage)
+    protected void UpdatePlayerDamage(StatName key, float damage)
     {
-        if (key != EnumName.Stat.Damage)
+        if (key != StatName.Damage)
             return;
         foreach (Transform shield in shieldProjectiles)
         {

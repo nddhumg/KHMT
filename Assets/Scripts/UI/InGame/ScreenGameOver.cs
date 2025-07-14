@@ -19,12 +19,19 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     [SerializeField] protected Color colorVictory;
     [SerializeField] protected Color colorDeffeat;
 
+    [SerializeField] protected PopupRevive popupRevive;
+    protected bool canRevive = true;
+
 
     private void Start()
     {
         main.SetActive(false);
+        popupRevive.gameObject.SetActive(false);
         SetUpButton();
+        Player.instance.OnPlayerDead += Deffeat;
     }
+
+
 
     public void Victory()
     {
@@ -36,8 +43,22 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
         UpdateInfo();
     }
 
+    [Button]
     public void Deffeat()
     {
+        GameSystem.Pause();
+        if (canRevive)
+        {
+            canRevive = false;
+            popupRevive.Show();
+        }
+        else
+        {
+            ShowUIDeffeat();
+        }
+    }
+
+    public void ShowUIDeffeat() {
         GameSystem.Pause();
         textGameOver.text = "DEFFEAT";
         bg.color = colorDeffeat;
@@ -60,17 +81,18 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
 
     protected void OnClickReplay()
     {
-        GameSystem.Pause();
-        LoadingSceneManager.instance.SwitchToSceneGame("1");
+        GameSystem.RePause();
+        LoadingSceneManager.instance.SwitchToSceneGame(GameController.instance.MapId);
     }
     protected void UpdateInfo()
     {
         main.SetActive(true);
         textEnemyDie.text = EnemySpawn.instance.EnemyKill.ToString();
-        textTime.text = TimeManager.instance.ConvertSecondsToTimeSpan(Time.timeSinceLevelLoad).ToString(@"mm\:ss"); 
+        textTime.text = TimeManager.instance.ConvertSecondsToTimeSpan(Time.timeSinceLevelLoad).ToString(@"mm\:ss");
     }
 
-    protected void SetUpButton() {
+    protected void SetUpButton()
+    {
         btnHome.onClick.AddListener(OnClickHome);
     }
 }

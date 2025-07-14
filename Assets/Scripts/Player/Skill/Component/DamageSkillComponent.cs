@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
 namespace Core.Skill
 {
     public class DamageSkillComponent
@@ -28,7 +29,7 @@ namespace Core.Skill
 
         public virtual int GetDamge()
         {
-            return (int)(statPlayer.GetStatValue(EnumName.Stat.Damage) * damageMultiplier);
+            return (int)(statPlayer.GetStatValue(StatName.Damage) * damageMultiplier);
         }
 
     }

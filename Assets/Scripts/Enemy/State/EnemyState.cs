@@ -5,11 +5,11 @@ namespace Core.Enemies
 {
 	public abstract class EnemyState : IState
 	{
-		protected EnemyStateManager enemyState;
+		protected StateManager stateManager;
 
-		public EnemyState(EnemyStateManager enemyState)
+		public EnemyState(StateManager enemyState)
 		{
-			this.enemyState = enemyState;
+			this.stateManager = enemyState;
 		}
 
 		public virtual void CheckChangeState()

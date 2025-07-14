@@ -133,6 +133,7 @@ MonoBehaviour:
   spriteTf: {fileID: 4072569145266658}
   statBase: {fileID: 11400000, guid: 2cfc837f7ddc1744db16006d937c4533, type: 2}
   dropItem: {fileID: 7484449133959872451}
+  damageCollsion: 10
 --- !u!1 &1619708366256838
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumName;
+using System;
 
 
 public class PlayerSkill : MonoBehaviour
@@ -10,12 +11,13 @@ public class PlayerSkill : MonoBehaviour
     Dictionary<string, GameObject> skillGameoObj = new Dictionary<string, GameObject>();
 
     [SerializeField] private int maxSkill = 6;
+    public Action<SOUpgrade> OnUpgradeApplied;
 
     public bool CanAddSkill => skillLevel.Count < maxSkill;
 
-    public void Upgrade(Skill skill, GameObject prefab)
+    public void Upgrade(Skill skill, GameObject prefab,SOUpgrade uiData )
     {
-        if (skillLevel.ContainsKey(skill))
+        if (IsSkillUnlocked(skill))
         {
             skillLevel[skill].LevelUp();
         }
@@ -26,6 +28,7 @@ public class PlayerSkill : MonoBehaviour
             skillLevel.Add(skill, level);
             skillGameoObj.Add(skill.ToString(), skillGO);
             level.LevelUp();
+            OnUpgradeApplied?.Invoke(uiData);
         }
     }
 
@@ -34,7 +37,7 @@ public class PlayerSkill : MonoBehaviour
         return (int)(GetLevelByName(skill)?.LevelCurrent ?? 0);
     }
 
-    public bool GetCanLevelUp(Skill skill)
+    public bool CanLevelUp(Skill skill)
     {
         return GetLevelByName(skill).CanLevelUp();
     }
@@ -54,5 +57,10 @@ public class PlayerSkill : MonoBehaviour
         {
             return null;
         }
+    }
+
+    private bool IsSkillUnlocked(Skill skill)
+    {
+        return skillLevel.ContainsKey(skill);
     }
 }

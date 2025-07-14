@@ -53,14 +53,14 @@ namespace Systems.Inventory
         public void Equip()
         {
             InventoryManager.instance.EquipItem(this);
-            InventoryManager.instance.StatsBonus.IncreaseStat(EquipmentStats.StatBonus, GetBonusStat());
+            InventoryManager.instance.StatsBonus.IncreaseStat(EquipmentStats.StatBonus, GetBonusStat(),false);
 
         }
 
         public void Dequip()
         {
             InventoryManager.instance.DequipItem(this);
-            InventoryManager.instance.StatsBonus.IncreaseStat(EquipmentStats.StatBonus, -GetBonusStat());
+            InventoryManager.instance.StatsBonus.IncreaseStat(EquipmentStats.StatBonus, -GetBonusStat(), false);
         }
 
         public float GetBonusStat( ) {

@@ -15,3 +15,11 @@ MonoBehaviour:
   modelEnemy:
   - id: 0
     enemy: {fileID: 1353859731769456, guid: e51e67bd3af33264e9ff816521b29390, type: 3}
+  - id: 1
+    enemy: {fileID: 6111057786810178812, guid: 7e43a0334443f9b4e9a16316274d633f, type: 3}
+  - id: 2
+    enemy: {fileID: 7220644819649597283, guid: d1ca16197bc6b6141ab4c4c2b37fc34a, type: 3}
+  - id: 3
+    enemy: {fileID: 6760698292419166515, guid: 2a1c0329528b8f145a4af22e2dbe8a45, type: 3}
+  - id: 4
+    enemy: {fileID: 7826506147558125671, guid: f4423425f711cfd4f99d65e4210fa97d, type: 3}

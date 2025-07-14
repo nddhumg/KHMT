@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
 
 public class HealthPoint : MonoBehaviour ,IItemPickUp
 {
     [SerializeField] protected int hpRecovery;
     [SerializeField] protected bool isPercentage;
+    protected IStat statPlayer;
+
+    void Start() { 
+        statPlayer = Player.instance.StatCurrent;
+    }
     public void PickUpAble()
     {
-        if(!isPercentage)
-            Player.instance.StatsManager.StatCurrent.IncreaseStat(EnumName.Stat.Hp, hpRecovery);
+        if (!isPercentage)
+        {
+            statPlayer.IncreaseStat(StatName.Hp, hpRecovery);
+        }
         else
         {
-            Player.instance.StatsManager.StatCurrent.PercentageIncreaseStat(EnumName.Stat.Hp, hpRecovery);
+            statPlayer.PercentageIncreaseStat(StatName.Hp, hpRecovery);
         }
         Player.instance.ActiveEffectHealing();
         gameObject.SetActive(false);

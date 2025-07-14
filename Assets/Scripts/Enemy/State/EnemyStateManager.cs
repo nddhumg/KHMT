@@ -4,7 +4,7 @@ using UnityEngine;
 using EnumName;
 namespace Core.Enemies
 {
-	public abstract class EnemyStateManager : StateManager
+	public abstract class EnemyStateManager : StateManager, IEnemyStateManager
 	{
 		protected Enemy enemy;
 

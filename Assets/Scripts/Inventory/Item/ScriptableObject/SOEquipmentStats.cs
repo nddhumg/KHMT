@@ -2,6 +2,7 @@ using EnumName;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
 
 namespace Systems.Inventory {
     [CreateAssetMenu(menuName = "SO/Inventory/EquipmentStats" , fileName = "EquipmentStats")]
@@ -20,7 +21,7 @@ namespace Systems.Inventory {
     {
 
         [SerializeField] private EnumName.EquipmentType type;
-        [SerializeField] private EnumName.Stat statBonus;
+        [SerializeField] private StatName statBonus;
         [SerializeField] private List<float> bonus;
         [SerializeField] private List<float> bonusLevelUp;
         [SerializeField] private Sprite iconType;
@@ -32,7 +33,7 @@ namespace Systems.Inventory {
 
         public Sprite IconStat => iconStat;
 
-        public Stat StatBonus => statBonus;
+        public StatName StatBonus => statBonus;
 
         public float GetBonus(int rarity)
         {

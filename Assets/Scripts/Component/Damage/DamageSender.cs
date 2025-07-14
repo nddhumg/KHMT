@@ -10,7 +10,10 @@ public class DamageSender : MonoBehaviour  {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		IReceiveDamage receive = col.GetComponent<IReceiveDamage>();
+		IReceiveDamage receive;
+		if( !col.TryGetComponent<IReceiveDamage>(out receive)){
+			receive = col.GetComponentInChildren<IReceiveDamage>();
+		}
 		Send(receive);
 
     }

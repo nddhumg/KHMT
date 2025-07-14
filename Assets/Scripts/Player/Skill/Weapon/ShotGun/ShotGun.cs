@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ndd.Pool;
+using Ndd.Stat;
+
+
 namespace Core.Skill
 {
     public class ShotGun : ShotSkill
@@ -34,7 +37,7 @@ namespace Core.Skill
                 moveBullet = bullet.GetComponentInChildren<MoveInDirection>();
                 damageBullet = bullet.GetComponentInChildren<DamageSender>();
                 moveBullet.Direction = directionShoot;
-                damageBullet.SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
+                damageBullet.SetDamage(damageComponent.GetDamge());
                 directionShoot = RotateVector2(directionShoot, angle);
             }
         }

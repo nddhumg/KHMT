@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Systems.Inventory;
+using Ndd.Stat;
 
 namespace UI.Charector
 {
@@ -29,25 +30,14 @@ namespace UI.Charector
             CreateInventory();
             CreateItemEquip();
 
-            statPlayer.OnChangeStat += UpdateTextHelth;
-            statPlayer.OnChangeStat += UpdateTextDamage;
+            statPlayer.OnStatUpdatedValue += UpdateTextHelth;
+            statPlayer.OnStatUpdatedValue += UpdateTextDamage;
 
 
-            textHelth.text = statPlayer.GetStatValue(EnumName.Stat.HpMax).ToString();
-            textDamage.text = statPlayer.GetStatValue(EnumName.Stat.Damage).ToString();
+            textHelth.text = statPlayer.GetStatValue(StatName.HpMax).ToString();
+            textDamage.text = statPlayer.GetStatValue(StatName.Damage).ToString();
         }
 
-        protected void OnDestroy()
-        {
-            IStat statPlayer = GameController.instance.StatPlayer;
-            InventoryManager inventoryManager = InventoryManager.instance;
-            inventoryManager.OnEquip -= EquipItem;
-            inventoryManager.OnDequip -= DequipItem;
-            inventoryManager.OnSwapItem -= SwapItem;
-
-            statPlayer.OnChangeStat -= UpdateTextHelth;
-            statPlayer.OnChangeStat -= UpdateTextDamage;
-        }
 
         [Button]
         protected void CreateInventory()
@@ -85,17 +75,17 @@ namespace UI.Charector
                 slotItemsEquip[i].gameObject.SetActive(true);
             }
         }
-        protected void UpdateTextHelth(EnumName.Stat stat, float value)
+        protected void UpdateTextHelth(StatName stat, float value)
         {
-            if (stat == EnumName.Stat.HpMax)
+            if (stat == StatName.HpMax)
             {
                 textHelth.text = value.ToString();
             }
         }
 
-        protected void UpdateTextDamage(EnumName.Stat stat, float value)
+        protected void UpdateTextDamage(StatName stat, float value)
         {
-            if (stat == EnumName.Stat.Damage)
+            if (stat == StatName.Damage)
             {
                 textDamage.text = value.ToString();
             }

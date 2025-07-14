@@ -15,7 +15,7 @@ public abstract class PopUp : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        popupAnimation.AnimationEnable();
+        popupAnimation?.AnimationEnable();
     }
 
 }

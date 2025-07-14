@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Systems.Inventory;
+using Ndd.Stat;
+using System;
 
-public class Player : Singleton<Player>
+
+public class Player : Singleton<Player>, IReceiveDamage
 {
     PlayerStateMachine state;
     [SerializeField] Animator anim;
     Transform weapon;
     SpriteRenderer spriteWeapon;
     [SerializeField] private PlayerLevel level;
-    [SerializeField] private PlayerStat statManager;
     [SerializeField] private PlayerSkill skillManager;
+    private IStat statCurrent;
 
     [SerializeField] private GameObject healingEffect;
     [SerializeField] private Transform sprite;
@@ -20,17 +23,22 @@ public class Player : Singleton<Player>
     private int directionLook = 1;
     private Vector3 rotationWeapon = Vector3.zero;
 
+    public Action OnPlayerDead;
+    private bool canRevive;
 
+    public IStat StatCurrent => statCurrent;
     public PlayerLevel Level => level;
-    public PlayerStat StatsManager => statManager;
     public PlayerSkill SkillManager => skillManager;
     public Vector2 Direction => directionMove;
+    public bool CanRevive { set { canRevive = value; } }
 
     void Start()
     {
-        state = new PlayerStateMachine(anim, this, statManager);
+        statCurrent = GameController.instance.StatPlayer.Clone();
+        statCurrent.Stats.Add(new StatEntry(StatName.Hp, statCurrent.GetStatValue(StatName.HpMax)));
+        state = new PlayerStateMachine(anim, this, statCurrent);
         state.Initialize();
-        statManager.StatCurrent.OnChangeStat += CheckDead;
+        statCurrent.OnStatUpdatedValue += CheckDead;
     }
 
     void FixedUpdate()
@@ -40,6 +48,7 @@ public class Player : Singleton<Player>
 
     void Update()
     {
+        
         state.Update();
         if (JoyStick.instance.Direction != Vector2.zero)
             directionMove = JoyStick.instance.Direction;
@@ -62,10 +71,20 @@ public class Player : Singleton<Player>
         RotateWeapon();
     }
 
+    public void TakeDamage(int damage)
+    {
+        statCurrent.IncreaseStat(StatName.Hp, -damage);
+    }
+
     public void SetWeapon(GameObject weapon)
     {
         this.weapon = weapon.transform;
         this.spriteWeapon = weapon.GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void Revive() { 
+        statCurrent.SetStatValue(StatName.Hp, statCurrent.GetStatValue(StatName.HpMax));
+
     }
 
     public void Flip()
@@ -92,11 +111,17 @@ public class Player : Singleton<Player>
         weapon.eulerAngles = rotationWeapon;
     }
 
-    void CheckDead(EnumName.Stat stat, float value)
+    void CheckDead(StatName stat, float value)
     {
-        if (stat == EnumName.Stat.Hp && value <= 0)
+        if (stat == StatName.Hp && value <= 0)
         {
-            ScreenGameOver.instance.Deffeat();
+            if (canRevive) { 
+                Revive();
+                return;
+            }
+            OnPlayerDead?.Invoke();
         }
     }
+
+    
 }

@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using Ndd.Stat;
 
 public class HealthBar : SliderGameObject
 {
     protected float hp, hpMax;
+    protected IStat statBar;
 
     private void Start()
     {
-        Player.instance.StatsManager.StatCurrent.OnChangeStat += UpdateSlider;
-        hp = Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Hp);
-        hpMax = Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.HpMax);
+        statBar = Player.instance.StatCurrent;
+        statBar.OnStatUpdatedValue += UpdateSlider;
+        hp = statBar.GetStatValue(StatName.Hp);
+        hpMax = statBar.GetStatValue(StatName.HpMax);
     }
-    protected void UpdateSlider(EnumName.Stat stat, float value) {
-        if (stat == EnumName.Stat.Hp)
+    protected void UpdateSlider(StatName stat, float value) {
+        if (stat == StatName.Hp)
         {
             hp = value;
         }
-        else if (stat == EnumName.Stat.HpMax)
+        else if (stat == StatName.HpMax)
         {
             hpMax = value;
         }

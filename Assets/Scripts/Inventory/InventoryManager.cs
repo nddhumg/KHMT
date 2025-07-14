@@ -3,6 +3,10 @@ using UnityEngine;
 using Systems.SaveLoad;
 using EnumName;
 using System;
+using UI.Charector;
+using Ndd.Stat;
+
+
 namespace Systems.Inventory
 {
     public class InventoryManager : PersistentSingleton<InventoryManager>
@@ -34,7 +38,7 @@ namespace Systems.Inventory
         {
             base.Awake();
             itemModelContainer = new InventoryModelContainer(containerModel.ItemCollection);
-            statbonus = ScriptableObject.CreateInstance<SOStat>(); ;
+            statbonus = ScriptableObject.CreateInstance<SOStat>();
         }
 
         protected virtual void Start()

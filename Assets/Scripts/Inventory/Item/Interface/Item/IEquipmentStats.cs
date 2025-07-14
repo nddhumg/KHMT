@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
+
 namespace Systems.Inventory
 {
     public interface IEquipmentStats
     {
         EnumName.EquipmentType Type { get; }
 
-        EnumName.Stat StatBonus { get; }
+        StatName StatBonus { get; }
 
         float GetBonus(int rarity);
 

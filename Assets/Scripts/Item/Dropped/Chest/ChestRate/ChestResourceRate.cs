@@ -3,23 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestResourceRate : ChestRate
+public class ChestResourceRate : IChestRate
 {
     private int valueIncrease;
     private ResourceName resourceName;
 
-    public ChestResourceRate(ResourceName resource,int coin) : base()
+    public ChestResourceRate(ResourceName resource,int coin) 
     {
         this.valueIncrease = coin;
         this.resourceName = resource;
     }
 
-    public override void GenerateChestReward()
+    public void GenerateChestReward()
     {
         ResourceController.instance.IncreaseResource(resourceName, valueIncrease);
     }
 
-    public override Sprite GetIcon()
+    public Sprite GetIcon()
     {
         if (this.resourceName == ResourceName.Coin)
             return SystemChest.instance.IconCoin;
@@ -29,7 +29,7 @@ public class ChestResourceRate : ChestRate
             return null;
     }
 
-    public override string GetStringValue()
+    public string GetStringValue()
     {
         return "+ " + valueIncrease;
     }

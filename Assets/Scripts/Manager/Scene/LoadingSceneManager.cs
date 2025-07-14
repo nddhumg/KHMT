@@ -17,12 +17,7 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
 
     private void Start()
     {
-        SwichToScene(1);
-    }
-    public void SwichToScene(int id)
-    {
-        StartSwitchToScene();
-        StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(id)));
+        StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(1), GameController.instance.OnCreateSceneGame));
     }
 
     public void SwichToScene(string id)

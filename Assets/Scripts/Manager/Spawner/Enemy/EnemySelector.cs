@@ -11,19 +11,22 @@ namespace Core.Spawn.Enemy
         protected string idMap;
         protected int wave = 1;
         protected SOSpawnEnemy soEnemySpawn;
-        protected SOEnemyContainer soEnemyContainer;
+        protected IEnemyContainer enemyContainer;
         protected IRandomSelector<GameObject> weightedRandomSelector;
         protected ICoolDownAuto timer;
+        protected ICoolDownAuto timerCheckWave;
 
-        public EnemySelector(string idMap, int wave, SOSpawnEnemy soEnemySpawn, SOEnemyContainer soEnemyContainer)
+        public EnemySelector(string idMap, int wave, SOSpawnEnemy soEnemySpawn, IEnemyContainer enemyContainer)
         {
             this.idMap = idMap;
             this.wave = wave;
             this.soEnemySpawn = soEnemySpawn;
-            this.soEnemyContainer = soEnemyContainer;
+            this.enemyContainer = enemyContainer;
 
             weightedRandomSelector = new GuaranteedSelectorRandom<GameObject>();
             timer = new AutoCooldownTimer(timeScale: 1/60);
+            timerCheckWave = new AutoCooldownTimer(timeScale: 1 / 60);
+            timerCheckWave.AddTimeoutListener(NewxtWave);
             GetEnemyWave(wave);
             timer.AddTimeoutListener(() => GetEnemyWave(wave++));
         }
@@ -31,6 +34,7 @@ namespace Core.Spawn.Enemy
         public void Update()
         {
             timer.UpdateCooldown(Time.deltaTime);
+            timerCheckWave.UpdateCooldown(Time.deltaTime);
         }
 
         public GameObject GetEnemySpawn()
@@ -47,7 +51,12 @@ namespace Core.Spawn.Enemy
                 return;
             }
             timer.Cooldown = enemyInfo.EnemyTransitionTime;
-            weightedRandomSelector.AddItems(soEnemyContainer.GetEnemies(enemyInfo.EnemyIdSpawn), enemyInfo.EnemyRate);
+            weightedRandomSelector.AddItems(enemyContainer.GetEnemies(enemyInfo.EnemyIdSpawn), enemyInfo.EnemyRate);
+        }
+
+        private void NewxtWave() {
+            wave++;
+            GetEnemyWave(wave);
         }
     }
 }

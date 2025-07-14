@@ -3,6 +3,8 @@ using Ndd.Cooldown;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
 namespace Core.Enemies
 {
     public class EnemyMelee : Enemy
@@ -21,8 +23,8 @@ namespace Core.Enemies
         public override void Init()
         {
             base.Init();
-            damageCollsion = (int)statBase.GetStatValue(EnumName.Stat.Damage) * EnemyManager.instance.Stat.GetBonusDamage();
-            attackCoolDown = statBase.GetStatValue(EnumName.Stat.AttackRate);
+            damageCollsion = (int)statBase.GetStatValue(StatName.Damage) * EnemyManager.instance.Stat.GetBonusDamage();
+            attackCoolDown = statBase.GetStatValue(StatName.AttackRate);
             timer = new CooldownChecker(attackCoolDown);
         }
 

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
 
 namespace Core.Enemies
 {
@@ -13,9 +15,10 @@ namespace Core.Enemies
         protected float hp;
         protected IStat statCurrent;
 
+
         [SerializeField] protected DropItem dropItem;
 
-        public IStat Stat => statCurrent;
+        public IStat StatCurrent => statCurrent;
 
         public void Flip()
         {
@@ -43,8 +46,8 @@ namespace Core.Enemies
             {
                 statCurrent = statBase.Clone();
             }
-            hp = statBase.GetStatValue(EnumName.Stat.HpMax) * EnemyManager.instance.Stat.GetBonusHp();
-            statCurrent.SetStatValue(EnumName.Stat.Damage, statBase.GetStatValue(EnumName.Stat.HpMax) * EnemyManager.instance.Stat.GetBonusDamage());
+            hp = statBase.GetStatValue(StatName.HpMax) * EnemyManager.instance.Stat.GetBonusHp();
+            statCurrent.SetStatValue(StatName.Damage, statBase.GetStatValue(StatName.HpMax) * EnemyManager.instance.Stat.GetBonusDamage());
         }
 
         protected virtual void Update()
@@ -65,6 +68,7 @@ namespace Core.Enemies
         public void TakeDamage(int damage)
         {
             hp -= damage;
+            EffectManager.instance.Pool.Take(EffectManager.instance.PopupDamage, transform.position, Quaternion.identity).GetComponent<PopupDamage>().SetText(damage);
             if (hp <= 0)
             {
                 Dead();

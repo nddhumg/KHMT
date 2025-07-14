@@ -5,18 +5,19 @@ namespace Core.Enemies
 {
     public class MoveStateEnemyArc : MoveStateEnemy
     {
-        protected EnemyArcStateManager state;
-        public MoveStateEnemyArc(EnemyArcStateManager enemyState, float speed) : base(enemyState, speed)
+        protected IEnemyArcStateManager arcStateManager;
+        public MoveStateEnemyArc(EnemyArcStateManager stateManager, IEnemyArcStateManager arcStateManager, float speed) : base(stateManager,arcStateManager, speed)
         {
-            state = enemyState;
+            this.arcStateManager = arcStateManager;
+            this.arcStateManager = stateManager;
         }
 
         public override void CheckChangeState()
         {
             base.CheckChangeState();
-            if (state.IsInAttackRange())
+            if (arcStateManager.IsInAttackRange())
             {
-                enemyState.ChangeState(state.attackState);
+                stateManager.ChangeState(arcStateManager.AttackState);
                 return;
             }
         }

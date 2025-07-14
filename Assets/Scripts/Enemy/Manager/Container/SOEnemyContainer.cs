@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Manager/ContainerEnemy", fileName = "ContainerEnemy")]
-public class SOEnemyContainer : ScriptableObject
+public class SOEnemyContainer : ScriptableObject , IEnemyContainer
 {
 
     [SerializeField] private List<ModelEnemy> modelEnemy;

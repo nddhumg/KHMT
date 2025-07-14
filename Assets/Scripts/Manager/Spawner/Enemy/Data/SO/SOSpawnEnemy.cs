@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/Spawn/Enemy")]
-public class SOSpawnEnemy : ScriptableObject
+public class SOSpawnEnemy : ScriptableObject 
 {
     [SerializeField] List<SpawnEnemyInfo> spawnEnemy;
 #if UNITY_EDITOR

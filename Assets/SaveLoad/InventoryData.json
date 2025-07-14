@@ -1,41 +1,8 @@
 {
-    "items": [
-        {
-            "nameItem": "PistolGun",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "HawkHelmHat",
-            "level": 0
-        },
-        {
-            "nameItem": "HawkHelmHat",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        }
-    ],
+    "items": [],
     "equippedItem": [
         {
-            "nameItem": "",
+            "nameItem": "PistolGun",
             "level": 0
         },
         {

@@ -8,6 +8,8 @@ public class DestroyAfterTime : MonoBehaviour {
 	protected ICoolDownAuto timer;
 	[SerializeField] protected float destroyTime = 3f;
 
+	public ICoolDownAuto Timer => timer;
+
 	protected virtual void Awake() {
 		timer = new AutoCooldownTimer(destroyTime);
 		timer.AddTimeoutListener(DestroyObject);
@@ -16,6 +18,7 @@ public class DestroyAfterTime : MonoBehaviour {
 	protected virtual void Update() {
 		timer.UpdateCooldown(Time.deltaTime);
 	}
+
 	protected virtual void DestroyObject()
 	{
 		Destroy (transform.parent);

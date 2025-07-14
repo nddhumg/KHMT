@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
 public class PlayerStateMachine : StateManager {
 	public PlayerMovementState moveState;
 	public PlayerIdleStat idleStat;
-	protected PlayerStat stats;
+	protected IStat stats;
 
 	protected Animator animator;
 	protected Player player;
@@ -14,7 +16,7 @@ public class PlayerStateMachine : StateManager {
 	public enum ParametersAnimator { 
 		isRun,
 	}
-	public PlayerStateMachine(Animator animator,Player player, PlayerStat stats){
+	public PlayerStateMachine(Animator animator,Player player, IStat stats){
 		this.animator = animator;
 		this.player = player;
 		this.stats = stats;
@@ -22,7 +24,7 @@ public class PlayerStateMachine : StateManager {
 
 	public override void Initialize ()
 	{
-		moveState = new PlayerMovementState (this,stats.StatCurrent.GetStatValue(EnumName.Stat.Speed));
+		moveState = new PlayerMovementState (this,stats.GetStatValue(StatName.Speed));
 		idleStat = new PlayerIdleStat(this);
 		stateCurrent = idleStat;
 		stateCurrent.Enter ();

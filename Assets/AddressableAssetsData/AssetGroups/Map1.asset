@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Map1
+  m_EditorClassIdentifier: 
+  m_GroupName: Map1
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 87361ccd1b377b34c830e2964fe5e4b7
+  m_SerializeEntries:
+  - m_GUID: e51e67bd3af33264e9ff816521b29390
+    m_Address: Assets/Prefabs/Enemy/Enemy1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map1Data
+  - m_GUID: 7e43a0334443f9b4e9a16316274d633f
+    m_Address: Assets/Prefabs/Enemy/Enemy2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map1Data
+  - m_GUID: d1ca16197bc6b6141ab4c4c2b37fc34a
+    m_Address: Assets/Prefabs/Enemy/EnemyArc.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map1Data
+  - m_GUID: 2580ac19c43771d42abb5a4147dc8bd9
+    m_Address: Assets/Prefabs/Map/Map1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map1Data
+  - m_GUID: 59f8eabe0c8ad484abfcfabbb1e7e1a4
+    m_Address: Assets/ScriptableObject/Map/Map1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4a0dae80a3cded94a87519add8e4d3dc
+    m_Address: Assets/ScriptableObject/Map/Map2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a2a71ef559ddb5f4c9356dee13d7706b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 427aded5451a0c244b867391225be00e, type: 2}
+    - {fileID: 11400000, guid: 17de5760857206143910fd3a9aba4894, type: 2}

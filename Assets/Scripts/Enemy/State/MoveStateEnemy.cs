@@ -5,31 +5,33 @@ namespace Core.Enemies
 {
     public class MoveStateEnemy : EnemyState
     {
+        protected IEnemyStateManager enemyStateManager;
         protected float speed = 10f;
         protected Vector3 position;
         protected int direction = 1;
         protected Vector3 directionToPlayer = new Vector3();
 
-        public MoveStateEnemy(EnemyStateManager enemyState, float speed) : base(enemyState)
+        public MoveStateEnemy(StateManager stateManager, IEnemyStateManager enemyStateManager, float speed) : base(stateManager)
         {
+            this.enemyStateManager = enemyStateManager;
             this.speed = speed;
         }
 
         public override void Enter()
         {
-            direction = enemyState.Enemy.GetDirectionLook();
+            direction = enemyStateManager.Enemy.GetDirectionLook();
         }
 
         public override void UpdateLogic()
         {
             base.UpdateLogic();
-            directionToPlayer = (enemyState.GetPositionPlayer() - enemyState.GetPosition()).normalized;
+            directionToPlayer = (enemyStateManager.GetPositionPlayer() - enemyStateManager.GetPosition()).normalized;
             if (directionToPlayer.x > 0)
             {
                 if (direction != 1)
                 {
                     direction = 1;
-                    enemyState.Enemy.Flip();
+                    enemyStateManager.Enemy.Flip();
                 }
             }
             else if (directionToPlayer.x < 0)
@@ -37,14 +39,14 @@ namespace Core.Enemies
                 if (direction != -1)
                 {
                     direction = -1;
-                    enemyState.Enemy.Flip();
+                    enemyStateManager.Enemy.Flip();
                 }
             }
 
-            position = enemyState.GetPosition();
+            position = enemyStateManager.GetPosition();
             position += speed * Time.deltaTime * directionToPlayer;
 
-            enemyState.SetPosition(position);
+            enemyStateManager.SetPosition(position);
         }
     }
 }

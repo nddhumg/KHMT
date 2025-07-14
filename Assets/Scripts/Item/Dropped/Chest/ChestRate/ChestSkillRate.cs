@@ -2,25 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestSkillRate : ChestRate
+public class ChestSkillRate : IChestRate
 {
     private SOUpgradeSkill skillUpgrade;
-    public ChestSkillRate() : base()
+    public void GenerateChestReward()
     {
+        skillUpgrade.ApplyUpgrade(Player.instance);
     }
 
-    public override void GenerateChestReward()
-    {
-        skillUpgrade.ApplyUpgrade();
-    }
-
-    public override Sprite GetIcon()
+    public Sprite GetIcon()
     {
         skillUpgrade = UpgradeSystem.instance.GetRandomUpgradeSkill();
         return skillUpgrade.Icon;
     }
 
-    public override string GetStringValue()
+    public string GetStringValue()
     {
         return string.Empty;
     }

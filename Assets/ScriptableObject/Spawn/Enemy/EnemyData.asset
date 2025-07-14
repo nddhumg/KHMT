@@ -14,8 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnEnemy:
   - id: 1.1
-    enemyTransitionTime: 2
+    enemyTransitionTime: 0.1
     enemysId:
     - Enemy1
     rateEnemy:
     - 1
+  - id: 1.2
+    enemyTransitionTime: 2
+    enemysId:
+    - Enemy1
+    - Enemy2
+    - EnemyArc
+    rateEnemy:
+    - 0.2
+    - 0.3
+    - 0.5
+  - id: 2.1
+    enemyTransitionTime: 2
+    enemysId:
+    - Skull
+    - Golem
+    rateEnemy:
+    - 0.5
+    - 0.5
+  - id: 2.2
+    enemyTransitionTime: 3
+    enemysId:
+    - Skull
+    - Golem
+    rateEnemy:
+    - 0.3
+    - 0.5

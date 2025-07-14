@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ndd.Stat;
+
+
 namespace Core.Skill
 {
     public class Rifle : ShotSkill
@@ -40,7 +43,7 @@ namespace Core.Skill
                     directionBullet.x += recoil;
                 bulletCurrent = poolBullet.Take(bullet, transform.position, Quaternion.identity);
                 bulletCurrent.GetComponentInChildren<MoveInDirection>().Direction = directionBullet;
-                bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage((int)Player.instance.StatsManager.StatCurrent.GetStatValue(EnumName.Stat.Damage));
+                bulletCurrent.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());
                 yield return new WaitForSeconds(Random.Range(0, 0.1f));
             }
             yield return null;

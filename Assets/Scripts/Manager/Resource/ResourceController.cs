@@ -23,7 +23,7 @@ public class ResourceController : PersistentSingleton<ResourceController>
     }
 
     void Start() {
-        data = SaveLoadSystem.DataService.Load<ResourceData>(gameObject) ?? data;
+        data = SaveLoadSystem.DataService.Load<ResourceData>(gameObject) ?? new();
         OfflineEnergy();
 
     }
@@ -96,10 +96,6 @@ public class ResourceController : PersistentSingleton<ResourceController>
     }
 
     protected void OfflineEnergy(){
-        if (TutorialControl.instance.IsFirstInGame) {
-            data.energy = energyMax;
-            return;
-        }
         TimeSpan offlineDuration = (DateTime.Now - TimeManager.instance.GameExitTime);
         float offlineRecoveredEnergy = offlineDuration.Minutes / energyRegenTimeMinutes;
         if (offlineRecoveredEnergy + data.energy >= energyMax)

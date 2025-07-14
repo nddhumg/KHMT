@@ -1,7 +1,9 @@
 using Ndd.Pool;
+using Ndd.Stat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Random;
 namespace Core.Skill
 {
     public abstract class ShotSkill : MonoBehaviour
@@ -19,7 +21,7 @@ namespace Core.Skill
 
         protected virtual void Start()
         {
-            damageComponent = new DamageSkillComponent(1, Player.instance.StatsManager.StatCurrent);
+            damageComponent = new DamageSkillComponent(1, Player.instance.StatCurrent);
             coolDownComponent = new CoolDownSkillComponent(1);
             coolDownComponent.Timer.AddTimeoutListener(Attack);
             poolBullet = BulletManager.instance.Pool;

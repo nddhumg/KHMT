@@ -24,26 +24,36 @@ MonoBehaviour:
       spawnIntervalSeconds: 2.5
       operationTimeMinutes: 1
     - spawnAmount: 50
-      maxEnemySpawn: 800
+      maxEnemySpawn: 300
       spawnIntervalSeconds: 2.5
       operationTimeMinutes: 0.2
     - spawnAmount: 20
-      maxEnemySpawn: 400
+      maxEnemySpawn: 150
       spawnIntervalSeconds: 2.5
       operationTimeMinutes: 0.8
     - spawnAmount: 25
-      maxEnemySpawn: 800
+      maxEnemySpawn: 200
       spawnIntervalSeconds: 2
       operationTimeMinutes: 2
     - spawnAmount: 30
-      maxEnemySpawn: 800
+      maxEnemySpawn: 200
       spawnIntervalSeconds: 1.7
       operationTimeMinutes: 2
     - spawnAmount: 35
-      maxEnemySpawn: 800
+      maxEnemySpawn: 300
       spawnIntervalSeconds: 1.5
       operationTimeMinutes: 1
     - spawnAmount: 70
-      maxEnemySpawn: 10000
+      maxEnemySpawn: 300
       spawnIntervalSeconds: 0.8
+      operationTimeMinutes: 1
+  - id: 2
+    infoWave:
+    - spawnAmount: 10
+      maxEnemySpawn: 100
+      spawnIntervalSeconds: 3
+      operationTimeMinutes: 2
+    - spawnAmount: 15
+      maxEnemySpawn: 100
+      spawnIntervalSeconds: 2.5
       operationTimeMinutes: 1

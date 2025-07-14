@@ -6,10 +6,13 @@ using TMPro;
 
 public class StartSceenManager : Singleton<StartSceenManager>
 {
-    [SerializeField] protected GameObject popupInDevelopment;
     [SerializeField] protected PopupDebug popupDebug;
     [SerializeField] protected PopupShowItem popupShowItemBuy;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     [Button]
     public void OpenPopupDebug(string text) { 
         popupDebug.Init(text);
@@ -19,7 +22,4 @@ public class StartSceenManager : Singleton<StartSceenManager>
         popupShowItemBuy.Init(item);
     }
 
-    public void OpenPopupInDevelopment() { 
-        popupInDevelopment.SetActive(true);
-    }
 }

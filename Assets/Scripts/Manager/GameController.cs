@@ -1,64 +1,100 @@
+
 using Core.Spawn.Enemy;
-using System.Collections;
-using System.Collections.Generic;
 using Systems.Inventory;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Ndd.Stat;
+using UnityEngine.ResourceManagement.AsyncOperations;
 public class GameController : PersistentSingleton<GameController>
 {
     [SerializeField] protected string mapId;
-    protected VictoryAchieved victoryAchieved;
     protected IStat statPlayer;
     [SerializeField] protected SOStat soStatPlayerBase;
+    [SerializeField, ReadOnly] protected string idMap = "1";
 
-#if UNITY_EDITOR 
-    [SerializeField] protected bool isDebugMode = false;
-#endif
+    public string MapId => mapId;
+
     private void Start()
     {
         statPlayer = soStatPlayerBase.Clone();
         statPlayer.Add(InventoryManager.instance.StatsBonus);
-        InventoryManager.instance.StatsBonus.OnChangeStat += (key, value) => 
-        { 
-            statPlayer.SetStatValue(key, value + soStatPlayerBase.GetStatValue(key)); 
+        InventoryManager.instance.StatsBonus.OnStatChangedValue += (key, value) =>
+        {
+            statPlayer.IncreaseStat(key, value);
         };
 
-#if UNITY_EDITOR
-        if (isDebugMode)
+        statPlayer.Add(GlobalUpgradeManager.instance.StatBonus);
+        GlobalUpgradeManager.instance.StatBonus.OnStatChangedValue += (key, value) =>
         {
-            Init("1");
-        }
-#endif
+            statPlayer.IncreaseStat(key, value);
+        };
     }
 
 
     public IStat StatPlayer
     {
         get => statPlayer ?? soStatPlayerBase;
-        set => statPlayer = value;
     }
-    private void Update()
-    {
-        victoryAchieved?.Update();
-    }
-
     public void Init(string mapId)
     {
+        var handle = Addressables.LoadAssetAsync<SOMap>($"Assets/ScriptableObject/Map/Map{mapId}.asset");
+        handle.Completed += (AsyncOperationHandle<SOMap> handle) =>
+        {
+            var mapData = handle.Result;
+            WinManager.instance.AddWinCondition(mapData.AnyWinCondition, WinManager.WinConditionGroupType.Any);
+            WinManager.instance.AddWinCondition(mapData.AllWinCondition, WinManager.WinConditionGroupType.All);
+            CreateGame(mapId);
+        };
+    }
+
+    public void CreateGame(string mapId)
+    {
         this.mapId = mapId;
-        CreateVictoryAchieved(mapId);
-        CreateMap(mapId);
 
+        AssetLabelReference assertlabel = new();
+        assertlabel.labelString = $"Map{mapId}Data";
+        Addressables.LoadAssetsAsync<GameObject>(assertlabel, null);
+        var handle = Addressables.InstantiateAsync($"Assets/Prefabs/Map/Map{mapId}.prefab");
+        handle.Completed += SetConfinerCameraForMap;
+        EnemySpawn.instance.Init(mapId, new UnboundedOffscreenSpawner(new Vector3(2, 2)));
+        StartupEffect();
     }
 
-
-    protected void CreateVictoryAchieved(string mapId)
+    public void OnCreateSceneGame()
     {
-        victoryAchieved = new TimeBasedVictory(10);
+        //statPlayer.Add(InventoryManager.instance.StatsBonus);
+        //InventoryManager.instance.StatsBonus.OnStatChangedValue += (key, value) =>
+        //{
+        //    statPlayer.IncreaseStat(key, value);
+        //};
+
+        //statPlayer.Add(GlobalUpgradeManager.instance.StatBonus);
+        //    GlobalUpgradeManager.instance.StatBonus.OnStatChangedValue += (key, value) =>
+        //    {
+        //        statPlayer.IncreaseStat(key, value);
+        //    };
     }
 
-    protected void CreateMap(string mapId)
+    protected void SetConfinerCameraForMap(AsyncOperationHandle<GameObject> handle)
     {
-        var mapHandle = Addressables.InstantiateAsync($"Assets/Prefabs/Map/Map{mapId}.prefab");
-        EnemySpawn.instance.Init(mapId, new SpawnZones(new Vector3(1f, 1f)));
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            GameObject mapObj = handle.Result;
+
+            var mapComponent = mapObj.GetComponent<MapController>();
+            CameraMain.instance.SetConfinerCollider(mapComponent.Col);
+        }
+        else
+        {
+            Debug.LogError("Failed to instantiate map prefab.");
+        }
+    }
+
+    protected void StartupEffect()
+    {
+        foreach (var upgrade in GlobalUpgradeManager.instance.UpgradeOnStart.Values)
+        {
+            upgrade.ApplyUpgrade();
+        }
     }
 }

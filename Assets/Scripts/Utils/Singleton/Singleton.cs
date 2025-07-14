@@ -12,8 +12,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 			{
 				if (FindObjectOfType<T>() != null)
 					_instance = FindObjectOfType<T>();
-				else
-					new GameObject().AddComponent<T>().name = "Singleton_"+  typeof(T).ToString();
+				//else
+				//	new GameObject().AddComponent<T>().name = "Singleton_"+  typeof(T).ToString();
 			}
 
 			return _instance;

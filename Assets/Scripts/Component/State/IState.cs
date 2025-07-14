@@ -1,4 +1,4 @@
-﻿public interface IState {
+﻿	public interface IState {
 	void Enter ();
 	void Exit();
 	void UpdateLogic ();

@@ -51,9 +51,9 @@ namespace UIManager.UIStartSceen
             buttonCombat.onClick.AddListener(() => ChangeFeature(Feature.Combat));
             buttonShop.onClick.AddListener(() => ChangeFeature(Feature.Shop));
             //buttonBattlePass.onClick.AddListener(() => ChangeFeature(Feature.BattlePass));
-            //buttonUpgrade.onClick.AddListener(() => ChangeFeature(Feature.Upgrade));
-            buttonBattlePass.onClick.AddListener(() => StartSceenManager.instance.OpenPopupInDevelopment());
-            buttonUpgrade.onClick.AddListener(() => StartSceenManager.instance.OpenPopupInDevelopment());
+            buttonUpgrade.onClick.AddListener(() => ChangeFeature(Feature.Upgrade));
+            buttonBattlePass.onClick.AddListener(() => StartSceenManager.instance.OpenPopupDebug("Dang phat trien"));
+            //buttonUpgrade.onClick.AddListener(() => StartSceenManager.instance.OpenPopupInDevelopment());
         }
 
         protected void SetUpStartMenu()

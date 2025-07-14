@@ -1,2 +1,9 @@
 Id,EnemyTransitionTime,EnemyRate:EnemyId,EnemyRate:Rate
-1.1,2,Enemy1,1
+1.1,0.1,Enemy1,1
+1.2,2,Enemy1,0.2
+,,Enemy2,0.3
+,,EnemyArc,0.5
+2.1,2,Skull,0.5
+,,Golem,0.5
+2.2,3,Skull,0.3
+,,Golem,0.5

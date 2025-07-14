@@ -8,8 +8,8 @@ public class SystemChest : Singleton<SystemChest>
     [SerializeField] private UIBoxChest[] boxChests;
     [SerializeField] private Sprite iconCoin;
     [SerializeField] private Sprite iconCoinVip;
-    [SerializeField] private List<ChestRate> boxRates = new List<ChestRate>();
-    private IRandomSelector<ChestRate> boxRate = new GuaranteedSelectorRandom<ChestRate>();
+    [SerializeField] private List<IChestRate> boxRates = new List<IChestRate>();
+    private IRandomSelector<IChestRate> boxRate = new GuaranteedSelectorRandom<IChestRate>();
     [SerializeField] private GameObject panel;
     [SerializeField] private Button btnClaim;
     public Sprite IconCoin => iconCoin;
@@ -42,10 +42,6 @@ public class SystemChest : Singleton<SystemChest>
         boxRate.SetRateItem(0, 0.4f);
         boxRate.SetRateItem(1, 0.3f);
         boxRate.SetRateItem(2, 0.2f);
-        //boxRates.RemoveAt(0);
-        //boxRates[0].Rate = 0.4f;
-        //boxRates[1].Rate = 0.3f;
-        //boxRates[2].Rate = 0.2f;
     }
 
     [Button]
@@ -73,7 +69,7 @@ public class SystemChest : Singleton<SystemChest>
         {
             NoMoreSkillUpgrades();
         }
-        ChestRate chest = boxRate.GetRandomItem();
+        IChestRate chest = boxRate.GetRandomItem();
         uiBox.SetIcon(chest.GetIcon());
         uiBox.SetText(chest.GetStringValue());
         chest.GenerateChestReward();

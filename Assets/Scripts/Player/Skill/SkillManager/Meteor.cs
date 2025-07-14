@@ -16,7 +16,7 @@ namespace Core.Skill
 
         private void Start()
         {
-            damageComponent = new DamageSkillComponent(1, Player.instance.StatsManager.StatCurrent);
+            damageComponent = new DamageSkillComponent(1, Player.instance.StatCurrent);
             coolDownComponent = new CoolDownSkillComponent(coolDownTime);
             coolDownComponent.Timer.AddTimeoutListener(Attack);
         }
@@ -46,7 +46,7 @@ namespace Core.Skill
             Vector2 positionSpawn = new Vector2();
             positionSpawn.x = positionTarget.x + CameraMain.instance.Size.x * Random.Range(-1f,1f);
             float angle = Random.Range(45, 90);
-            float opposite = Mathf.Max(Mathf.Abs(positionTarget.x - positionSpawn.x), Vector2.Distance(CameraMain.instance.MaxCameraBounds, positionTarget));
+            float opposite = Mathf.Max(Mathf.Abs(positionTarget.x - positionSpawn.x), Vector2.Distance(CameraMain.instance.CameraTopRight, positionTarget));
             positionSpawn.y = positionTarget.y + Mathf.Sin(angle * Mathf.Deg2Rad) * opposite;
 
             return positionSpawn;

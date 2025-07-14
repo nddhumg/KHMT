@@ -1,0 +1,16 @@
+{
+    "globalUpgradeModel": [
+        {
+            "name": "DamageBoost",
+            "levelCurrent": 3
+        },
+        {
+            "name": "FirstStepPower",
+            "levelCurrent": 0
+        },
+        {
+            "name": "FinalMercy",
+            "levelCurrent": 0
+        }
+    ]
+}

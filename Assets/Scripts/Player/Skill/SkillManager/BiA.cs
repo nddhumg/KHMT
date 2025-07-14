@@ -6,8 +6,8 @@ namespace Core.Skill {
     public class BiA : ShotSkill
     {
         [SerializeField] private uint maxCollider = 3;
-        [SerializeField] private ParticleSystem effectCollider;
-        public ParticleSystem EffectCollider => effectCollider;
+        [SerializeField] private GameObject effectCollider;
+        public GameObject EffectCollider => effectCollider;
         protected override void Start()
         {
             base.Start();
