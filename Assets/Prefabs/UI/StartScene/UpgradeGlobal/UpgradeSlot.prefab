@@ -179,7 +179,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2522717956761325219}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -214,10 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641dd557aee53514faddf1938780574b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalUpgradeModel: {fileID: 11400000, guid: 553274c0ff21d7347b44b9c03373f7f6, type: 2}
   btnSelection: {fileID: 2609438002057356916}
   icon: {fileID: 112812418514228686}
   textLevel: {fileID: 3895904657734175141}
+  rectTransform: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!114 &2609438002057356916
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ndd.Cooldown;
 
-public class Necromancer : MonoBehaviour
+public class Necromancer : MonoBehaviour, IReceiveDamage
 {
     [SerializeField] protected NecromancerStateAttackData attackData;
     protected Stack<NercromancerBullet> bullets = new();
@@ -62,8 +62,9 @@ public class Necromancer : MonoBehaviour
             orbReleaseCooldown.Pause();
     }
 
-    [Button]
-    private void Test (){
-        stateManager.ChangeState(stateManager.StateHealing);
+    public void TakeDamage(int damage)
+    {
+        EffectManager.instance.Pool.Take(EffectManager.instance.PopupDamage, transform.position, Quaternion.identity).GetComponent<PopupDamage>().SetText(damage);
+        stat.IncreaseStat(StatName.Hp, -damage);
     }
 }

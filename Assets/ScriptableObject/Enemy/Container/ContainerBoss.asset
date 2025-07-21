@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da95e4db815cde499273f6ff8a13720, type: 3}
+  m_Name: ContainerBoss
+  m_EditorClassIdentifier: 
+  bossContainers:
+  - id: 0
+    boss: {fileID: 8813615572376463922, guid: 600adb5fdfe9c7b4fb501749e5d68fd4, type: 3}

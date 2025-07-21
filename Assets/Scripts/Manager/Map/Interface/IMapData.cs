@@ -7,4 +7,6 @@ public interface IMapData
 {
     List<InterfaceReference<IWinConditionData>> AnyWinCondition { get; }
     List<InterfaceReference<IWinConditionData>> AllWinCondition { get; }
+
+    GameObject Map { get; }
 }

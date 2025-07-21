@@ -48,7 +48,7 @@ public class CombatMenu : MonoBehaviour
         }
         if (idMapCurrent == 0 || idMapCurrent == idMapMax + 1) {
             idMapCurrent = idMapLast;
-            StartSceenManager.instance.OpenPopupDebug("Khong the chuyen sang map");
+            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotAvailable));
             return;
         }
         textNameMap.text = "Map " + idMapCurrent;

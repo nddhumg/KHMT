@@ -86,13 +86,13 @@ public class GlobalUpgradeUI : MonoBehaviour
 
     protected void OnClickLevelUp()
     {
-
         if (GlobalUpgradeManager.instance.LevelUpUpgradeSelection(globalUpgradeSelection))
         {
             UpdateInfo(globalUpgradeSelection);
+            MusicManager.instance.PlaySFX(MusicKey.UpgradeGlobal);
         }
         else {
-            StartSceenManager.instance.OpenPopupDebug("Khong du tien");
+            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotEnoughGold));
         }
     }
 

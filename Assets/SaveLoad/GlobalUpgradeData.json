@@ -6,11 +6,11 @@
         },
         {
             "name": "FirstStepPower",
-            "levelCurrent": 0
+            "levelCurrent": 1
         },
         {
             "name": "FinalMercy",
-            "levelCurrent": 0
+            "levelCurrent": 1
         }
     ]
 }

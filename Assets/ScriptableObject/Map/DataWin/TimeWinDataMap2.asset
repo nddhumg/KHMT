@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96db4cea89274c74c8464aa128ace931, type: 3}
   m_Name: TimeWinDataMap2
   m_EditorClassIdentifier: 
-  idMap: 1
-  time: 0.1
+  idMap: 2
+  time: 10

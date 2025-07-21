@@ -10,14 +10,14 @@
       "hash": "d4b41e270eb56f7db0386b52d00df1fd239169a2"
     },
     "com.coffee.ui-particle": {
-      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git#4.9.0",
+      "version": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
-      "hash": "4dfcb9075e166fa53fee5decc51975bdc247cdad"
+      "hash": "4b98abd7469b10d55c9c623830cb6e1518f72731"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

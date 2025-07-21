@@ -16,3 +16,4 @@ MonoBehaviour:
   - _underlyingValue: {fileID: 11400000, guid: 8352be293d9451f40be76bd0c2f2d798, type: 2}
   allWinConditions: []
   id: 2
+  map: {fileID: 74426506417778392, guid: 820a6f33441adc74ca9e69e3b5b87615, type: 3}

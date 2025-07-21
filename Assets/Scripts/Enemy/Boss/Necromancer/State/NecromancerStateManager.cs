@@ -34,7 +34,7 @@ public class NecromancerStateManager : StateManager , INecromancerStateManager
         this.animation = animation;
 
         stateIdle = new NecromancerStateIdle(this,this, animation);
-        stateAttack = new NecromancerStateAttack(this,this, animation, necromancerScript.AttackData, necromancerScript.Bullets, BulletManager.instance.Pool);
+        stateAttack = new NecromancerStateAttack(this,this, animation, necromancerScript.AttackData, necromancerScript.Bullets, BulletManager.instance.Pool, (int)necromancerScript.Stat.GetStatValue(StatName.Damage));
         stateMove = new NecromancerStateMove(this,this, necromancerScript.Stat.GetStatValue(StatName.Speed));
         stateHealing = new NecromancerStateHealth(this,this, necromancerScript.Stat, necromancerScript.Collider, animation);
     }
@@ -49,7 +49,6 @@ public class NecromancerStateManager : StateManager , INecromancerStateManager
     public override void Update()
     {
         base.Update();
-        Debug.Log(stateCurrent.ToString());
         cooldownChecker.UpdateCooldown(Time.deltaTime);
     }
 

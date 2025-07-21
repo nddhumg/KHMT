@@ -14,9 +14,9 @@ public class Player : Singleton<Player>, IReceiveDamage
     SpriteRenderer spriteWeapon;
     [SerializeField] private PlayerLevel level;
     [SerializeField] private PlayerSkill skillManager;
+    [SerializeField] private PlayerEffect effect;
     private IStat statCurrent;
 
-    [SerializeField] private GameObject healingEffect;
     [SerializeField] private Transform sprite;
 
     private Vector2 directionMove = Vector2.up;
@@ -26,6 +26,7 @@ public class Player : Singleton<Player>, IReceiveDamage
     public Action OnPlayerDead;
     private bool canRevive;
 
+    public PlayerEffect Effect => effect;
     public IStat StatCurrent => statCurrent;
     public PlayerLevel Level => level;
     public PlayerSkill SkillManager => skillManager;
@@ -74,6 +75,7 @@ public class Player : Singleton<Player>, IReceiveDamage
     public void TakeDamage(int damage)
     {
         statCurrent.IncreaseStat(StatName.Hp, -damage);
+        effect.ActiveEffectTakeDamage();
     }
 
     public void SetWeapon(GameObject weapon)
@@ -90,11 +92,6 @@ public class Player : Singleton<Player>, IReceiveDamage
     public void Flip()
     {
         sprite.localScale = new Vector3(-1 * sprite.localScale.x, sprite.localScale.y, sprite.localScale.z);
-    }
-
-    public void ActiveEffectHealing()
-    {
-        healingEffect.SetActive(true);
     }
 
 

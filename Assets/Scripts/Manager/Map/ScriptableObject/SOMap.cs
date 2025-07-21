@@ -11,6 +11,9 @@ public class SOMap : ScriptableObject, IMapData
     [SerializeField] protected List<InterfaceReference<IWinConditionData>> allWinConditions;
 
     [SerializeField] protected string id;
+    [SerializeField] protected GameObject map;
+
+    public GameObject Map => map;
 
     public List<InterfaceReference<IWinConditionData>> AnyWinCondition => anyWinConditions;
 

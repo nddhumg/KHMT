@@ -23,7 +23,8 @@ public class HealthPoint : MonoBehaviour ,IItemPickUp
         {
             statPlayer.PercentageIncreaseStat(StatName.Hp, hpRecovery);
         }
-        Player.instance.ActiveEffectHealing();
+        Player.instance.Effect.ActiveEffectHealing();
+        //Player.instance.ActiveEffectHealing();
         gameObject.SetActive(false);
     }
 

@@ -1,7 +1,5 @@
 using AYellowpaper;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class WinManager : Singleton<WinManager>
 {
@@ -12,6 +10,12 @@ public class WinManager : Singleton<WinManager>
     public enum WinConditionGroupType
     {
         Any, All,
+    }
+
+    private void Start()
+    {
+        AddWinCondition(GameController.instance.MapData.AnyWinCondition, WinConditionGroupType.Any);
+        AddWinCondition(GameController.instance.MapData.AnyWinCondition, WinConditionGroupType.All);
     }
 
     private void Update()
@@ -42,7 +46,7 @@ public class WinManager : Singleton<WinManager>
         if (isWin)
             OnWin();
     }
-    public void AddWinCondition(IWinCondition condition, WinConditionGroupType type)
+    protected void AddWinCondition(IWinCondition condition, WinConditionGroupType type)
     {
         if (condition == null)
             return;
@@ -56,7 +60,7 @@ public class WinManager : Singleton<WinManager>
         }
     }
 
-    public void AddWinCondition(IWinConditionData conditionData, WinConditionGroupType type)
+    protected void AddWinCondition(IWinConditionData conditionData, WinConditionGroupType type)
     {
         AddWinCondition(conditionData.GetCondition(), type);
     }

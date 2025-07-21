@@ -712,35 +712,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4678239911495763504, guid: cd185b4ca44a9804babdf7b82e19455e,
-        type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678239911495763504, guid: cd185b4ca44a9804babdf7b82e19455e,
-        type: 3}
-      propertyPath: m_ScreenMatchMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678239911495763504, guid: cd185b4ca44a9804babdf7b82e19455e,
-        type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678239911495763504, guid: cd185b4ca44a9804babdf7b82e19455e,
-        type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1920
-      objectReference: {fileID: 0}
     - target: {fileID: 7743785178632749788, guid: cd185b4ca44a9804babdf7b82e19455e,
         type: 3}
       propertyPath: m_Name
       value: SceneManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8016180209896470290, guid: cd185b4ca44a9804babdf7b82e19455e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.2827148
       objectReference: {fileID: 0}
     - target: {fileID: 9125549230120085886, guid: cd185b4ca44a9804babdf7b82e19455e,
         type: 3}

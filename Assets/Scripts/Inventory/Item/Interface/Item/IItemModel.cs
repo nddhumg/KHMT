@@ -10,7 +10,6 @@ namespace Systems.Inventory
         Sprite Icon { get; }
         int LevelMax { get; }
 
-
     }
 
 }

@@ -7,84 +7,42 @@ using UnityEngine.UI;
 
 public class PopUpInfoItem : MonoBehaviour
 {
-    [SerializeField] private Image iconItem;
-    [SerializeField] private TMP_Text textName;
+    [SerializeField] protected Image iconItem;
+    [SerializeField] protected TMP_Text textName;
 
     [Header("Type")]
-    [SerializeField] private Image iconType;
-    [SerializeField] private TMP_Text textType;
+    [SerializeField] protected Image iconType;
+    [SerializeField] protected TMP_Text textType;
 
     [Header("Stat")]
-    [SerializeField] private Image iconStat;
-    [SerializeField] private TMP_Text textStat;
-
-    [Header("Level")]
-    [SerializeField] private TMP_Text textLevel;
-
-    [Header("Button")]
-    [SerializeField] private Button btnEquip;
-    [SerializeField] private Button btnDequip;
-    [SerializeField] private Button btnLevelUp;
-    [SerializeField] private Button btnLevelUpMax;
+    [SerializeField] protected Image iconStat;
+    [SerializeField] protected TMP_Text textStat;
 
     [SerializeField] private Button btnCancel;
 
-    private IItemData data;
+    protected IItemModel modelItemSelect;
 
-    private void Start()
+    protected virtual void Start()
     {
         btnCancel.onClick.AddListener(() => gameObject.SetActive(false));
-        btnEquip.onClick.AddListener(Equip);
-        btnDequip.onClick.AddListener(Dequip);
-        btnLevelUp.onClick.AddListener(LevelUp);
-
         
     }
 
-    public void SetInfo(IItemData data, bool isEquip)
-    {
-
-        this.data = data;
-        IEquipmentStats equipmentStats = data.BonusStatData.EquipmentStats;
-
-        iconItem.sprite = data.ModelData.Icon;
-        textName.text = data.ModelData.NameItem;
+    public virtual void SetInfo(IItemModel model) {
+        modelItemSelect = model;
+        IEquipmentStats equipmentStats = InventoryManager.instance.SOEquipmentStats.GetEquipmentStats(model.Type);
+        iconItem.sprite = model.Icon;
+        textName.text = model.NameItem;
 
         iconStat.sprite = equipmentStats.IconStat;
-        UpdateTextStatBonus();
 
-        textType.text = data.ModelData.Type.ToString();
+        textType.text = model.Type.ToString();
         iconType.sprite = equipmentStats.IconType;
-
-        UpdateTextLevel();
-
-        btnEquip.gameObject.SetActive(!isEquip);
-        btnDequip.gameObject.SetActive(isEquip);
     }
 
-    public void LevelUp(){
-        data.LevelData.LevelUp();
-        UpdateTextLevel();
-        UpdateTextStatBonus();
-    }
-
-    public void Equip()
+    protected virtual void UpdateTextStatBonus()
     {
-        data.Equip();
-        gameObject.SetActive(false);
+        textStat.text = InventoryManager.instance.SOEquipmentStats.GetEquipmentStats(modelItemSelect.Type).GetBonus(0).ToString();
     }
 
-    public void Dequip()
-    {
-        data.Dequip();
-        gameObject.SetActive(false);
-    }
-
-    protected void UpdateTextStatBonus() {
-        textStat.text = data.BonusStatData.GetBonusStat().ToString();
-    }
-
-    protected void UpdateTextLevel() { 
-        textLevel.text = "Level: "+ data.LevelData.Level.ToString();
-    }
 }

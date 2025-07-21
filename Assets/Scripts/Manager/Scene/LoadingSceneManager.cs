@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking.Types;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,6 +13,7 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
     [SerializeField] protected GameObject goLoadingScene;
     [SerializeField] protected Slider sliderLoadingScene;
     [SerializeField] protected float delayLoadScene = 0.2f;
+    public bool isDebug = false;
 
     private string sceneNameGame = "game";
     private string sceneNameUIGame = "UIGameScene";
@@ -17,7 +21,9 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
 
     private void Start()
     {
-        StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(1), GameController.instance.OnCreateSceneGame));
+        if (isDebug) { 
+            goLoadingScene.SetActive(false);
+        }
     }
 
     public void SwichToScene(string id)
@@ -26,16 +32,15 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
         StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(id)));
     }
 
-    public void SwitchToSceneGame(string mapId) {
+    public void SwitchToSceneGame(string mapId)
+    {
         StartSwitchToScene();
-        StartCoroutine(SwitchGameAndUISceneCoroutine(() => OnCompleteLoadSceneGame(mapId)));
+        _= SwitchGameAndUISceneCoroutine(mapId,() => { GameController.instance.Init(); });
     }
 
-    protected void OnCompleteLoadSceneGame(string mapId) { 
-        GameController.instance.Init(mapId);
-    }
 
-    private void StartSwitchToScene() {
+    private void StartSwitchToScene()
+    {
         goLoadingScene.SetActive(true);
         sliderLoadingScene.value = 0;
     }
@@ -66,30 +71,31 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
         onComplete?.Invoke();
     }
 
-    private IEnumerator SwitchGameAndUISceneCoroutine(Action onComplete = null)
+    private async Task SwitchGameAndUISceneCoroutine(string mapid, Action OnComplete = null)
     {
+        Task loadTask =  GameController.instance.LoadAddressableMap(mapid);
+
         AsyncOperation asyncGameLoad = SceneManager.LoadSceneAsync(sceneNameGame);
         asyncGameLoad.allowSceneActivation = false;
 
-        while (asyncGameLoad.progress < 0.9f)
+        while (asyncGameLoad.progress < 0.9f  || !loadTask.IsCompleted)
         {
             sliderLoadingScene.value = Mathf.Clamp01(asyncGameLoad.progress / 0.9f);
-            yield return null;
+            await Task.Yield();
         }
 
-        yield return new WaitForSeconds(delayLoadScene);
-
+        await loadTask;
         asyncGameLoad.allowSceneActivation = true;
-
-        while (!asyncGameLoad.isDone)
-            yield return null;
-
+        
         AsyncOperation asyncUILoad = SceneManager.LoadSceneAsync(sceneNameUIGame, LoadSceneMode.Additive);
         while (!asyncUILoad.isDone)
-            yield return null;
-
+        {
+            await Task.Yield();
+        }
+        await Task.Delay(100);
+        OnComplete?.Invoke();
+        await Task.Delay((int)(delayLoadScene * 1000));
         goLoadingScene.SetActive(false);
-        onComplete?.Invoke();
     }
 
 }

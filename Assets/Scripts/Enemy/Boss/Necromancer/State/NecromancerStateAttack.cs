@@ -1,4 +1,5 @@
 using Ndd.Pool;
+using Ndd.Stat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,11 @@ public class NecromancerStateAttack : IState
     protected float angleStep = 0;
     protected NecromancerStateAttackData dataAttack;
     protected Stack<NercromancerBullet> bullets;
+    protected int damage;
 
     protected IPoolObject<GameObject, GameObject> poolBullet;
 
-    public NecromancerStateAttack(StateManager stateManager, INecromancerStateManager necromancerState, IAnimEventSource animation , NecromancerStateAttackData data , Stack<NercromancerBullet> bullets, IPoolObject<GameObject,GameObject> pool)
+    public NecromancerStateAttack(StateManager stateManager, INecromancerStateManager necromancerState, IAnimEventSource animation , NecromancerStateAttackData data , Stack<NercromancerBullet> bullets, IPoolObject<GameObject,GameObject> pool, int damage)
     {
         this.necromancerState = necromancerState;
         this.stateManager = stateManager;
@@ -23,6 +25,7 @@ public class NecromancerStateAttack : IState
         this.animation = animation;
         this.poolBullet = pool;
         this.bullets = bullets;
+        this.damage = damage;
     }
 
     public void CheckChangeState()
@@ -60,8 +63,9 @@ public class NecromancerStateAttack : IState
         for (int i = 0; i < dataAttack.countBullet; i++)
         {
             GameObject bulletNew = poolBullet.Take(dataAttack.bullet, positionSpawnBullet, Quaternion.identity);
-            //bulletNew.GetComponent<BulletDamageSender>()?.SetDamage(0);
             bulletNew.transform.SetParent(dataAttack.holderBullet);
+            NercromancerBullet bulletScript = bulletNew.GetComponent<NercromancerBullet>();
+            bulletScript.DamageSender.SetDamage(damage);
             bullets.Push(bulletNew.GetComponent<NercromancerBullet>());
             angleCurrent += angleStep;
             positionSpawnBullet.x = dataAttack.spawnCenter.x + Mathf.Sin(angleCurrent * Mathf.Deg2Rad) * dataAttack.spawnRadius;

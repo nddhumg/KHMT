@@ -25,7 +25,7 @@ namespace UI.Charector
 
         private void Start()
         {
-            btn.onClick.AddListener(Click);
+            btn.onClick.AddListener(OpenPopupInfo);
         }
 
         public static void SetUIManager(CharectorUIManager uiManager)
@@ -47,7 +47,7 @@ namespace UI.Charector
             this.isEquiped = isEquiped;
         }
 
-        private void Click()
+        private void OpenPopupInfo()
         {
             manager.OpenPopupInfoItem(data, this);
         }

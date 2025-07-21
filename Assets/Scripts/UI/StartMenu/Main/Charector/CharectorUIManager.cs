@@ -13,7 +13,7 @@ namespace UI.Charector
         [SerializeField] protected TMP_Text textHelth;
         [SerializeField] protected TMP_Text textDamage;
 
-        [SerializeField] private PopUpInfoItem popupInfoItem;
+        [SerializeField] private PopupInfoItemInventory popupInfoItem;
         [SerializeField] private ItemSlot[] slotItemsEquip;
 
 
@@ -97,6 +97,7 @@ namespace UI.Charector
             slot.Init(item, item, true);
             slot.gameObject.SetActive(true);    
             Destroy(slotSelect.gameObject);
+            MusicManager.instance.PlaySFX(MusicKey.Equip);
         }
 
         protected void DequipItem(Item item)

@@ -2,7 +2,7 @@ using Core.Enemies;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Manager/ContainerEnemy", fileName = "ContainerEnemy")]
+[CreateAssetMenu(menuName = "SO/Manager/Container/Enemy", fileName = "ContainerEnemy")]
 public class SOEnemyContainer : ScriptableObject , IEnemyContainer
 {
 

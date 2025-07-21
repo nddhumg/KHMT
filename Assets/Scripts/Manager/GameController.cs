@@ -5,14 +5,18 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Ndd.Stat;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Threading.Tasks;
 public class GameController : PersistentSingleton<GameController>
 {
-    [SerializeField] protected string mapId;
+    [SerializeField] protected string mapId = "1";
     protected IStat statPlayer;
     [SerializeField] protected SOStat soStatPlayerBase;
-    [SerializeField, ReadOnly] protected string idMap = "1";
+    protected ISpawnZone spawnZone;
+    protected IMapData mapData;
 
+    public ISpawnZone SpawnZone => spawnZone;
     public string MapId => mapId;
+    public IMapData MapData => mapData;
 
     private void Start()
     {
@@ -35,59 +39,45 @@ public class GameController : PersistentSingleton<GameController>
     {
         get => statPlayer ?? soStatPlayerBase;
     }
-    public void Init(string mapId)
-    {
-        var handle = Addressables.LoadAssetAsync<SOMap>($"Assets/ScriptableObject/Map/Map{mapId}.asset");
-        handle.Completed += (AsyncOperationHandle<SOMap> handle) =>
-        {
-            var mapData = handle.Result;
-            WinManager.instance.AddWinCondition(mapData.AnyWinCondition, WinManager.WinConditionGroupType.Any);
-            WinManager.instance.AddWinCondition(mapData.AllWinCondition, WinManager.WinConditionGroupType.All);
-            CreateGame(mapId);
-        };
-    }
 
-    public void CreateGame(string mapId)
+    public async Task LoadAddressableMap(string mapid)
     {
-        this.mapId = mapId;
+        this.mapId = mapid;
 
         AssetLabelReference assertlabel = new();
         assertlabel.labelString = $"Map{mapId}Data";
-        Addressables.LoadAssetsAsync<GameObject>(assertlabel, null);
-        var handle = Addressables.InstantiateAsync($"Assets/Prefabs/Map/Map{mapId}.prefab");
-        handle.Completed += SetConfinerCameraForMap;
-        EnemySpawn.instance.Init(mapId, new UnboundedOffscreenSpawner(new Vector3(2, 2)));
+        var mapHandle = Addressables.LoadAssetsAsync<Object>(assertlabel, null);
+        await mapHandle.Task;
+
+        if (mapHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            foreach (var assert in mapHandle.Result)
+            {
+                if (assert is SOMap soMap)
+                {
+                    mapData = soMap;
+                    spawnZone = new UnboundedOffscreenSpawner(new Vector3(2, 2));
+                }
+            }
+        }
+    }
+    public void Init()
+    {
+        if (MapData.Map != null)
+        {
+            GameObject Map = Instantiate(mapData.Map);
+            SetConfinerCameraForMap(Map);
+        }
+        else {
+            Debug.LogError("Not data map in soMap");
+        }
         StartupEffect();
     }
 
-    public void OnCreateSceneGame()
+    protected void SetConfinerCameraForMap(GameObject map)
     {
-        //statPlayer.Add(InventoryManager.instance.StatsBonus);
-        //InventoryManager.instance.StatsBonus.OnStatChangedValue += (key, value) =>
-        //{
-        //    statPlayer.IncreaseStat(key, value);
-        //};
-
-        //statPlayer.Add(GlobalUpgradeManager.instance.StatBonus);
-        //    GlobalUpgradeManager.instance.StatBonus.OnStatChangedValue += (key, value) =>
-        //    {
-        //        statPlayer.IncreaseStat(key, value);
-        //    };
-    }
-
-    protected void SetConfinerCameraForMap(AsyncOperationHandle<GameObject> handle)
-    {
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            GameObject mapObj = handle.Result;
-
-            var mapComponent = mapObj.GetComponent<MapController>();
-            CameraMain.instance.SetConfinerCollider(mapComponent.Col);
-        }
-        else
-        {
-            Debug.LogError("Failed to instantiate map prefab.");
-        }
+        var mapComponent = map.GetComponent<MapController>();
+        CameraMain.instance.SetConfinerCollider(mapComponent.Col);
     }
 
     protected void StartupEffect()

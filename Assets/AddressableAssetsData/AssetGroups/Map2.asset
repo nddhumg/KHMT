@@ -32,6 +32,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Map2Data
+  - m_GUID: 600adb5fdfe9c7b4fb501749e5d68fd4
+    m_Address: Assets/Prefabs/Enemy/Boss/Necromancer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map2Data
+  - m_GUID: 4a0dae80a3cded94a87519add8e4d3dc
+    m_Address: Assets/ScriptableObject/Map/Map2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Map2Data
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a2a71ef559ddb5f4c9356dee13d7706b, type: 2}
   m_SchemaSet:

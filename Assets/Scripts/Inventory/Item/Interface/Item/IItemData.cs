@@ -9,7 +9,7 @@ namespace Systems.Inventory
 
         IItemLevel LevelData { get; }
 
-        IItemBonusStat BonusStatData { get; }
+        //IItemBonusStat BonusStatData { get; }
 
         void Equip();
         void Dequip();

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Core.Spawn.Enemy;
+using System.Threading.Tasks;
 
 public class ScreenGameOver : Singleton<ScreenGameOver>
 {

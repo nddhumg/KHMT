@@ -8,6 +8,9 @@ public class NercromancerBullet : MonoBehaviour
 {
     [SerializeField] protected DestroyAfterTime destroyAfterTime;
     [SerializeField] protected MoveInDirection moveInDirection;
+    [SerializeField] protected DamageSender damageSender;
+
+    public DamageSender DamageSender => damageSender;   
 
     private void Start()
     {
@@ -19,6 +22,7 @@ public class NercromancerBullet : MonoBehaviour
     {
         ResetState();
     }
+
 
     public void MoveToPlayer()
     {
