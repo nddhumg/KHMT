@@ -16,6 +16,6 @@ MonoBehaviour:
   - key: 1
     value: 0.3
   - key: 3
-    value: 1
+    value: 3
   - key: 5
-    value: 100
+    value: 20000

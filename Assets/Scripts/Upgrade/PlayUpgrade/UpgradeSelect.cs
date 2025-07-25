@@ -7,10 +7,16 @@ using UnityEngine.UI;
 public class UpgradeSelect : MonoBehaviour {
 	[SerializeField] protected Image icon;
 	[SerializeField] protected TMP_Text text;
+	[SerializeField] protected Button btnSelect;
 
 	private int indexSelect;
 
-	public void SetInfo(int index, Sprite icon, string text)
+    private void Start()
+    {
+		btnSelect.onClick.AddListener(Select);
+    }
+
+    public void SetInfo(int index, Sprite icon, string text)
 	{
 		this.indexSelect = index;
 		this.icon.sprite = icon;

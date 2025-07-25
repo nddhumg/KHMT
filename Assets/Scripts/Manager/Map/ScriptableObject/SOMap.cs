@@ -12,6 +12,7 @@ public class SOMap : ScriptableObject, IMapData
 
     [SerializeField] protected string id;
     [SerializeField] protected GameObject map;
+    [SerializeField] protected MusicKey musicKey;
 
     public GameObject Map => map;
 
@@ -19,5 +20,5 @@ public class SOMap : ScriptableObject, IMapData
 
     public List<InterfaceReference<IWinConditionData>> AllWinCondition => allWinConditions;
 
-
+    public MusicKey MusicKey => musicKey;
 }

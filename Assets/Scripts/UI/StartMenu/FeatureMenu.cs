@@ -52,7 +52,7 @@ namespace UIManager.UIStartSceen
             buttonShop.onClick.AddListener(() => ChangeFeature(Feature.Shop));
             //buttonBattlePass.onClick.AddListener(() => ChangeFeature(Feature.BattlePass));
             buttonUpgrade.onClick.AddListener(() => ChangeFeature(Feature.Upgrade));
-            buttonBattlePass.onClick.AddListener(() => StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotAvailable)));
+            buttonBattlePass.onClick.AddListener(() => StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotAvailable)));
             //buttonUpgrade.onClick.AddListener(() => StartSceenManager.instance.OpenPopupInDevelopment());
         }
 

@@ -30,6 +30,7 @@ public class CombatMenu : MonoBehaviour
     {
         if (ResourceController.instance.GetResource(EnumName.ResourceName.Energy) < combatEnergy)
         {
+            StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotEnoughEnergy));
             return;
         }
         ResourceController.instance.IncreaseResource(EnumName.ResourceName.Energy, -combatEnergy);
@@ -48,7 +49,7 @@ public class CombatMenu : MonoBehaviour
         }
         if (idMapCurrent == 0 || idMapCurrent == idMapMax + 1) {
             idMapCurrent = idMapLast;
-            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotAvailable));
+            StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotAvailable));
             return;
         }
         textNameMap.text = "Map " + idMapCurrent;

@@ -13,7 +13,7 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     [SerializeField] protected TMP_Text textGameOver;
     [SerializeField] protected Button btnHome;
     [SerializeField] protected Button btnContinue;
-    [SerializeField] protected TMP_Text textBtnContinue;
+    [SerializeField] protected Button btnReplay;
     [SerializeField] protected TMP_Text textEnemyDie;
     [SerializeField] protected TMP_Text textTime;
 
@@ -28,6 +28,8 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     {
         main.SetActive(false);
         popupRevive.gameObject.SetActive(false);
+        btnContinue.onClick.AddListener(OnClickContinue);
+        btnReplay.onClick.AddListener(OnClickReplay);
         SetUpButton();
         Player.instance.OnPlayerDead += Deffeat;
     }
@@ -37,10 +39,10 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
     public void Victory()
     {
         GameSystem.Pause();
-        textGameOver.text = "VICTORY";
+        textGameOver.text = LocalizationManager.instance.GetMesage("Victory");
         bg.color = colorVictory;
-        btnContinue.onClick.AddListener(OnClickContinue);
-        textBtnContinue.text = "Continue";
+        btnContinue.gameObject.SetActive(true);
+        btnReplay.gameObject.SetActive(false);
         UpdateInfo();
     }
 
@@ -59,24 +61,25 @@ public class ScreenGameOver : Singleton<ScreenGameOver>
         }
     }
 
-    public void ShowUIDeffeat() {
+    public void ShowUIDeffeat()
+    {
         GameSystem.Pause();
-        textGameOver.text = "DEFFEAT";
+        textGameOver.text = LocalizationManager.instance.GetMesage("Deffeat");
         bg.color = colorDeffeat;
-        btnContinue.onClick.AddListener(OnClickReplay);
-        textBtnContinue.text = "Replay";
+        btnReplay.gameObject.SetActive(true);
+        btnContinue.gameObject.SetActive(false);
         UpdateInfo();
     }
 
     protected void OnClickContinue()
     {
-
+        //LoadingSceneManager.instance.
     }
 
     protected void OnClickHome()
     {
+        LoadingSceneManager.instance.SwitchToSceneStartGame();
         GameSystem.RePause();
-        LoadingSceneManager.instance.SwichToScene("StartSceen");
     }
 
 

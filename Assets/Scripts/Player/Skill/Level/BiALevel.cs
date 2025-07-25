@@ -19,19 +19,18 @@ namespace Core.Skill
             if (base.LevelUp())
                 return false;
             switch (LevelCurrent) {
-                case 1:
+                case 2:
                     biA.DamageComponent.IncreaseDamageMultiplier(0.1f);
                     biA.IncreaseBulletCount(1);
                     return true;
-                case 2:
+                case 3:
                     biA.DamageComponent.IncreaseDamageMultiplier(0.1f);
                     return true;
-                case 3:
-
-                    return true;
                 case 4:
+                    
                     return true;
                 case 5:
+
                     return true;
             }
             return false;

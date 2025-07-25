@@ -23,9 +23,22 @@ public class SOUpgradeStats : SOUpgrade
 
     public override string GetDescription(Player player)
     {
-        if(percentageIncrease == false)
-            return "Increase " + statName.ToString() + " by " + statIncreaseValue;
+        string stat = LocalizationManager.instance.GetMesage(statName.ToString());
+        if (stat == string.Empty)
+        {
+            Debug.LogWarning($"Not key: {statName} in Localization ");
+        }
         else
-            return "Increase " + statName.ToString() + " by " + statIncreaseValue + "%";
+        {
+            stat = stat.Substring(0, 1).ToLower() + stat.Substring(1);
+        }
+        if (percentageIncrease == false)
+        {
+            return LocalizationManager.instance.GetMesage("Increase") + " " + stat;
+        }
+        else
+        {
+            return LocalizationManager.instance.GetMesage("PercentageIncrease") + " " + stat;
+        }
     }
 }

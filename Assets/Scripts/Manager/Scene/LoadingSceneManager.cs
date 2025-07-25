@@ -7,6 +7,11 @@ using UnityEngine.Networking.Types;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+public enum SceneName
+{
+    StartSceen,
+    game,
+}
 
 public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
 {
@@ -21,8 +26,13 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
 
     private void Start()
     {
-        if (isDebug) { 
+        if (isDebug)
+        {
             goLoadingScene.SetActive(false);
+        }
+        else
+        {
+            SwitchToSceneStartGame();
         }
     }
 
@@ -32,10 +42,17 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
         StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(id)));
     }
 
+    public void SwitchToSceneStartGame()
+    {
+        StartSwitchToScene();
+        StartCoroutine(SwitchToSceneAsync(SceneManager.LoadSceneAsync(SceneName.StartSceen.ToString())));
+        MusicManager.instance.PlayMusic(MusicKey.StartSceen);
+    }
+
     public void SwitchToSceneGame(string mapId)
     {
         StartSwitchToScene();
-        _= SwitchGameAndUISceneCoroutine(mapId,() => { GameController.instance.Init(); });
+        _ = SwitchGameAndUISceneCoroutine(mapId, () => { GameController.instance.Init(); });
     }
 
 
@@ -48,37 +65,27 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
     IEnumerator SwitchToSceneAsync(AsyncOperation asyncLoad, Action onComplete = null)
     {
         asyncLoad.allowSceneActivation = false;
-        float timer = 0f;
-
-        while (!asyncLoad.isDone)
+        
+        while ( asyncLoad.progress < 0.9f)
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             sliderLoadingScene.value = progress;
-
-            if (asyncLoad.progress >= 0.9f)
-            {
-                timer += Time.deltaTime;
-                if (timer >= delayLoadScene)
-                {
-                    asyncLoad.allowSceneActivation = true;
-                }
-            }
-
             yield return null;
         }
-
+        asyncLoad.allowSceneActivation = true;
+        yield return new WaitForSeconds(delayLoadScene);
         goLoadingScene.SetActive(false);
         onComplete?.Invoke();
     }
 
     private async Task SwitchGameAndUISceneCoroutine(string mapid, Action OnComplete = null)
     {
-        Task loadTask =  GameController.instance.LoadAddressableMap(mapid);
+        Task loadTask = GameController.instance.LoadAddressableMap(mapid);
 
         AsyncOperation asyncGameLoad = SceneManager.LoadSceneAsync(sceneNameGame);
         asyncGameLoad.allowSceneActivation = false;
 
-        while (asyncGameLoad.progress < 0.9f  || !loadTask.IsCompleted)
+        while (asyncGameLoad.progress < 0.9f || !loadTask.IsCompleted)
         {
             sliderLoadingScene.value = Mathf.Clamp01(asyncGameLoad.progress / 0.9f);
             await Task.Yield();
@@ -86,7 +93,7 @@ public class LoadingSceneManager : PersistentSingleton<LoadingSceneManager>
 
         await loadTask;
         asyncGameLoad.allowSceneActivation = true;
-        
+
         AsyncOperation asyncUILoad = SceneManager.LoadSceneAsync(sceneNameUIGame, LoadSceneMode.Additive);
         while (!asyncUILoad.isDone)
         {

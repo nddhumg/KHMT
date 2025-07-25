@@ -30,10 +30,10 @@ public class UpgradeSystem : Singleton<UpgradeSystem>
     }
     public void ApllyUpgrade(int index)
     {
+        MusicManager.instance.PlaySFX(MusicKey.SelectUpgrade);
         infoUpgradeSelect[index].ApplyUpgrade(player);
         SetActiveUIUpgrade(false);
         GameSystem.RePause();
-
     }
 
     public void AddUpgradeWeapon()

@@ -92,7 +92,7 @@ public class GlobalUpgradeUI : MonoBehaviour
             MusicManager.instance.PlaySFX(MusicKey.UpgradeGlobal);
         }
         else {
-            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotEnoughGold));
+            StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotEnoughGold));
         }
     }
 

@@ -1,85 +1,20 @@
 {
-    "items": [
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "RifleGun",
-            "level": 0
-        },
-        {
-            "nameItem": "BattleguardHelmHat",
-            "level": 0
-        },
-        {
-            "nameItem": "RifleGun",
-            "level": 0
-        },
-        {
-            "nameItem": "PistolGun",
-            "level": 0
-        },
-        {
-            "nameItem": "PistolGun",
-            "level": 0
-        },
-        {
-            "nameItem": "HawkHelmHat",
-            "level": 0
-        },
-        {
-            "nameItem": "RifleGun",
-            "level": 0
-        },
-        {
-            "nameItem": "RifleGun",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightArmor",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightArmor",
-            "level": 0
-        },
-        {
-            "nameItem": "HawkHelmHat",
-            "level": 0
-        },
-        {
-            "nameItem": "ShotGun",
-            "level": 0
-        },
-        {
-            "nameItem": "BanditLightShoe",
-            "level": 0
-        },
-        {
-            "nameItem": "ShotGun",
-            "level": 0
-        },
-        {
-            "nameItem": "DarkMountainShoe",
-            "level": 0
-        }
-    ],
+    "items": [],
     "equippedItem": [
         {
-            "nameItem": "RifleGun",
+            "nameItem": "PistolGun",
             "level": 0
         },
         {
-            "nameItem": "BattleguardArmor",
+            "nameItem": "",
             "level": 0
         },
         {
-            "nameItem": "HawkHelmHat",
+            "nameItem": "",
             "level": 0
         },
         {
-            "nameItem": "BanditLightShoe",
+            "nameItem": "",
             "level": 0
         }
     ]

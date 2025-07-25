@@ -18,8 +18,6 @@ namespace Core.Skill
                 return false;
             switch (levelCurrent)
             {
-                case 1:
-                    break;
                 case 2:
                     radiantBlast.DamageComponent.IncreaseDamageMultiplier(0.5f);
                     radiantBlast.IncreaseSkillRange(0.3f);

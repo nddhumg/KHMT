@@ -4,7 +4,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/GlobalUpgrade")]
-public class SOGlobalUpgradeModel : ScriptableObject , IGlobalUpgradeModel
+public class SOGlobalUpgradeModel : ScriptableObject, IGlobalUpgradeModel
 {
     [SerializeField] private Sprite icon;
     [SerializeField] private GlobalUpgradeLevel[] globalUpgradeLevels;
@@ -30,9 +30,9 @@ public class SOGlobalUpgradeModel : ScriptableObject , IGlobalUpgradeModel
 [System.Serializable]
 public class GlobalUpgradeLevel : IGlobalUpgradeLevel
 {
-    [SerializeField] private string description;
+    [SerializeField] private string keyMessage;
     [SerializeField] private uint cost;
-    public string Description => description;
+    public string Description => LocalizationManager.instance.GetMesage(keyMessage);
     public uint Cost => cost;
 
 }

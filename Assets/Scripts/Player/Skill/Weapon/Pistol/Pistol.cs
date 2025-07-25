@@ -15,6 +15,7 @@ namespace Core.Skill
 
         protected override void Attack()
         {
+            MusicManager.instance.PlaySFX(MusicKey.PistolShot);
             GameObject bullet = poolBullet.Take(this.bullet, muzzle.position, Quaternion.identity);
             bullet.GetComponentInChildren<MoveInDirection>().Direction = GetAttackDirection();
             bullet.GetComponentInChildren<DamageSender>().SetDamage(damageComponent.GetDamge());

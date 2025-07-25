@@ -12,6 +12,7 @@ namespace Ndd.Cooldown
         public float Cooldown { get; set; }
         public float Timer { get; }
         public bool IsStart { get; }
+        public bool CountUp { get; }
 
         void Start();
 

@@ -19,6 +19,6 @@ namespace Ndd.Stat
         public void IncreaseStat(StatName statKey, float value, bool isDebug = true);
         public void PercentageIncreaseStat(StatName statKey, float value);
         public void AddStatValue(StatName statKey, float value);
-        public void Add(IStat stat);
+        public void AddStats(IStat stat);
     }
 }

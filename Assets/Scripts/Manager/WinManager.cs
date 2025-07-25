@@ -46,6 +46,11 @@ public class WinManager : Singleton<WinManager>
         if (isWin)
             OnWin();
     }
+
+    public void Win() { 
+        OnWin();
+    }
+
     protected void AddWinCondition(IWinCondition condition, WinConditionGroupType type)
     {
         if (condition == null)

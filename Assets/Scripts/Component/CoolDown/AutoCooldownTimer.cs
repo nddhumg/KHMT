@@ -18,7 +18,7 @@ namespace Ndd.Cooldown
     {
         public Action OnTimeout;
 
-        public AutoCooldownTimer(float cooldown = 1f, float timeScale = 1,Action action = null,bool isStart = true) : base(cooldown, timeScale, isStart)
+        public AutoCooldownTimer(float cooldown = 1f, float timeScale = 1,Action action = null,bool isStart = true,bool countUp = true) : base(cooldown, timeScale, isStart,countUp)
         {
             this.OnTimeout = action;
         }

@@ -36,7 +36,7 @@ public class Player : Singleton<Player>, IReceiveDamage
     void Start()
     {
         statCurrent = GameController.instance.StatPlayer.Clone();
-        statCurrent.Stats.Add(new StatEntry(StatName.Hp, statCurrent.GetStatValue(StatName.HpMax)));
+        statCurrent.AddStatValue(StatName.Hp, statCurrent.GetStatValue(StatName.HpMax));
         state = new PlayerStateMachine(anim, this, statCurrent);
         state.Initialize();
         statCurrent.OnStatUpdatedValue += CheckDead;
@@ -86,7 +86,7 @@ public class Player : Singleton<Player>, IReceiveDamage
 
     public void Revive() { 
         statCurrent.SetStatValue(StatName.Hp, statCurrent.GetStatValue(StatName.HpMax));
-
+        canRevive = false;
     }
 
     public void Flip()

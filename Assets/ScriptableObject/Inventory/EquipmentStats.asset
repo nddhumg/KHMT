@@ -22,7 +22,7 @@ MonoBehaviour:
     iconType: {fileID: 393826363, guid: 3e8e31edbb9b48944bd6ac33915784e5, type: 3}
     iconStat: {fileID: 98780701, guid: 3e8e31edbb9b48944bd6ac33915784e5, type: 3}
   - type: 1
-    statBonus: 0
+    statBonus: 5
     bonus:
     - 50
     bonusLevelUp:
@@ -30,7 +30,7 @@ MonoBehaviour:
     iconType: {fileID: 393826363, guid: 3e8e31edbb9b48944bd6ac33915784e5, type: 3}
     iconStat: {fileID: 393826363, guid: 3e8e31edbb9b48944bd6ac33915784e5, type: 3}
   - type: 2
-    statBonus: 0
+    statBonus: 5
     bonus:
     - 20
     bonusLevelUp:

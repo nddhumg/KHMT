@@ -19,22 +19,22 @@ namespace Core.Skill
             {
                 case 2:
                     fireBall.DamageComponent.IncreaseDamageMultiplier(0.5f);
-                    break;
+                    return true;
                 case 3:
                     fireBall.IncreaseBulletCount(1);
-                    break;
+                    return true;
                 case 4:
                     fireBall.CoolDownSkillComponent.IncreaseAttackSpeed(0.5f);
-                    break;
+                    return true;
                 case 5:
                     fireBall.IncreaseBulletCount(1);
                     fireBall.DamageComponent.IncreaseDamageMultiplier(1f);
                     fireBall.CoolDownSkillComponent.IncreaseAttackSpeed(0.5f);
-                    break;
+                    return true;
 
 
             }
-            return true;
+            return false;
         }
     }
 }

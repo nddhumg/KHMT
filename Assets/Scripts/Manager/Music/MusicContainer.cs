@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class MusicContainer : MonoBehaviour
 {
+    [ArrayElementTitle("key")]
     [SerializeField] private List<MusicData> musicData;
+    [ArrayElementTitle("key")]
     [SerializeField] private List<MusicData> sfxData;
     private Dictionary<MusicKey, MusicData> dictionaryMusic;
 

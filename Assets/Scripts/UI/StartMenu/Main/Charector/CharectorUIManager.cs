@@ -1,7 +1,7 @@
-using UnityEngine;
-using TMPro;
-using Systems.Inventory;
 using Ndd.Stat;
+using Systems.Inventory;
+using TMPro;
+using UnityEngine;
 
 namespace UI.Charector
 {
@@ -26,6 +26,7 @@ namespace UI.Charector
             inventoryManager.OnEquip += EquipItem;
             inventoryManager.OnDequip += DequipItem;
             inventoryManager.OnSwapItem += SwapItem;
+            inventoryManager.OnAddItem += AddItem;
             ItemSlot.SetUIManager(this);
             CreateInventory();
             CreateItemEquip();
@@ -74,6 +75,11 @@ namespace UI.Charector
                 slotItemsEquip[i].Init(item, item, true);
                 slotItemsEquip[i].gameObject.SetActive(true);
             }
+        }
+
+        protected void AddItem(Item item) {
+            IItemUIUpdater slot = Instantiate(prefabSlot, inventoryUI).GetComponent<IItemUIUpdater>();
+            slot.Init(item, item, false);
         }
         protected void UpdateTextHelth(StatName stat, float value)
         {

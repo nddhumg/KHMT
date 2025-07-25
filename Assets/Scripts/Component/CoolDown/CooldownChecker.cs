@@ -10,7 +10,7 @@ namespace Ndd.Cooldown
 
         public bool IsTimeout => isTimeout;
 
-        public CooldownChecker(float cooldown = 1f, float timeScale = 1,bool isStart = true) : base(cooldown, timeScale, isStart)
+        public CooldownChecker(float cooldown = 1f, float timeScale = 1, bool isStart = true, bool countUp = true) : base(cooldown, timeScale, isStart, countUp)
         {
         }
 

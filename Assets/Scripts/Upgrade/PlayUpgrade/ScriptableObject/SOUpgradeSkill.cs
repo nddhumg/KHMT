@@ -6,7 +6,6 @@ using UnityEngine;
 public class SOUpgradeSkill : SOUpgrade
 {
     [SerializeField] protected EnumName.Skill skillName;
-    [SerializeField] protected string[] description;
     [SerializeField] private GameObject prefabSkill;
 
     public EnumName.Skill SkillName => skillName;
@@ -21,6 +20,6 @@ public class SOUpgradeSkill : SOUpgrade
 
     public override string GetDescription(Player player)
     {
-        return description[player.SkillManager.GetLevelSkill(skillName)];
+        return LocalizationManager.instance.GetMesage($"Describe{skillName.ToString()}_{player.SkillManager.GetLevelSkill(skillName)}");
     }
 }

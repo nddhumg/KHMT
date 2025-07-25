@@ -11,6 +11,7 @@ public class Exp : MonoBehaviour, IItemPickUp
 
     public void PickUpAble()
     {
+        MusicManager.instance.PlaySFX(MusicKey.PickUpLevel);
         Player.instance.Level.ExpUp(exp);
         gameObject.SetActive(false);
     }

@@ -48,6 +48,7 @@ namespace Core.Skill
                 move.Direction = new Vector2(move.Direction.x * -1, move.Direction.y);
                 maxCollider -= 1;
                 EffectManager.instance.Pool.Take(skill.EffectCollider, new Vector3(posColliderX, pos.y, 0f), Quaternion.identity);
+                MusicManager.instance.PlaySFX(MusicKey.BiA);
             }
 
             if ((pos.y <= mainCamera.CameraBottomLeft.y + radius && move.Direction.y < 0) || (pos.y >= mainCamera.CameraTopRight.y - radius && move.Direction.y > 0))
@@ -56,13 +57,11 @@ namespace Core.Skill
                 move.Direction = new Vector2(move.Direction.x, move.Direction.y * -1);
                 maxCollider -= 1;
                 EffectManager.instance.Pool.Take(skill.EffectCollider, new Vector3(pos.x, posColliderY, 0f), Quaternion.identity);
+                MusicManager.instance.PlaySFX(MusicKey.BiA);
             }
 
             if (maxCollider <= 0)
                 gameObject.SetActive(false);
         }
-
-
-
     }
 }

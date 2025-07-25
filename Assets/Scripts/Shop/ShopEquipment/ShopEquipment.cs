@@ -31,7 +31,7 @@ public class ShopEquipment : MonoBehaviour
         }
         else
         {
-            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotEnoughGold));
+            StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotEnoughGold));
         }
     }
 
@@ -61,7 +61,7 @@ public class ShopEquipment : MonoBehaviour
         }
         else
         {
-            StartSceenManager.instance.OpenPopupDebug(GameMessages.GetMesage(MessageKey.NotEnoughGold));
+            StartSceenManager.instance.OpenPopupDebug(LocalizationManager.instance.GetMesage(MessageKey.NotEnoughGold));
         }
     }
 

@@ -13,12 +13,205 @@ MonoBehaviour:
   m_Name: GameMessage
   m_EditorClassIdentifier: 
   messages:
-  - key: 0
+  - key: NotEnoughGold
     vi: "B\u1EA1n kh\xF4ng \u0111\u1EE7 v\xE0ng!"
     eng: 
-  - key: 1
+  - key: NotEnoughDia
     vi: "B\u1EA1n kh\xF4ng \u0111\u1EE7 kim c\u01B0\u01A1ng!"
     eng: 
-  - key: 2
+  - key: NotAvailable
     vi: "\u0110ang ph\xE1t tri\u1EC3n"
+    eng: 
+  - key: NotEnoughEnergy
+    vi: "B\u1EA1n kh\xF4ng \u0111\u1EE7 n\u0103ng l\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeBiA_0
+    vi: "T\u1EA1o ra 1 vi\xEAn bi g\xE2y s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeBiA_1
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng vi\xEAn bi"
+    eng: 
+  - key: DescribeBiA_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng vi\xEAn bi"
+    eng: 
+  - key: DescribeBiA_3
+    vi: "T\u0103ng \u0111\u1ED9 l\u1EDBn vi\xEAn bi"
+    eng: 
+  - key: DescribeBiA_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribePistolGun_0
+    vi: "S\xFAng b\u1EAFn ch\u1EADm s\xE1t th\u01B0\u01A1ng cao"
+    eng: 
+  - key: DescribePistolGun_1
+    vi: "T\u0103ng t\u1ED1c \u0111\u1ED9 b\u1EAFn"
+    eng: 
+  - key: DescribePistolGun_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribePistolGun_3
+    vi: "T\u0103ng t\u1ED1c \u0111\u1ED9 b\u1EAFn v\xE0 s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribePistolGun_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeShotGun_0
+    vi: "S\xFAng b\u1EAFn \u0111\u1EA1n ch\xF9m"
+    eng: 
+  - key: DescribeShotGun_1
+    vi: "T\u0103ng t\u1ED1c \u0111\u1ED9 b\u1EAFn"
+    eng: 
+  - key: DescribeShotGun_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeShotGun_3
+    vi: "Th\xEAm \u0111\u1EA1n khi b\u1EAFn"
+    eng: 
+  - key: DescribeShotGun_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeRifleGun_0
+    vi: "S\xFAng b\u1EAFn nhi\u1EC1u \u0111\u1EA1n 1 l\u1EA7n"
+    eng: 
+  - key: DescribeRifleGun_1
+    vi: "T\u0103ng t\u1ED1c \u0111\u1ED9 b\u1EAFn"
+    eng: 
+  - key: DescribeRifleGun_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 th\xEAm \u0111\u1EA1n"
+    eng: 
+  - key: DescribeRifleGun_3
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 t\u1ED1c \u0111\u1ED9 b\u1EAFn"
+    eng: 
+  - key: DescribeRifleGun_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeRadiantBlast_0
+    vi: "T\u1EA1o 1 v\xF9ng g\xE2y s\xE1t th\u01B0\u01A1ng xung quanh"
+    eng: 
+  - key: DescribeRadiantBlast_1
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 d\u1ED9 l\u1EDBn"
+    eng: 
+  - key: DescribeRadiantBlast_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeRadiantBlast_3
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeRadiantBlast_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeMeteor_0
+    vi: "T\u1EA1o thi\xEAn th\u1EA1ch"
+    eng: 
+  - key: DescribeMeteor_1
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeMeteor_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng v\xE0 \u0111\u1ED9 l\u1EDBn"
+    eng: 
+  - key: DescribeMeteor_3
+    vi: "T\u0103ng \u0111\u1ED9 l\u1EDBn"
+    eng: 
+  - key: DescribeMeteor_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeFireBall_0
+    vi: "T\u1EA1o c\u1EA7u l\u1EEDa"
+    eng: 
+  - key: DescribeFireBall_1
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeFireBall_2
+    vi: "T\u0103ng s\u1ED1 l\u01B0\u1EE3ng c\u1EA7u l\u1EEDa t\u1EA1o ra"
+    eng: 
+  - key: DescribeFireBall_3
+    vi: "T\u0103ng t\u1ED1c \u0111\u1ED9 t\u1EA1o c\u1EA7u l\u1EEDa"
+    eng: 
+  - key: DescribeFireBall_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng!"
+    eng: 
+  - key: DescribeShieldOrbit_0
+    vi: "T\u1EA1o khi\xEAng bay xung quanh g\xE2y s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeShieldOrbit_1
+    vi: "T\u1EA1o th\xEAm khi\xEAng v\xE0 xoay nhanh h\u01A1n"
+    eng: 
+  - key: DescribeShieldOrbit_2
+    vi: "T\u0103ng s\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: DescribeShieldOrbit_3
+    vi: "T\u1EA1o th\xEAm khi\xEAng"
+    eng: 
+  - key: DescribeShieldOrbit_4
+    vi: "C\u1EA5p t\u1ED1i th\u01B0\u1EE3ng"
+    eng: 
+  - key: Hp
+    vi: "M\xE1u"
+    eng: 
+  - key: Speed
+    vi: "T\u1ED1c \u0111\u1ED9 di chuy\u1EC3n"
+    eng: 
+  - key: HpMax
+    vi: "M\xE1u t\u1ED1i \u0111a"
+    eng: 
+  - key: Damage
+    vi: "S\xE1t th\u01B0\u01A1ng"
+    eng: 
+  - key: Increase
+    vi: "T\u0103ng"
+    eng: 
+  - key: PercentageIncrease
+    vi: "T\u0103ng ph\u1EA7n tr\u0103m"
+    eng: 
+  - key: Pause
+    vi: "T\u1EA1m d\u1EEBng"
+    eng: Pause
+  - key: Continue
+    vi: "Ti\u1EBFp t\u1EE5c"
+    eng: Continue
+  - key: WannaQuit
+    vi: "B\u1EA1n c\xF3 mu\u1ED1n r\u1EDDi"
+    eng: Wanaa Quit
+  - key: Yes
+    vi: "C\xF3"
+    eng: Yes
+  - key: No
+    vi: "Kh\xF4ng"
+    eng: No
+  - key: Revice
+    vi: "H\u1ED3i sinh"
+    eng: Revice
+  - key: ClickToClose
+    vi: "Nh\u1EA5n \u0111\u1EC3 tho\xE1t"
+    eng: 
+  - key: Victory
+    vi: "Chi\u1EBFn th\u1EAFng"
+    eng: Victory
+  - key: Deffeat
+    vi: "Th\u1EA5t b\u1EA1i"
+    eng: Deffeat
+  - key: Replay
+    vi: "Ch\u01A1i l\u1EA1i"
+    eng: Replay
+  - key: Time
+    vi: "Th\u1EDDi gian"
+    eng: Time
+  - key: Home
+    vi: "V\u1EC1 nh\xE0"
+    eng: Home
+  - key: UpgradeGlobalFinalMercry
+    vi: "B\u1EA1n \u0111\u01B0\u1EE3c h\u1ED3i sinh 1 l\u1EA7n"
+    eng: 
+  - key: UpgradeGlobalFirstStepPower
+    vi: "B\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c n\xE2ng c\u1EA5p ngay khi v\xE0o tr\xF2
+      ch\u01A1i"
+    eng: 
+  - key: GlobalUpgradeDamageBoost_0
+    vi: "S\xE1t th\u01B0\u01A1ng <color=\"green\">+ 10</color>"
+    eng: 
+  - key: GlobalUpgradeDamageBoost_1
+    vi: "S\xE1t th\u01B0\u01A1ng <color=\"green\">+ 20</color>"
+    eng: 
+  - key: GlobalUpgradeDamageBoost_2
+    vi: "S\xE1t th\u01B0\u01A1ng <color=\"green\">+ 30</color>"
     eng: 

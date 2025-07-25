@@ -12,6 +12,7 @@ public class SpawnBoss : MonoBehaviour
     private int indexSpawnBoss = 0;
     private IContainerBoss bossContaiener;
     private ICoolDownAuto coolDown;
+    private bool isActiveEffectWarning;
 
     [SerializeField] private SOContainerBoss soContainerBoss;
     [SerializeField] private SOBossSpawn soBossSpawn;
@@ -29,12 +30,16 @@ public class SpawnBoss : MonoBehaviour
         }
 
         bossNext = bossContaiener.GetBoss(spawnData.BossSpawnEntry[indexSpawnBoss].bossid);
-        coolDown = new AutoCooldownTimer(spawnData.BossSpawnEntry[indexSpawnBoss].timeSpawn,1f/60,Spawn);
+        coolDown = new AutoCooldownTimer(spawnData.BossSpawnEntry[indexSpawnBoss].timeSpawn,1f/60,Spawn,countUp: false);
     }
 
     void Update()
     {
         coolDown.UpdateCooldown(Time.deltaTime);
+        if (coolDown.Timer <= 5 && !isActiveEffectWarning) {
+            MusicManager.instance.PlaySFX(MusicKey.Warning);
+            isActiveEffectWarning = true;
+        }
     }
 
     void Spawn()
@@ -50,6 +55,7 @@ public class SpawnBoss : MonoBehaviour
         {
             StopSpawnBoss();
         }
+        isActiveEffectWarning = false;
     }
 
     void StopSpawnBoss()

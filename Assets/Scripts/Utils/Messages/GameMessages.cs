@@ -13,6 +13,8 @@ public class GameMessages : ScriptableObject
     private static Dictionary<MessageKey, MessageEntry> dictionaryMessages;
     [SerializeField] protected static LanguageKey language = LanguageKey.Vi;
 
+    public List<MessageEntry> Messages => messages;
+
 #if UNITY_EDITOR
     [Button]
     protected void GetData()
@@ -29,32 +31,11 @@ public class GameMessages : ScriptableObject
 
 #endif
 
-    protected void OnEnable()
-    {
-        dictionaryMessages = new Dictionary<MessageKey, MessageEntry>();
-        messages.ForEach(message => dictionaryMessages.Add(message.key, message));
-    }
-    public static string GetMesage(MessageKey messageKey)
-    {
-        MessageEntry message = dictionaryMessages[messageKey];
-        if (message == null)
-            return string.Empty;
-        switch (language)
-        {
-            case LanguageKey.Vi:
-                return message.vi;
-            case LanguageKey.Eng:
-                return message.eng;
-            default:
-                return string.Empty;
-        }
-    }
-
 }
 [Serializable]
 public class MessageEntry
 {
-    public MessageKey key;
+    public string key;
     public string vi;
     public string eng;
 }
@@ -63,6 +44,7 @@ public enum MessageKey
     NotEnoughGold,
     NotEnoughDia,
     NotAvailable,
+    NotEnoughEnergy,
 }
 
 public enum LanguageKey

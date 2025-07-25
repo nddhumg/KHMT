@@ -21,13 +21,13 @@ public class GameController : PersistentSingleton<GameController>
     private void Start()
     {
         statPlayer = soStatPlayerBase.Clone();
-        statPlayer.Add(InventoryManager.instance.StatsBonus);
+        statPlayer.AddStats(InventoryManager.instance.StatsBonus);
         InventoryManager.instance.StatsBonus.OnStatChangedValue += (key, value) =>
         {
             statPlayer.IncreaseStat(key, value);
         };
 
-        statPlayer.Add(GlobalUpgradeManager.instance.StatBonus);
+        statPlayer.AddStats(GlobalUpgradeManager.instance.StatBonus);
         GlobalUpgradeManager.instance.StatBonus.OnStatChangedValue += (key, value) =>
         {
             statPlayer.IncreaseStat(key, value);
@@ -71,6 +71,7 @@ public class GameController : PersistentSingleton<GameController>
         else {
             Debug.LogError("Not data map in soMap");
         }
+        MusicManager.instance.PlayMusic(mapData.MusicKey);
         StartupEffect();
     }
 

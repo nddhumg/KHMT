@@ -44,13 +44,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adacbe7faa8f6604cabccafc06714324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicData: []
+  musicData:
+  - key: 1000
+    clip: {fileID: 8300000, guid: 9944647a8453f2648b2c16199427529a, type: 3}
+    volume: 1
+  - key: 1001
+    clip: {fileID: 8300000, guid: cb3af3f110fb7d04f8c8de2e49ef269c, type: 3}
+    volume: 1
+  - key: 1002
+    clip: {fileID: 8300000, guid: c4e5bc62104568f4bbae0315c430dd28, type: 3}
+    volume: 1
   sfxData:
   - key: 0
     clip: {fileID: 8300000, guid: 780c5811d13f85a4f9cf43e1405b2e5f, type: 3}
     volume: 1
   - key: 1
     clip: {fileID: 8300000, guid: 894bd71f0437a024cafa359718517530, type: 3}
+    volume: 1
+  - key: 2
+    clip: {fileID: 8300000, guid: f17f8dbfe1f61ae40b48a087ce60e6f7, type: 3}
+    volume: 1
+  - key: 3
+    clip: {fileID: 8300000, guid: 3479cd161cf79824783f7eb16467a33f, type: 3}
+    volume: 1
+  - key: 100
+    clip: {fileID: 8300000, guid: e83c397013bee864fb82e6cad1887c21, type: 3}
     volume: 1
 --- !u!1 &5001663293884302492
 GameObject:
@@ -117,7 +135,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

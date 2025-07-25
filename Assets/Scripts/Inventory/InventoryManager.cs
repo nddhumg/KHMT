@@ -32,6 +32,7 @@ namespace Systems.Inventory
         public Action<Item> OnEquip;
         public Action<Item> OnDequip;
         public Action<Item, Item> OnSwapItem;
+        public Action<Item> OnAddItem;
 
 
         protected override void Awake()
@@ -54,10 +55,11 @@ namespace Systems.Inventory
         public void AddItem(Item item)
         {
             data.items.Add(item);
+            OnAddItem?.Invoke(item);
         }
 
         public void AddItem(IItemModel model) { 
-            data.items.Add(new Item(model));
+           AddItem(new Item(model));
         }
 
         public void EquipItem(Item item)

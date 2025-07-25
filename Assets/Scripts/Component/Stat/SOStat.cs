@@ -149,7 +149,7 @@ namespace Ndd.Stat
             }
         }
 
-        public void Add(IStat stats)
+        public void AddStats(IStat stats)
         {
             foreach (StatEntry stat in stats.Stats)
             {

@@ -16,4 +16,4 @@ MonoBehaviour:
   - mapid: 2
     entry:
     - bossid: Necromancer
-      timeSpawn: 0.1
+      timeSpawn: 0.5

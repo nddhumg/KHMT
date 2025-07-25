@@ -12,9 +12,8 @@ namespace Core.Skill {
             if (!base.LevelUp())
                 return false;
             switch (levelCurrent) {
-                case 1:
-                    return true;
                 case 2:
+                    //meteor.
                     return true;
                 case 3:
                     return true;

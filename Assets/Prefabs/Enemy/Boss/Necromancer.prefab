@@ -199,6 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21d346c0f29e8479b2391a41e194e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stat: {fileID: 11400000, guid: 39c59e1fcf2f1e04ca592efbfada42b8, type: 2}
+  nameBoss: Necromancer
   attackData:
     bullet: {fileID: 6992195740099924068, guid: 445763df5b0719f46afe91626002a824,
       type: 3}
@@ -209,7 +211,6 @@ MonoBehaviour:
   timerAttack: 5
   animatorCtrl: {fileID: 4768910744152491963}
   boxCollider: {fileID: 3464727869374262088}
-  stat: {fileID: 11400000, guid: 39c59e1fcf2f1e04ca592efbfada42b8, type: 2}
 --- !u!61 &3464727869374262088
 BoxCollider2D:
   m_ObjectHideFlags: 0

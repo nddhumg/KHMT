@@ -17,6 +17,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
     [SerializeField] protected MusicContainer musicContainer;
 
     [SerializeField] protected float fadeDuration;
+    private float volumeMusic,volumeSFX;
     private Dictionary<MusicKey, float> lastPlayTime = new();
     private float coolDown = 0.3f;
 
@@ -25,19 +26,60 @@ public class MusicManager : PersistentSingleton<MusicManager>
     public bool IsMuteMusic => musicAudio.mute;
     public bool IsMuteSound => soundAudio.mute;
 
-    public void PlayerMusic(MusicData data)
+    protected void Start()
     {
-        musicAudio.clip = data.clip;
-        musicAudio.volume = data.volume;
-        musicAudio.Play();
+        volumeMusic = 1;
+        volumeSFX = 1;
+        musicAudio.volume = volumeMusic;
+        soundAudio.volume = volumeSFX;
+    }
+
+    public void PlayMusic(MusicData data)
+    {
+        if (musicAudio.clip == null)
+        {
+            musicAudio.clip = data.clip;
+            musicAudio.volume = data.volume * volumeMusic;
+            musicAudio.Play();
+        }
+        else
+        {
+            StartCoroutine(SwitchMusic(data));
+        }
+    }
+
+    public void PlayMusic(MusicKey key)
+    {
+        MusicData musicData = musicContainer.GetMusicData(key);
+        PlayMusic(musicData);
+    }
+
+    public void PlaySFX(MusicKey key)
+    {
+
+        if (!lastPlayTime.ContainsKey(key))
+            lastPlayTime.Add(key, Time.time);
+        else
+        {
+            if (Time.time - lastPlayTime[key] <= coolDown)
+            {
+                return;
+            }
+        }
+        lastPlayTime[key] = Time.time;
+        MusicData musicData = musicContainer.GetMusicData(key);
+        soundAudio.volume = volumeSFX * musicData.volume;
+        soundAudio.PlayOneShot(musicData.clip);
     }
 
     public void ChangeVolumnMusic(float value) {
         musicAudio.volume = value;
+        volumeMusic = value;
     }
 
     public void ChangeVolumnSound(float value) { 
         soundAudio.volume = value;
+        volumeSFX = value;
     }
 
     public void ChangeMuteMusic()
@@ -53,10 +95,9 @@ public class MusicManager : PersistentSingleton<MusicManager>
     protected IEnumerator SwitchMusic(MusicData data)
     {
         float startVolume = musicAudio.volume;
-
-        for (float t = 0; t < fadeDuration/2; t += Time.deltaTime)
+        for (float t = 0; t <= fadeDuration/2; t += Time.unscaledDeltaTime)
         {
-            musicAudio.volume = Mathf.Lerp(startVolume, 0, t / fadeDuration);
+            musicAudio.volume = Mathf.SmoothStep(startVolume, 0, t / (fadeDuration / 2));
             yield return null;
         }
 
@@ -65,36 +106,14 @@ public class MusicManager : PersistentSingleton<MusicManager>
         musicAudio.clip = data.clip;
         musicAudio.Play();
 
-        for (float t = 0; t < fadeDuration/2; t += Time.deltaTime)
+        for (float t = 0; t <= fadeDuration/2; t += Time.unscaledDeltaTime)
         {
-            musicAudio.volume = Mathf.Lerp(0, data.volume, t / fadeDuration);
+            musicAudio.volume = Mathf.SmoothStep(0, data.volume * volumeMusic, t / (fadeDuration / 2));
             yield return null;
         }
 
-        musicAudio.volume = data.volume;
+        musicAudio.volume = data.volume * volumeMusic ;
     }
 
-    public void PlayMusic(MusicKey key)
-    {
-        MusicData musicData = musicContainer.GetMusicData(key);
-        musicAudio.clip = musicData.clip;
-        musicAudio.volume = musicData.volume;
-        musicAudio.Play();
-    }
-
-    public void PlaySFX(MusicKey key) {
-        
-        if (!lastPlayTime.ContainsKey(key))
-            lastPlayTime.Add(key, Time.time);
-        else {
-            if (Time.time - lastPlayTime[key] <= coolDown)
-            {
-                return;
-            }
-        }
-        lastPlayTime[key] = Time.time;
-        MusicData musicData =  musicContainer.GetMusicData(key);
-        soundAudio.volume = musicData.volume;
-        soundAudio.PlayOneShot(musicData.clip);
-    }
+   
 }
